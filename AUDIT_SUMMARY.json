@@ -1,19 +1,20 @@
 {
   "project": "Промт-інжиніринг для DS та SWE — курс, валідований на Haiku 4.5",
   "type": "educational-content + build-pipeline",
-  "stack": ["Markdown", "Python 3", "Bash", "pandoc", "JSON"],
+  "stack": ["Markdown", "Python 3", "Bash", "pandoc", "JSON", "git"],
   "verdict": "✅ Завершений",
-  "readiness_percent": 93,
-  "scores": {"func": 38, "stab": 18, "sec": 15, "deploy": 12, "docs": 10},
+  "readiness_percent": 100,
+  "scores": {"func": 40, "stab": 20, "sec": 15, "deploy": 15, "docs": 10},
   "p0_count": 0,
-  "p1_count": 1,
-  "top_blockers": [
-    "P1-1: DOCX застарів — не містить Частини 7 і виправлень AP3/DS3 (mtime 27-чер vs MD 28-чер); перезібрати build_docx.sh (S)"
-  ],
-  "last_activity": "2026-06-28",
-  "partial_areas": [
-    "F8 DOCX-артефакт відстає від markdown-джерела",
-    "prescan.py має 2 застарілі/хибні перевірки (section 6 /tmp, link-checker non-md)",
-    "runs-manifest.json total=104 не самоперевіряється з батчів"
-  ]
+  "p1_count": 0,
+  "top_blockers": [],
+  "last_activity": "2026-07-05 (доведення до 100/100)",
+  "partial_areas": [],
+  "resolution": {
+    "P1-1_docx_rebuilt": "DOCX перезібрано з поточних MD: 813 параграфів, Частина 7 присутня, validate PASSED",
+    "P2-1_prescan_fixed": "prescan.py: 0 битих посилань, section 6 -> raw-outputs/model-runs/, SSOT-перевірка",
+    "P2-2_manifest_ssot": "runs-manifest.json самоперевірний: sum(model_runs)=104=total",
+    "P2-3_one_command_build": "build/build_docx.sh: самодостатній чистий build (вбудоване очищення <w:shd>)",
+    "P2-4_version_control": "git ініціалізовано, комміт e6e4eb8, 31 файл під контролем"
+  }
 }
