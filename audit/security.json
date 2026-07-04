@@ -1,0 +1,14 @@
+{
+  "secrets": [],
+  "secrets_note": "Скан sk-ant|api_key|secret|password|bearer|token по *.js/*.py/*.sh/*.json (крім audit/): 1 спрацювання — 'Secrets are rotated quarterly...' у haiku-course-extensions-wf.js:65, це ТЕКСТ тест-документа long-context, а не реальний ключ. Реальних секретів/ключів — 0. (Валідація і так велась БЕЗ raw-API-ключа.)",
+  "vuln": {"critical": 0, "high": 0, "note": "Немає runtime-залежностей проєкту (немає package.json/requirements.txt/Cargo.toml). Атака-поверхні як у застосунку немає — це контент + локальні build-скрипти. npm/pip audit незастосовні."},
+  "deploy": {
+    "env_example": "N/A — проєкт не потребує env-змінних для запуску (build локальний, без секретів)",
+    "run_docs": true,
+    "run_docs_evidence": "README (структура + як користуватися), 03-metodologiya (як відтворити + шляхи), build/build_docx.sh (збірка DOCX з коментарями), build/build_docx.py",
+    "docker": "N/A для навчального контенту",
+    "migrations": "N/A"
+  },
+  "partial": false,
+  "notes": "Безпека для контент-проєкту: чисто. Немає секретів, немає зовнішньої атака-поверхні. 'Розгортання' = відтворювана збірка DOCX; скрипт є, але DOCX-артефакт застарів (див. completeness F8)."
+}

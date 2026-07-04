@@ -1,0 +1,21 @@
+{
+  "project": "Промт-інжиніринг для DS та SWE — курс, валідований на Haiku 4.5",
+  "type": "educational-content + build-pipeline (НЕ веб-застосунок; рубрику адаптовано чесно)",
+  "stack": ["Markdown (8 файлів: README + 01-07)", "Python 3 (build/*.py)", "Bash (build_docx.sh)", "pandoc (MD->DOCX)", "JS workflow-скрипти (історичні артефакти прогонів, не запускні standalone)", "JSON (raw-outputs докази + manifest)"],
+  "entrypoints": ["README.md (вхід читача/навігація)", "build/build_docx.sh (вхід збірки DOCX)", "build/prescan.py (перевірка узгодженості = де-факто тести)"],
+  "dod": [
+    {"id": "F1", "feature": "11 базових технік (DS1-5, SE1-6) з валідованими weak->strong парами і реальним виводом Haiku", "source": "readme"},
+    {"id": "F2", "feature": "Розширені техніки: Haiku-vs-Sonnet, RAG-grounding, prompt chaining, вкладений JSON, long-context (Частина 5)", "source": "readme"},
+    {"id": "F3", "feature": "Надійність формату N=5 + антипатерни AP1-AP4 (Частина 6)", "source": "readme"},
+    {"id": "F4", "feature": "Топ-3 сайти + додаткові, усі перевірені живими (Частина 4)", "source": "readme"},
+    {"id": "F5", "feature": "Фінальний синтез / take-home фреймворк (Частина 7)", "source": "inferred"},
+    {"id": "F6", "feature": "Вправи + відповіді для всіх частин з технікою", "source": "readme"},
+    {"id": "F7", "feature": "Внутрішня навігація: крос-посилання + анкери резолвляться", "source": "inferred"},
+    {"id": "F8", "feature": "Єдиний зібраний DOCX, валідний за OOXML", "source": "readme"},
+    {"id": "F9", "feature": "Відтворюваність: build-скрипт + збережені сирі докази + manifest як SSOT", "source": "inferred"},
+    {"id": "F10", "feature": "Чесна методологія: застереження, no raw-API, harness-контамінація", "source": "readme"}
+  ],
+  "monorepo": false,
+  "last_activity": "2026-06-28 (файли 03-07 модифіковані; README/build 28 черв; DOCX 27 черв)",
+  "notes": "Не git-репозиторій (git відсутній). 'Тести' проєкту = build/prescan.py (перевірка посилань/чисел) + валідація DOCX. 'Секрети' = потенційні API-ключі у скриптах/JSON. Рубрику func/stab/sec/deploy/docs адаптовано під контент-проєкт."
+}

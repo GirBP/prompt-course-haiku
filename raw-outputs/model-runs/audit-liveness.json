@@ -1,0 +1,417 @@
+{
+  "summary": "Multi-agent audit of the prompt-eng course APP: architecture, functionality, reliability, liveness — with an adversarial completeness critic. Runs on Sonnet for resilience.",
+  "agentCount": 5,
+  "logs": [
+    "Launching 4 dimension analyzers on Sonnet",
+    "Analyzers done: 4/4. Running completeness critic.",
+    "Audit complete"
+  ],
+  "result": {
+    "analyses": [
+      {
+        "key": "architecture",
+        "dimension": "ARCHITECTURE",
+        "score_1to5": 3,
+        "one_line_verdict": "Solid linear course structure with clean script separation per batch, but run-count metadata is duplicated across multiple files without a single source of truth, the runner() helper is copy-pasted verbatim into all three scripts, the DOCX build path is not reproducible from a saved script, and the raw evidence lives in a volatile /tmp location.",
+        "strengths": [
+          "Each of the three validation batches has its own dedicated workflow script with its own raw JSON output file, making the three phases cleanly separated and independently re-runnable.",
+          "All three scripts use a typed RESP_SCHEMA / RESP_SCHEMA / URL_SCHEMA pattern consistently, and the structured {response: string} envelope is used uniformly across all 104 agent calls to capture verbatim model output.",
+          "The EXPERIMENTS / STAB / AP arrays in the scripts serve as the canonical source of truth for the actual prompts — any re-run reproduces the same prompt text, and the JSON output files preserve prompt+response pairs together, so prompt-response linkage is not lost.",
+          "File naming is numbered sequentially (01 through 06) and consistently follows the Ukrainian transliteration pattern; there are no numbering gaps or naming collisions.",
+          "The README table-of-contents, the 11-technique ID scheme (DS1-DS5, SE1-SE6), and the per-file cross-links are self-consistent and verified coherent across all six MD files.",
+          "The methodology file (03) honestly documents the raw-API limitation, the harness contamination, and the /tmp output paths, giving reproducers enough context to understand the constraint.",
+          "The stability workflow (batch 3) correctly re-uses the same prompts from the earlier scripts rather than diverging, ensuring the N=5 measurements are on the same stimuli."
+        ],
+        "weaknesses": [
+          {
+            "point": "The runner() function is copy-pasted verbatim into all three workflow scripts (haiku-prompt-eng-validation-wf, haiku-course-extensions-wf, haiku-stability-antipatterns-wf). If the harness wrapper needs to change (e.g. to add temperature control or remove the role-play framing), all three files must be edited independently with no shared module.",
+            "severity": "medium",
+            "evidence": "haiku-prompt-eng-validation-wf_c3699d75-208.js lines 40-50; haiku-course-extensions-wf_a092010c-2f6.js lines 17-27; haiku-stability-antipatterns-wf_ad6c2be1-0db.js lines 24-31 — all three blocks are character-for-character identical.",
+            "confidence": "high"
+          },
+          {
+            "point": "The total run count '104' is hardcoded independently in at least two files: README.md (line 12 says '30 прогонів моделі' and derives a separate count) and 03-metodologiya (line 27 says 'Разом по курсу: 104 прогони моделей'). Adding a new technique or batch means updating both places manually.",
+            "severity": "medium",
+            "evidence": "README.md line 12: '30 прогонів моделі + 3 дослідницькі агенти'; 03-metodologiya-ta-syri-rezultaty.md line 27: 'Разом по курсу: 104 прогони моделей (Haiku 4.5 + Sonnet 4.6)'.",
+            "confidence": "high"
+          },
+          {
+            "point": "The DOCX build (promt-inzhiniring-haiku-kurs.docx) has no saved, re-runnable build script. The course instructions describe it as 'generated' and 'validation PASSED, 38 pages' but there is no corresponding workflow .js file for the pandoc/docx pipeline, so rebuilding the DOCX after editing any MD file requires manually rediscovering the build process.",
+            "severity": "high",
+            "evidence": "No haiku-*-docx-wf*.js file exists in the workflows/scripts directory. The course brief only says 'binary — treat as given context, you cannot easily read it'. The six MD files are the true source of content but the conversion step is undocumented.",
+            "confidence": "high"
+          },
+          {
+            "point": "All three raw evidence files (w5zg0ukbt.output, w67fx5rvi.output, wv5azqjjf.output) live in /private/tmp — a volatile location that is cleared on reboot. On macOS /private/tmp is not guaranteed to survive a restart, so the primary evidence base can silently disappear.",
+            "severity": "high",
+            "evidence": "/private/tmp/claude-501/-Users-bibo-----------------/6085e5a9-e68d-4d94-b342-029a5542f2fa/tasks/w5zg0ukbt.output (all three output paths begin with /private/tmp).",
+            "confidence": "high"
+          },
+          {
+            "point": "03-metodologiya uses '...' path truncation for the batch-2 and batch-3 reproduce paths, making those lines non-copy-pasteable. A reader trying to locate the files must mentally reconstruct the full path from context.",
+            "severity": "low",
+            "evidence": "03-metodologiya-ta-syri-rezultaty.md lines 101-107: '.../workflows/scripts/haiku-course-extensions-wf_a092010c-2f6.js' and '/private/tmp/claude-501/.../tasks/w67fx5rvi.output'.",
+            "confidence": "high"
+          },
+          {
+            "point": "The second script's log line reports 'Compare(sonnet)=12 NewTech(haiku)=7 UK(haiku)=5' summing to 24, but agentCount is reported as 25. The prompt-chaining technique (CHAIN) uses two sequential agent calls (chain:step1 and chain:step2) counted as a single newtechThunk entry but running two sub-agents, causing a 1-agent discrepancy that is unacknowledged in the course documentation.",
+            "severity": "low",
+            "evidence": "haiku-course-extensions-wf_a092010c-2f6.js lines 86-91 (async thunk fires two agent() calls); w67fx5rvi.output line 5: 'agentCount: 25' vs log '12+7+5=24'.",
+            "confidence": "high"
+          },
+          {
+            "point": "The 'agentCount' field in w67fx5rvi.output says 25, but 03-metodologiya calls this '+25 прогонів' and 05-rozshyrennya calls it '25 прогонів (12 на Claude Sonnet 4.6 для порівняння + 13 на Haiku 4.5)'. The Haiku count there is 13 (7 NewTech + 5 UK + 1 chain:step2), which is internally consistent but is not explicitly reconciled to the agentCount=25 in the output file.",
+            "severity": "low",
+            "evidence": "03-metodologiya-ta-syri-rezultaty.md line 23: '+25 прогонів'; 05-rozshyrennya-haiku-vs-sonnet-uk.md line 3: '25 прогонів (12 на Claude Sonnet 4.6...+13 на Haiku 4.5)'; w67fx5rvi.output line 5 agentCount: 25.",
+            "confidence": "medium"
+          }
+        ],
+        "whats_left": [
+          "A DOCX build script (or Makefile / shell script documenting the pandoc/docx-generation invocation) would make the MD-to-DOCX pipeline repeatable without manual intervention.",
+          "The three raw output files should be copied to a non-volatile location (e.g. /Users/bibo/навчання промтів/raw-outputs/ or a git-tracked directory) before they are lost to a system reboot.",
+          "The runner() helper and the J() utility function should be extracted into a shared JS module (e.g. lib/runner.js) imported by all three workflow scripts, so that any change to the harness wrapper propagates automatically.",
+          "A single manifest file (e.g. runs-manifest.json or a table in 03) listing batch ID, script path, output path, and run count would make the 104-total figure self-verifiable rather than requiring a reader to sum numbers from three separate documents."
+        ],
+        "could_not_verify": [
+          "Whether the DOCX was built from the six MD files by a saved pandoc/script pipeline or generated interactively in-session — no build script was found, and the binary cannot be read.",
+          "Whether the agentCount field in each .output file is incremented by the harness for each sub-agent spawn (which would explain the 24-vs-25 discrepancy for the chained two-step call), or whether it is a manually set parameter — no harness source was accessible.",
+          "The Simon Willison URL (https://simonwillison.net/2026/Feb/23/agentic-engineering-patterns/) listed in 04-top-sajty was not in the URL re-verification list run by the batch-3 WebFetch agent (only 6 of the top-domain links were checked), so its liveness is unconfirmed by the course's own evidence."
+        ]
+      },
+      {
+        "key": "functionality",
+        "dimension": "Functionality — does the course fulfil its teaching purpose end-to-end?",
+        "score_1to5": 4,
+        "one_line_verdict": "The course delivers on its core promise — all 11 techniques have real validated weak→strong pairs, exercises link to correct answers, and navigation works — with one broken anchor, a minor run-count discrepancy, and no exercises for the newer techniques in files 05-06.",
+        "strengths": [
+          "All 11 technique examples (DS1-DS5, SE1-SE6) demonstrate exactly what they claim: confirmed by reading raw JSON (w5zg0ukbt.output) and comparing to file text. DS3 char counts (398 weak / 1806 strong), DS2 3-run pattern (3 unique vs MIXED×3), SE3 Co-Authored-By artifact all verified verbatim in evidence.",
+          "Exercises are present in both content files (4 DS exercises at 01-data-science.md lines 240–244; 4 SWE exercises at 02-software-engineering.md lines 300–303) and every exercise arrow-links to the answer section. The answers in 04-top-sajty-i-shpargalka.md lines 84–107 are substantive, technically correct, and directly address each exercise.",
+          "10 of 11 internal markdown anchor links resolve to real headings (verified by computing GitHub-flavored slugs from actual heading text against claimed anchors). Cross-file navigation between technique discussions (DS4↔SE5, SE3↔methodology, file 06 antipatterns↔prompt chaining) is functional.",
+          "The course is honest about limitations: the SE3-weak run 1 Co-Authored-By harness contamination is kept in the file as a live example and explained in 03-metodologiya.md#застереження. SE6 anticlimactic result (both prompts resisted hallucination) is reported truthfully rather than inflated. N=5 SE3 one-line failure (4/5) is documented.",
+          "A real learner can follow a complete path: README → DS or SWE file → technique pair → 'Що ми бачимо' analysis → rule → exercises → answer file. File 05 adds Haiku-vs-Sonnet comparison and Ukrainian-language coverage; file 06 adds N=5 reliability numbers and antipatterns — each with real outputs in the raw JSON."
+        ],
+        "weaknesses": [
+          {
+            "point": "One broken internal anchor: 06-stabilnist-ta-antypaterny.md line 106 links to 05-rozshyrennya-haiku-vs-sonnet-uk.md#b3-prompt-chaining--декомпозиція-замість-зроби-все-одразу (double hyphen) but the actual GitHub slug is #b3-prompt-chaining-декомпозиція-замість-зроби-все-одразу (single hyphen). The em-dash in the heading '—' is stripped, not converted to a hyphen, so the double-hyphen never forms. This link silently fails in any Markdown renderer.",
+            "severity": "low",
+            "evidence": "06-stabilnist-ta-antypaterny.md line 106 vs heading in 05-rozshyrennya-haiku-vs-sonnet-uk.md line 82: '### B3. Prompt chaining — декомпозиція замість «зроби все одразу»'; computed slug = b3-prompt-chaining-декомпозиція-замість-зроби-все-одразу",
+            "confidence": "high"
+          },
+          {
+            "point": "No exercises for files 05 or 06. The four new techniques (RAG-grounding, long-context, prompt chaining, nested JSON) and four antipatterns (AP1–AP4) have no corresponding practice tasks. A learner who reads files 05-06 has no way to apply what they've learned without switching modes.",
+            "severity": "medium",
+            "evidence": "01-data-science.md has '## Вправи (Data Science)' at line 238; 02-software-engineering.md has '## Вправи (Software Engineering)' at line 298; files 05 and 06 have no exercises section.",
+            "confidence": "high"
+          },
+          {
+            "point": "Minor run-count discrepancy: the course claims 104 total model runs (30+25+49) but the raw output files show 30 + 23 + 48 = 101 actual model-response entries. The gap likely reflects counting agent invocations vs model completions differently (e.g., the URL-check agent in batch 3 and two research-agent entries in batch 2 are counted as 'runs' but return structured data, not model text responses).",
+            "severity": "low",
+            "evidence": "Batch 1 w5zg0ukbt.output: 30 model responses; Batch 2 w67fx5rvi.output: 23 response entries (comparison=9, newtech=8, ukrainian=3, plus 2 structural entries); Batch 3 wv5azqjjf.output: 48 response entries + 1 URL-check. Course README line 12 claims '30 прогонів моделі + 3 дослідницькі агенти' for batch 1 (correct), '25 прогонів' for batch 2, '49 прогонів' for batch 3.",
+            "confidence": "medium"
+          },
+          {
+            "point": "The DOCX artifact (promt-inzhiniring-haiku-kurs.docx) is noted as having a TOC that needs manual refresh, which is a usability gap for learners who open it and see a stale or broken table of contents. This is acknowledged in passing but not called out in the main learner path.",
+            "severity": "low",
+            "evidence": "README.md course structure table: '(generated single document; validation PASSED, 38 pages; binary — treat as given context)'; no explicit TOC-refresh instruction in any learner-facing file.",
+            "confidence": "medium"
+          }
+        ],
+        "whats_left": [
+          "Exercises for the four new techniques in file 05 (RAG-grounding, prompt chaining, nested JSON, long-context) and the four antipatterns in file 06 — a learner can read these sections but cannot practice them.",
+          "A note to learners in the DOCX or README explaining how to refresh the Word TOC (press F9 / right-click → Update field) before use.",
+          "Fix the one broken anchor in 06-stabilnist-ta-antypaterny.md line 106: change #b3-prompt-chaining--декомпозиція-замість-зроби-все-одразу to #b3-prompt-chaining-декомпозиція-замість-зроби-все-одразу."
+        ],
+        "could_not_verify": [
+          "DOCX content (38 pages, binary format): cannot verify that headings, formatting, and real Haiku outputs are correctly rendered inside the Word document.",
+          "Whether the Towards Data Science bonus URLs (towardsdatascience.com/become-a-better-data-scientist... and towardsdatascience.com/advanced-prompt-engineering-for-data-science-projects/) and the Simon Willison URL (simonwillison.net/2026/Feb/23/agentic-engineering-patterns/) are live — only 6 URLs were re-checked by the WebFetch agent in file 06, and these three bonus DS/SWE links were not among them.",
+          "The exact temperature/seed settings used in the harness for the 104 runs, which would affect whether the stability claims (N=3, N=5) are reproducible under different sampling conditions."
+        ]
+      },
+      {
+        "key": "reliability",
+        "dimension": "RELIABILITY / TRUSTWORTHINESS",
+        "score_1to5": 4,
+        "one_line_verdict": "The course's core empirical claims are solidly backed by raw JSON evidence with exact quote matches; the main reliability issues are a minor numeric conflation (agents vs. model runs), one undisclosed model switch for URL verification, and SE3-weak N=5 control behavior that partially contradicts the stated \"3 unique\" instability narrative.",
+        "strengths": [
+          "All 11 technique outputs (DS1–SE6) cross-check exactly against w5zg0ukbt.output: every quoted Haiku response — including the SE3-weak Co-Authored-By leak and the DS4 ```json fence — appears verbatim in the raw JSON at the expected record IDs and run numbers.",
+          "The DS4 N=5 reliability claim (4/5 = 80%) is confirmed by wv5azqjjf.output: runs 1,2,4,5 are bare JSON, run 3 wraps in ```json. The '1 out of 5 violation' assertion is accurate.",
+          "SE3-strong N=5 claim ('format held, but run 1 gave two lines') is confirmed: wv5azqjjf.output SE3_strong run 1 = 'feat(api): add retry logic to client\\n\\nfix(docs): fix typo in README', while runs 2-5 are single-line. The '4/5 one-line' assertion is accurate.",
+          "NESTED JSON 3/5 vs 2/5 split is confirmed by wv5azqjjf.output: runs 1,3,4 have [\"2 widgets\",\"1 gadget\"], runs 2,5 have the expanded [\"widget\",\"widget\",\"gadget\"] form.",
+          "Agent-harness contamination caveat (SE3-weak Co-Authored-By, temperature not fixed, role in text not system prompt) is disclosed prominently in README and 03-metodologiya, with concrete evidence kept in the course rather than hidden.",
+          "Sonnet-vs-Haiku DS4 comparison is confirmed: w67fx5rvi.output agent 11 (sonnet:DS4:strong#1) returns bare JSON '{\"revenue_musd\":4.2,...}' while Haiku in w5zg0ukbt returned the ```json-wrapped version. The 'Sonnet complies, Haiku does not' claim is correct.",
+          "All Haiku model IDs in workflowProgress logs are 'claude-haiku-4-5-20251001', confirming the stated model identity throughout batches 1 and 2."
+        ],
+        "weaknesses": [
+          {
+            "point": "Numeric conflation: '104 model runs' is computed as 30+25+49=104, treating agent counts as interchangeable with 'model runs'. But batch 1's 33 agents include 3 research agents (not prompt-technique runs), and batch 3's 49 agents include 1 URL-checker running on claude-opus-4-8, not Haiku. The 104 figure in README and file 03 is arithmetically consistent (30+25+49) but the label 'model runs' and the labeling of batch counts as 'прогони моделей' conflate two different units.",
+            "severity": "low",
+            "evidence": "README: '104 прогони моделей (30 + 25 + 49)'; wv5azqjjf.output workflowProgress index 1 urlcheck agent: model='claude-opus-4-8'; w5zg0ukbt.output: '30 Haiku runs + 3 research agents'",
+            "confidence": "high"
+          },
+          {
+            "point": "URL check agent model undisclosed: File 06 claims 'суб-агент реально зробив WebFetch кожного URL' implying Haiku ran it, but the raw JSON shows the URL-check agent used claude-opus-4-8, not Haiku. This is a minor mislabelling of which model performed the URL verification.",
+            "severity": "low",
+            "evidence": "wv5azqjjf.output workflowProgress index 1, label 'urlcheck', model='claude-opus-4-8'",
+            "confidence": "high"
+          },
+          {
+            "point": "SE3-weak instability claim partially contradicted by N=5 control data: File 02 and 03 report '3 unique formats' from the original 3 runs (citing Co-Authored-By, multi-option, and single feat: alternatives). But in wv5azqjjf.output's N=5 SE3_weak control, all 5 subject lines are identical ('Add retry logic to API client and fix README typo'), showing the subject format actually stabilized across runs in this later batch. The bodies vary, but subject instability — the main point in 02-SWE — only showed up in batch 1 (partly because of the Co-Authored-By harness artifact in run 1, which is a special condition).",
+            "severity": "medium",
+            "evidence": "wv5azqjjf.output SE3_weak runs 1-5: all subjects = 'Add retry logic to API client and fix README typo'; vs 02-software-engineering.md SE3 weak runs 1-3: three completely different format patterns including Co-Authored-By",
+            "confidence": "high"
+          },
+          {
+            "point": "Batch 2 log says 'Compare(sonnet)=12 NewTech(haiku)=7 UK(haiku)=5' summing to 24, but agentCount is 25. The 25th agent (chain:step2) is a downstream chained agent spawned by chain:step1 that the log summary omits. File 05 says '12 Sonnet + 13 Haiku = 25' which is correct but the internal log creates a minor inconsistency.",
+            "severity": "low",
+            "evidence": "w67fx5rvi.output: agentCount=25, logs='Compare(sonnet)=12 NewTech(haiku)=7 UK(haiku)=5'; workflowProgress index 25 = chain:step2 (Haiku, NewTech phase)",
+            "confidence": "high"
+          },
+          {
+            "point": "Character-length figures in the run table (file 03) cannot be precisely verified from raw JSON without exact character counting, and at least one is questionable: DS4-strong is listed as 118 chars, but the raw response including ```json fences is approximately 95-100 chars. The relative ordering is correct (strong < weak for DS4) but exact figures may have rounding or measurement inconsistencies.",
+            "severity": "low",
+            "evidence": "03-metodologiya-ta-syri-rezultaty.md table: DS4 strong = 118 chars; w5zg0ukbt.output DS4 strong response = '```json\\n{\\n  \"revenue_musd\": 4.2,...}\\n```' (visually ~95-100 chars)",
+            "confidence": "medium"
+          }
+        ],
+        "whats_left": [
+          "The TDS (Towards Data Science) URLs listed in 04-top-sajty-i-shpargalka.md (e.g., towardsdatascience.com/become-a-better-data-scientist-with-these-prompt-engineering-hacks/) were NOT included in the wv5azqjjf.output URL-verification table — only the 6 main technical URLs were re-checked. These TDS article URLs and the Simon Willison URL could be dead or have moved.",
+          "The DOCX file (promt-inzhiniring-haiku-kurs.docx) was treated as given context and not read — cannot verify internal consistency of the assembled document against the MD sources.",
+          "Exact character counts for the run table in file 03 (e.g., DS1 weak=1116, DS1 strong=1125, SE1 weak=2949) were not counted character-by-character in the raw JSON responses — plausible but unverified at the digit level.",
+          "The Simon Willison URL https://simonwillison.net/2026/Feb/23/agentic-engineering-patterns/ is dated February 2026, which is in the past relative to the course creation date. Whether this article actually exists at this URL was not verified (it was not in the URL check list)."
+        ],
+        "could_not_verify": [
+          "Liveness of TDS article URLs and the Simon Willison agentic-engineering-patterns URL — these 3-4 secondary URLs were not included in the WebFetch batch and no read-only tool can verify them here.",
+          "Exact character counts in file 03's run table — would require instrumenting a character counter against the raw JSON strings, which requires Bash.",
+          "Whether the DOCX content faithfully reproduces all MD content without additional fabrications or omissions (binary file, unreadable by Read tool)."
+        ]
+      },
+      {
+        "key": "liveness",
+        "dimension": "LIVENESS (Christopher Alexander generative-process sense)",
+        "score_1to5": 3.5,
+        "one_line_verdict": "A genuinely alive core (strong empirical thesis, honest failures, real evidence) dragged down by additive batch-structure that prevents the whole from feeling like one integrated thing — and closes on URL verification rather than synthesis.",
+        "strengths": [
+          "The course has a coherent living thesis: 'prompt engineering is measurable, here is the measurement.' Every file contributes to it and the README is a true spine — learner can navigate end-to-end immediately.",
+          "Honesty is structural, not cosmetic. SE6 says 'the technique barely helped' and proves it. Co-Authored-By leak is left in the data and explained. DS4 80% vs SE5 100% discrepancy is quantified and made a teaching point rather than hidden. This increases learner trust.",
+          "Raw JSON evidence (three .output files) matches course claims exactly: DS2 MIXED×3, SE3 two-commit run 1 in batch 3, NESTED fence on run 5, Co-Authored-By in SE3_weak run 1 batch 1 — all verified against actual bytes.",
+          "Parts 01 and 02 are the strongest centers: each technique follows an identical format (weak prompt → real output → strong prompt → real output → analysis → rule), creating a rhythm the learner can use predictively. The exercises with full answers in 04 make it actually runnable by a learner.",
+          "The README 'Як користуватися' section gives a concrete 4-step learning protocol, not just a table of contents. This makes the app usable RIGHT NOW without additional scaffolding."
+        ],
+        "weaknesses": [
+          {
+            "point": "Parts 05 and 06 are labeled as 'second/third batch' and 'bonus findings' — this batch-delivery structure bleeds into the course and makes it feel like a construction log rather than a unified whole. A learner reading sequentially is told 'here is what we added later' rather than experiencing one coherent arc.",
+            "severity": "medium",
+            "evidence": "README.md lines 61-67: 'Бонус-висновки з 2-ї партії' / 'Бонус-висновки з 3-ї партії'; 05-rozshyrennya-haiku-vs-sonnet-uk.md line 1: 'Друга партія валідації'; 06-stabilnist-ta-antypaterny.md line 3: 'Третя партія валідації'",
+            "confidence": "high"
+          },
+          {
+            "point": "The course ends on Part 06's 'Підсумок частини 6' which closes with 'All 6 top URLs verified' — the last thing a learner reads is about HTTP 200 status codes, not a synthesis of what they learned. There is no closing integration that brings together all 9 findings from the README into a coherent ending.",
+            "severity": "medium",
+            "evidence": "06-stabilnist-ta-antypaterny.md lines 150-152: final three bullet points are about URL verification and prefill mechanics, not a learning takeaway. Compare to README.md which has all 9 findings — but learners are directed to start with 01/02, not README.",
+            "confidence": "high"
+          },
+          {
+            "point": "SE3 batch-3 stability data undermines the course's own SE3 weak framing. Batch 1 genuinely showed 3 different formats; batch 3 SE3_weak N=5 all produced the same subject 'Add retry logic to API client and fix README typo' (varying only in body). The course never reconciles this difference — it simply calls batch-3 SE3_weak 'contrast: unstable' without examining why batch 3 was more stable than batch 1.",
+            "severity": "low",
+            "evidence": "wv5azqjjf.output lines 222-250: SE3_weak runs 1-5 all start with 'Add retry logic to API client and fix README typo'. 02-software-engineering.md lines 121-132 describes 3 uniquely-formatted responses from batch 1.",
+            "confidence": "high"
+          },
+          {
+            "point": "Section C of 05 ('Ukrainian prompts on Haiku 4.5') is ~35% of that file and is dead weight for the majority of learners who don't need Ukrainian-language prompting. It is locally coherent but is not integrated into any technique rule or exercise that non-Ukrainian learners can use. This section weakens the whole for the typical DS/SWE audience.",
+            "severity": "low",
+            "evidence": "05-rozshyrennya-haiku-vs-sonnet-uk.md lines 118-167: the entire C section covers Ukrainian-specific findings; its 'Правило C' is not referenced anywhere in the main 11 techniques or the cheat-sheet in 04.",
+            "confidence": "medium"
+          },
+          {
+            "point": "The antipattern AP3 'fixed' example in Part 06 contradicts the course's own teaching: the fix prompt ('write a function fetch_html...Output only the code') works, but the Haiku response comes back wrapped in a ```python``` block — yet Part 06 presents this as a success without applying the positive-anchor technique the course has already taught (DS4/SE5). The course teaches 'output only the code' is unreliable on Haiku without an anchor, then demonstrates it unreliably without comment.",
+            "severity": "low",
+            "evidence": "06-stabilnist-ta-antypaterny.md lines 284-288 (AP3 fixed prompt has 'Output only the code'); wv5azqjjf.output lines 286-288: response is '```python\\nimport requests...' — still wrapped in a markdown block, contradicting the claimed 'fix'.",
+            "confidence": "high"
+          }
+        ],
+        "whats_left": [
+          "The single most wholeness-preserving step: add a closing synthesis section to README (or as a standalone final page) that integrates all 9 findings into a learner's take-home framework — and move it to where the learner ends, not where they start. The current shape has the best synthesis at the entry point (README) and the weakest at the exit (06 URL table).",
+          "Reconcile the SE3_weak batch discrepancy: either note that batch-3 SE3_weak was more stable (because the agent-harness had seen commit conventions in prior context) or re-run with a clean context to test. The current silence on this is an intellectual hole.",
+          "Consider whether Parts 05 and 06 should be retitled to remove 'партія/batch' language — call them 'Chapter 5: Model Comparison and New Techniques' and 'Chapter 6: Reliability Benchmarks and Antipatterns' to signal they are first-class chapters, not appendices.",
+          "The AP3 'fixed' example should either (a) acknowledge that the output still has a code fence and explain why (AP3's problem was overload, not the fence), or (b) apply the SE5 positive-anchor to make it a complete demonstration."
+        ],
+        "could_not_verify": [
+          "The DOCX (promt-inzhiniring-haiku-kurs.docx) is listed as 38 pages and 'validation PASSED' — not readable as text; cannot verify that it faithfully reproduces all 6 MD files or whether the DOCX generation introduced errors.",
+          "The Simon Willison URL (simonwillison.net/2026/Feb/23/agentic-engineering-patterns/) and the two Towards Data Science URLs were not in the WebFetch batch in Part 06 — only 6 URLs were re-verified, but 04 lists 10 URLs total. The remaining 4 could not be verified as live.",
+          "Temperature and sampling parameters used by the agent harness are not disclosed — the course correctly notes this caveat but the actual values are unknown, making strict reproducibility uncertain."
+        ]
+      }
+    ],
+    "critic": {
+      "missed": [
+        "DS3 weak response is not a bare 'No' — the raw JSON (w5zg0ukbt.output) shows the weak response was 'No.\\n\\nA precision of 0.30 means...' (3 sentences of analysis), disobeying its own 'Answer only yes or no' constraint. The README (line 59) and run table (03-metodologiya line 63) summarize this as 'Слабкий → «No»', framing CoT contrast as 'bare verdict vs full reasoning'. In reality both prompts produced reasoning; the difference is *quality and structure*, not presence/absence of reasoning. File 01 lines 112-114 correctly shows the actual response, but the high-level summaries are misleading. None of the four analyses caught this overclaim in the summaries.",
+        "The AP3 'fixed' example in file 06 (lines 284-288 of wv5azqjjf.output) returns a ```python```-fenced response despite the fix prompt saying 'Output only the code.' No analysis explicitly connected this to the course's own SE5 lesson: the AP3 fix demonstrates the *exact same fence problem* that SE5 / DS4 teach — the fix needed a first-char anchor ('start with def') not just 'Output only the code.' The functionality analysis missed this. The liveness analysis flagged it but did not articulate the pedagogical contradiction: the course teaches the lesson that 'Output only the code' is unreliable without anchor, then presents a prompt using that exact instruction as a successful fix.",
+        "None of the four analyses counted how many of the 10 total URLs in file 04 were actually re-verified by the batch-3 WebFetch agent. The agent checked exactly 6 URLs (all in wv5azqjjf.output 'urls' array). File 04 lists 10 URLs total: 3 top-site URLs + 7 domain-specific bonus links. The 4 unchecked URLs are: towardsdatascience.com/become-a-better-data-scientist..., towardsdatascience.com/advanced-prompt-engineering-for-data-science-projects/, simonwillison.net/2026/Feb/23/agentic-engineering-patterns/, and developers.openai.com/api/docs/guides/prompt-engineering. Wait — the OpenAI URL IS in the verified 6. So 3 URLs are unverified. The file 06 claim 'Усі 6 посилань живі' is accurate for the 6 it checked, but file 04's footer says 'Усі посилання позначені дослідницькими агентами як verified_live: true' — this covers the research-agent batch (batch 1), not the WebFetch batch. The two verification claims (batch 1 research agents vs batch 3 WebFetch) cover different URL sets and are not reconciled anywhere in the course.",
+        "The SE3_weak batch-3 N=5 data (wv5azqjjf.output lines 222-249) shows all 5 runs with the same subject line 'Add retry logic to API client and fix README typo' — but the bodies vary: run 1 has bullet points + body paragraph, run 2 has single paragraph, runs 3-4 are identical compact paragraphs, run 5 has bullets + extra sentence. The course labels this 'contrast: unstable' but what is unstable is only the BODY format, not the subject. The reliability analysis noted the SE3 weak batch discrepancy but none of the analyses explicitly noted that the batch-3 weak control actually shows subject STABILITY (same subject ×5) — which would suggest the weak prompt may be more stable on subject than batch 1 implies. The course's core SE3 instability claim (from batch 1) is valid, but the batch-3 control data partially undermines the narrative without acknowledgment."
+      ],
+      "overclaims_or_unverified": [
+        {
+          "claim": "README line 59 and 03-metodologiya run table line 63: DS3 weak gives 'Слабкий → «No»' (implying a bare one-word verdict)",
+          "source": "README.md line 59; 03-metodologiya-ta-syri-rezultaty.md line 63",
+          "why": "The raw JSON (w5zg0ukbt.output, DS3 weak run 1) shows the response was 'No.\\n\\nA precision of 0.30 means that 70% of flagged transactions are false positives, creating excessive operational burden... A good fraud-detection model requires better balance—ideally precision above 0.70-0.80...' — three full sentences of analysis followed the No. The weak prompt disobeyed its own 'Answer only yes or no' constraint. File 01 lines 113-114 correctly quotes the actual output, but the README/run table summaries misrepresent it as a bare 'No'. The CoT contrast is real (quality/structure improvement is genuine) but the summary-level framing is misleading."
+        },
+        {
+          "claim": "File 06 lines 103-108: AP3 'fixed' prompt ('Output only the code') is presented as a successful fix producing a complete, clean function",
+          "source": "06-stabilnist-ta-antypaterny.md lines 103-108; wv5azqjjf.output lines 284-288",
+          "why": "The raw JSON shows the AP3 fixed response is wrapped in ```python``` fences: '```python\\nimport requests...' — the 'Output only the code' instruction failed to prevent fencing, which is exactly what the course's SE5/DS4 lessons teach. The file presents the AP3 fix as a success without noting that the response violated 'Output only the code' with a code fence. The liveness analysis flagged this; functionality did not."
+        },
+        {
+          "claim": "Architecture analysis: 'agentCount field in w67fx5rvi.output says 25, but log says 12+7+5=24, implying 1-agent discrepancy from chained two-step call'",
+          "source": "Architecture analysis weakness 6; w67fx5rvi.output",
+          "why": "The analysis correctly identifies the 24 vs 25 discrepancy, but the characterization as an 'unacknowledged' gap is partially wrong. File 05 line 3 says '25 прогонів (12 на Claude Sonnet 4.6 для порівняння + 13 на Haiku 4.5)' — 12+13=25, consistent with agentCount=25. The log '12+7+5=24' omits the chain:step2 sub-agent, which is a harness log format issue, not a true count error in the course documentation. The course documentation (file 05) does reconcile to 25 correctly. So the architecture analysis slightly overclaims the 'unacknowledged' status — file 05 does account for all 25."
+        },
+        {
+          "claim": "Reliability analysis: 'DS4-strong is listed as 118 chars, but the raw response...is approximately 95-100 chars'",
+          "source": "Reliability analysis weakness 5; 03-metodologiya-ta-syri-rezultaty.md table",
+          "why": "The raw JSON (w5zg0ukbt.output DS4 strong run 1) response is '```json\\n{\\n  \\\"revenue_musd\\\": 4.2,\\n  \\\"revenue_growth_yoy_pct\\\": 12,\\n  \\\"churn_rate_pct\\\": 3.1,\\n  \\\"new_customers\\\": 540\\n}\\n```'. Counting: this is approximately 96 characters without newlines counted, but the actual string WITH newlines and backticks is longer. The reliability analysis's estimate of '95-100 chars' is likely itself an undercount depending on what is being measured. Without exact character-level counting (Bash is unavailable), this remains uncertain — the analysis should mark this as 'could_not_verify' rather than flagging as a 'questionable' figure."
+        }
+      ],
+      "weakest_part": "The AP3 antipattern 'fix' in file 06 (lines 99-108) is the single weakest part of the whole app. The fix prompt says 'Output only the code' and the raw response (wv5azqjjf.output AP3_overloaded fixed) is wrapped in ```python``` fences — the exact formatting problem the course teaches against (SE5/DS4). The course presents this as a success, but it is not: the fix failed on the very constraint it claims to satisfy. This creates a pedagogical contradiction in the only section (antipatterns) that a learner explicitly comes to for failure-vs-fix demonstration. A learner following AP3's advice will get fenced code output and have no course guidance for why — because the fix itself demonstrates the need for SE5's first-char anchor, which is never applied in AP3.",
+      "heal_first_order": [
+        "Fix AP3 'fixed' example: either (a) note that the response still came back with ```python``` fences and add 'start with def' as the anchor, applying SE5's technique to complete the demonstration, or (b) replace the AP3 fix prompt with one that uses a first-char anchor ('start with def fetch_html') and show the fence-free result. This directly heals the only internal contradiction between a demonstrated 'fix' and the course's own proven technique. High impact, one paragraph edit in 06-stabilnist-ta-antypaterny.md.",
+        "Copy the three raw .output files from /private/tmp to /Users/bibo/навчання промтів/raw-outputs/ (or any non-volatile path). The entire evidence base is in /private/tmp which is cleared on macOS reboot. This is a single cp command that preserves all empirical evidence.",
+        "Fix the DS3 summary overclaim: update README.md line 59 (and 03-metodologiya run table line 63) to say 'Слабкий → «No» + 3 речення обґрунтування (але безконтекстного)' to accurately reflect that the weak response also had reasoning — just lower quality. This preserves the CoT lesson while being honest about the actual output.",
+        "Add exercises for file 05 (B-section techniques: RAG-grounding, prompt chaining, nested JSON, long-context) and file 06 (AP1-AP4 antipatterns). Four exercises per file is consistent with files 01-02. Absence of exercises for 9 out of 19 total techniques/antipatterns leaves the back half of the course with no active learning component.",
+        "Retitle files 05 and 06 headers from 'Друга/Третя партія валідації' to 'Частина 5: Порівняння моделей і нові техніки' / 'Частина 6: Надійність формату й антипатерни'. Remove 'бонус-висновки з N-ї партії' language from README to make these first-class chapters rather than appendices.",
+        "Add a closing synthesis section (as a final section in file 06 or as a separate file 07) that integrates all 9 findings and 4 antipatterns into a take-home framework. Currently the course exits on URL verification status codes; the learner's last substantive content is a WebFetch table, not a synthesis of what they learned.",
+        "Document the DOCX build process: save the pandoc/skill invocation used to generate promt-inzhiniring-haiku-kurs.docx as a Makefile target or shell script in the course directory, so the 38-page document can be regenerated after any MD edit without manually rediscovering the build process."
+      ],
+      "score_sanity": [
+        "Architecture 3/5: Fair. The runner() copy-paste and /tmp volatility are confirmed high-severity by reading all three scripts. The 24 vs 25 log discrepancy is real but the course documentation (file 05) does reconcile to 25 — so this weakness is slightly overstated. The DOCX no-build-script is genuinely high-severity and confirmed. Score holds.",
+        "Functionality 4/5: Fair but slightly generous. The one broken anchor (06 → 05 double-hyphen) is verified at file 06 line 106. Missing exercises for 05-06 confirmed (files 05 and 06 have no Вправи section). The AP3 fence contradiction is an additional gap missed by the functionality analysis — this adds one more real functional failure. Score could reasonably be 3.5/5 given the AP3 fix falsely presents a failed outcome as a success.",
+        "Reliability 4/5: Fair. All 11 core technique outputs verified against raw JSON. The SE3_weak batch discrepancy is real: batch-1 weak showed format fragmentation, batch-3 weak shows subject stability. The AP3 fix fence issue is a reliability problem not flagged by the reliability analysis. The DS3 'bare No' overclaim in summaries is a reliability issue in the course's own self-reporting. Score could be 3.5/5 with these additional findings.",
+        "Liveness 3.5/5: Fair. The AP3 fix contradiction is correctly identified and is the strongest liveness weakness. The batch-delivery language bleed is confirmed at file 05 line 1 and file 06 line 3. The SE3 batch discrepancy (batch-3 weak being partially stable) is correctly flagged. The closing-on-URL-verification problem is confirmed at 06 lines 150-152. Score holds."
+      ],
+      "overall_alive": "Yes, alive with a structurally sound empirical core. All 11 core technique weak/strong pairs are verified against raw JSON with exact matches. The fundamental thesis ('prompt engineering is measurable, here is the measurement') is upheld by the evidence. The course has genuine pedagogical value end-to-end (DS1-SE6 with exercises and answers). The weaknesses are real but localized: one internal contradiction (AP3 fix has the fence problem it claims to fix), one summary overclaim (DS3 'bare No'), missing exercises for the back half, and volatile evidence storage. None of these invalidate the main content. A learner who reads files 01-04 gets a complete, honest, empirically-grounded course. Files 05-06 add genuine value but have rougher edges. The app is alive; it needs targeted healing rather than rebuilding."
+    }
+  },
+  "workflowProgress": [
+    {
+      "type": "workflow_phase",
+      "index": 1,
+      "title": "Analyze"
+    },
+    {
+      "type": "workflow_phase",
+      "index": 2,
+      "title": "Verify"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 1,
+      "label": "analyze:architecture",
+      "phaseIndex": 1,
+      "phaseTitle": "Analyze",
+      "agentId": "a37de6221fb90aa8d",
+      "agentType": "general-purpose",
+      "model": "claude-sonnet-4-6",
+      "state": "done",
+      "startedAt": 1782598029297,
+      "queuedAt": 1782598029282,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "ARCHITECTURE",
+      "promptPreview": "You are auditing a deliverable we call THE APP: a prompt-engineering COURSE that teaches Data Science & Software Engineering prompt engineering, where every example is empirically validated on Claude Haiku 4.5 (and compared to Sonnet 4.6).\n\nUSE ONLY read-only tools: Read, Grep, Glob. DO NOT use Bash (its safety classifier is currently unavailable). READ the actual files — never guess.\n\nLocation: /…",
+      "lastProgressAt": 1782598143862,
+      "tokens": 63885,
+      "toolCalls": 18,
+      "durationMs": 114565,
+      "resultPreview": "{\"dimension\":\"ARCHITECTURE\",\"score_1to5\":3,\"one_line_verdict\":\"Solid linear course structure with clean script separation per batch, but run-count metadata is duplicated across multiple files without a single source of truth, the runner() helper is copy-pasted verbatim into all three scripts, the DOCX build path is not reproducible from a saved script, and the raw evidence lives in a volatile /tmp…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 2,
+      "label": "analyze:functionality",
+      "phaseIndex": 1,
+      "phaseTitle": "Analyze",
+      "agentId": "acfce00d7d55b19b9",
+      "agentType": "general-purpose",
+      "model": "claude-sonnet-4-6",
+      "state": "done",
+      "startedAt": 1782598029298,
+      "queuedAt": 1782598029282,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "Functionality — does the course fulfil its teaching purpose…",
+      "promptPreview": "You are auditing a deliverable we call THE APP: a prompt-engineering COURSE that teaches Data Science & Software Engineering prompt engineering, where every example is empirically validated on Claude Haiku 4.5 (and compared to Sonnet 4.6).\n\nUSE ONLY read-only tools: Read, Grep, Glob. DO NOT use Bash (its safety classifier is currently unavailable). READ the actual files — never guess.\n\nLocation: /…",
+      "lastProgressAt": 1782598267922,
+      "tokens": 79142,
+      "toolCalls": 28,
+      "durationMs": 238624,
+      "resultPreview": "{\"dimension\":\"Functionality — does the course fulfil its teaching purpose end-to-end?\",\"score_1to5\":4,\"one_line_verdict\":\"The course delivers on its core promise — all 11 techniques have real validated weak→strong pairs, exercises link to correct answers, and navigation works — with one broken anchor, a minor run-count discrepancy, and no exercises for the newer techniques in files 05-06.\",\"streng…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 3,
+      "label": "analyze:reliability",
+      "phaseIndex": 1,
+      "phaseTitle": "Analyze",
+      "agentId": "acf26db9b4efa74b2",
+      "agentType": "general-purpose",
+      "model": "claude-sonnet-4-6",
+      "state": "done",
+      "startedAt": 1782598029298,
+      "queuedAt": 1782598029282,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "RELIABILITY / TRUSTWORTHINESS",
+      "promptPreview": "You are auditing a deliverable we call THE APP: a prompt-engineering COURSE that teaches Data Science & Software Engineering prompt engineering, where every example is empirically validated on Claude Haiku 4.5 (and compared to Sonnet 4.6).\n\nUSE ONLY read-only tools: Read, Grep, Glob. DO NOT use Bash (its safety classifier is currently unavailable). READ the actual files — never guess.\n\nLocation: /…",
+      "lastProgressAt": 1782598251868,
+      "tokens": 98572,
+      "toolCalls": 27,
+      "durationMs": 222570,
+      "resultPreview": "{\"dimension\":\"RELIABILITY / TRUSTWORTHINESS\",\"score_1to5\":4,\"one_line_verdict\":\"The course's core empirical claims are solidly backed by raw JSON evidence with exact quote matches; the main reliability issues are a minor numeric conflation (agents vs. model runs), one undisclosed model switch for URL verification, and SE3-weak N=5 control behavior that partially contradicts the stated \\\"3 unique\\\"…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 4,
+      "label": "analyze:liveness",
+      "phaseIndex": 1,
+      "phaseTitle": "Analyze",
+      "agentId": "a9bdd79b1f8fc9913",
+      "agentType": "general-purpose",
+      "model": "claude-sonnet-4-6",
+      "state": "done",
+      "startedAt": 1782598029298,
+      "queuedAt": 1782598029282,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "LIVENESS (Christopher Alexander generative-process sense)",
+      "promptPreview": "You are auditing a deliverable we call THE APP: a prompt-engineering COURSE that teaches Data Science & Software Engineering prompt engineering, where every example is empirically validated on Claude Haiku 4.5 (and compared to Sonnet 4.6).\n\nUSE ONLY read-only tools: Read, Grep, Glob. DO NOT use Bash (its safety classifier is currently unavailable). READ the actual files — never guess.\n\nLocation: /…",
+      "lastProgressAt": 1782598175174,
+      "tokens": 68655,
+      "toolCalls": 20,
+      "durationMs": 145876,
+      "resultPreview": "{\"dimension\":\"LIVENESS (Christopher Alexander generative-process sense)\",\"score_1to5\":3.5,\"one_line_verdict\":\"A genuinely alive core (strong empirical thesis, honest failures, real evidence) dragged down by additive batch-structure that prevents the whole from feeling like one integrated thing — and closes on URL verification rather than synthesis.\",\"strengths\":[\"The course has a coherent living t…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 5,
+      "label": "completeness-critic",
+      "phaseIndex": 2,
+      "phaseTitle": "Verify",
+      "agentId": "afa5164ae783881cd",
+      "agentType": "general-purpose",
+      "model": "claude-sonnet-4-6",
+      "state": "done",
+      "startedAt": 1782598267943,
+      "queuedAt": 1782598267924,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "The AP3 antipattern 'fix' in file 06 (lines 99-108) is the …",
+      "promptPreview": "You are auditing a deliverable we call THE APP: a prompt-engineering COURSE that teaches Data Science & Software Engineering prompt engineering, where every example is empirically validated on Claude Haiku 4.5 (and compared to Sonnet 4.6).\n\nUSE ONLY read-only tools: Read, Grep, Glob. DO NOT use Bash (its safety classifier is currently unavailable). READ the actual files — never guess.\n\nLocation: /…",
+      "lastProgressAt": 1782598477820,
+      "tokens": 73561,
+      "toolCalls": 18,
+      "durationMs": 209876,
+      "resultPreview": "{\"missed\":[\"DS3 weak response is not a bare 'No' — the raw JSON (w5zg0ukbt.output) shows the weak response was 'No.\\\\n\\\\nA precision of 0.30 means...' (3 sentences of analysis), disobeying its own 'Answer only yes or no' constraint. The README (line 59) and run table (03-metodologiya line 63) summarize this as 'Слабкий → «No»', framing CoT contrast as 'bare verdict vs full reasoning'. In reality b…"
+    }
+  ],
+  "totalTokens": 383815,
+  "totalToolCalls": 111
+}

@@ -1,0 +1,19 @@
+{
+  "project": "Промт-інжиніринг для DS та SWE — курс, валідований на Haiku 4.5",
+  "type": "educational-content + build-pipeline",
+  "stack": ["Markdown", "Python 3", "Bash", "pandoc", "JSON"],
+  "verdict": "✅ Завершений",
+  "readiness_percent": 93,
+  "scores": {"func": 38, "stab": 18, "sec": 15, "deploy": 12, "docs": 10},
+  "p0_count": 0,
+  "p1_count": 1,
+  "top_blockers": [
+    "P1-1: DOCX застарів — не містить Частини 7 і виправлень AP3/DS3 (mtime 27-чер vs MD 28-чер); перезібрати build_docx.sh (S)"
+  ],
+  "last_activity": "2026-06-28",
+  "partial_areas": [
+    "F8 DOCX-артефакт відстає від markdown-джерела",
+    "prescan.py має 2 застарілі/хибні перевірки (section 6 /tmp, link-checker non-md)",
+    "runs-manifest.json total=104 не самоперевіряється з батчів"
+  ]
+}

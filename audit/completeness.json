@@ -1,0 +1,22 @@
+{
+  "markers": {"total_raw_hits": 7, "real_markers": 0, "note": "Усі 7 — хибні: слово 'hacks' в URL, легітимні згадки 'Co-Authored-By' (описаний артефакт), рядок тест-документа. TODO/FIXME/stub/placeholder/mock РЕАЛЬНИХ — 0."},
+  "matrix": [
+    {"id": "F1", "status": "code_only", "evidence": "01/02: 11 заголовків ## DS1-5 / ## SE1-6; сирі докази batch1-30runs у raw-outputs/model-runs/"},
+    {"id": "F2", "status": "code_only", "evidence": "05: секції ## A (рядок 7), ## B (50), ## C (117); batch2-25runs.json присутній"},
+    {"id": "F3", "status": "code_only", "evidence": "06: 4× '### AP[1-4].', 16 згадок N=5/×5//5; batch3-49runs.json присутній"},
+    {"id": "F4", "status": "code_only", "evidence": "04: '### 1/2/3.' топ-сайти; 9 URL заявлені перевіреними WebFetch"},
+    {"id": "F5", "status": "code_only", "evidence": "07-synthez: 7 секцій (7.1-7.7) — робочий процес, драбина надійності, чек-лист, мета-уроки"},
+    {"id": "F6", "status": "code_only", "evidence": "Вправи: 01,02,05,06; '### Відповіді (Частина 5)' 05:179, '(Частина 6)' 06:171; відповіді 01/02 у 04"},
+    {"id": "F7", "status": "code_only", "evidence": "prescan: 37/40 md-посилань резолвляться; 3 'биті' — ХИБНІ (raw-outputs/, manifest, build_docx.sh існують — перевірено -e)"},
+    {"id": "F8", "status": "code_only", "evidence": "DOCX ІСНУЄ і валідний (validate PASSED, 695 параграфів), АЛЕ ЗАСТАРІВ: mtime 27-чер, наймолодший MD 28-чер; DOCX містить 'Частина 1-6', 'Частина 7'=0, AP3-якір=0"},
+    {"id": "F9", "status": "code_only", "evidence": "raw-outputs/runs-manifest.json (total_model_runs=104) + 4 JSON-докази (49-94KB) + build/build_docx.sh; АЛЕ батчі маніфесту без сумовного поля runs (сума=0)"},
+    {"id": "F10", "status": "code_only", "evidence": "03: 5 згадок застереження/raw-API/контамінація/harness; README рядок 84 блок 'Застереження про чесність'"}
+  ],
+  "dead_ends": [
+    {"what": "prescan.py section 6 хардкодить старі /private/tmp шляхи (w5zg0ukbt тощо) — тепер 0B/зникли; має вказувати на raw-outputs/model-runs/", "file": "build/prescan.py:section6", "severity": "low"},
+    {"what": "prescan.py link-checker дає хибні спрацювання на non-.md цілях (raw-outputs/, *.json, *.sh) — рахує їх 'missing file', хоча вони існують", "file": "build/prescan.py:strip/link-check", "severity": "low"},
+    {"what": "runs-manifest.json: батчі не несуть сумовного поля runs, тож total=104 не самоперевіряється з розбивки (SSOT неповний)", "file": "raw-outputs/runs-manifest.json", "severity": "low"}
+  ],
+  "partial": false,
+  "notes": "0 реальних incompleteness-маркерів. Усі 10 DoD присутні в коді. Єдина суттєва прогалина — F8: DOCX-артефакт відстає від джерела (нема Частини 7 і виправлень AP3/DS3). Решта — дрібні дефекти tooling (prescan) і неповний SSOT."
+}

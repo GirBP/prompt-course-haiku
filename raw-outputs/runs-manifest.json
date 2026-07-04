@@ -1,0 +1,42 @@
+{
+  "description": "Single source of truth for every model run behind the course. The 104 total = sum of model_runs across the three content batches (the audit batch is meta, not course content).",
+  "models": ["claude-haiku-4-5", "claude-sonnet-4-6"],
+  "total_model_runs": 104,
+  "batches": [
+    {
+      "id": "batch1",
+      "task_id": "w5zg0ukbt",
+      "script": "workflow-scripts/haiku-prompt-eng-validation-wf_c3699d75-208.js",
+      "output": "model-runs/batch1-30runs-16sites.json",
+      "model_runs": 30,
+      "extra_agents": 3,
+      "note": "11 techniques x weak/strong on Haiku (DS2/SE3 x3) + 3 research agents (16 sites)"
+    },
+    {
+      "id": "batch2",
+      "task_id": "w67fx5rvi",
+      "script": "workflow-scripts/haiku-course-extensions-wf_a092010c-2f6.js",
+      "output": "model-runs/batch2-25runs-haiku-vs-sonnet-uk.json",
+      "model_runs": 25,
+      "breakdown": "12 Sonnet (comparison) + 13 Haiku (new techniques + UK)",
+      "note": "Haiku comparison side reused from batch1; chain technique = 2 sequential agents"
+    },
+    {
+      "id": "batch3",
+      "task_id": "wv5azqjjf",
+      "script": "workflow-scripts/haiku-stability-antipatterns-wf_ad6c2be1-0db.js",
+      "output": "model-runs/batch3-49runs-stability-antipatterns.json",
+      "model_runs": 49,
+      "breakdown": "40 stability (8 prompts x5) + 8 antipatterns + 1 URL-check agent",
+      "note": "N=5 format-reliability measurement"
+    }
+  ],
+  "audit": {
+    "id": "audit",
+    "task_id": "wknsoazgl",
+    "script": "workflow-scripts/course-liveness-audit-wf_367b5903-21a.js",
+    "output": "model-runs/audit-liveness.json",
+    "agents": 5,
+    "note": "Meta: 4 dimension analyses + 1 adversarial critic on Sonnet. Not counted in the 104."
+  }
+}

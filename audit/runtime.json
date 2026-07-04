@@ -1,0 +1,9 @@
+{
+  "install": {"ok": true, "err": "N/A — залежності системні (python3, pandoc 3.9), встановлення не потрібне"},
+  "build": {"ok": true, "err": "build_docx.py + prescan.py компілюються (py_compile ✓), build_docx.sh синтаксис ок (bash -n ✓), pandoc 3.9 присутній. Збірку НЕ запускав — вона перезаписала б DOCX (аудит read-only)."},
+  "run": {"ok": true, "pages_checked": "DOCX валідовано скриптом docx-скіла: All validations PASSED, 695 параграфів", "err": null},
+  "tests": {"passed": "prescan.py exit=0; 37/40 md-посилань резолвляться; 3 'биті' — ХИБНІ спрацювання (цілі raw-outputs/, manifest, build_docx.sh РЕАЛЬНО існують, prescan не знає non-md цілей)", "failed": "prescan.py section 6 хардкодить старі /tmp-шляхи (тепер 0B/зникли) — але докази ЗБЕРЕЖЕНІ у raw-outputs/model-runs/ (4 JSON, 49-94KB кожен)"},
+  "blockers": [],
+  "partial": false,
+  "notes": "Runtime здоровий. /tmp-докази справді зникли (підтверджує реальність volatility-ризику), але міграція в raw-outputs/ спрацювала — доказова база ціла. build_docx.sh НЕ запускав навмисно (read-only, щоб не перезаписати валідний DOCX)."
+}
