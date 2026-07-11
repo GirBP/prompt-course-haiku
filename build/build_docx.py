@@ -17,6 +17,7 @@ ORDER = [
     "05-rozshyrennya-haiku-vs-sonnet-uk.md",
     "06-stabilnist-ta-antypaterny.md",
     "07-synthez-praktychnyj-freymvork.md",
+    "08-vybir-modeli-haiku-opus-fable.md",
 ]
 
 PAGEBREAK = '\n\n```{=openxml}\n<w:p><w:r><w:br w:type="page"/></w:r></w:p>\n```\n\n'

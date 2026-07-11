@@ -27,6 +27,7 @@
 | [05-rozshyrennya-haiku-vs-sonnet-uk.md](05-rozshyrennya-haiku-vs-sonnet-uk.md) | **Haiku vs Sonnet 4.6**, нові техніки (RAG-grounding, prompt chaining, вкладений JSON), **українські промпти на Haiku** — ще 25 прогонів |
 | [06-stabilnist-ta-antypaterny.md](06-stabilnist-ta-antypaterny.md) | **Надійність формату (N=5)** — числа замість здогадок, **антипатерни** промптів (fail→fix), пере-перевірка URL — ще 49 прогонів |
 | [07-synthez-praktychnyj-freymvork.md](07-synthez-praktychnyj-freymvork.md) | **Фінальний синтез** — робочий процес із 5 кроків, драбина надійності, чек-лист «перед продом», мета-уроки |
+| [08-vybir-modeli-haiku-opus-fable.md](08-vybir-modeli-haiku-opus-fable.md) | **Вибір моделі: Haiku vs Opus vs Fable** — механіка API (що приймається) + стиль промпта під кожну; що обирати. ⚠️ з офіційного `claude-api`, не з прогонів |
 
 > 📁 Сирі докази й скрипти генерації — у [`raw-outputs/`](raw-outputs/) (усі 104 прогони в JSON + workflow-скрипти). Відтворити DOCX — [`build/build_docx.sh`](build/build_docx.sh).
 
