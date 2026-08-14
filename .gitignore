@@ -1,3 +1,5 @@
 _combined.md
 .DS_Store
 *.tmp
+__pycache__/
+*.pyc
