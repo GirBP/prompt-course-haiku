@@ -29,6 +29,8 @@
 | [07-synthez-praktychnyj-freymvork.md](07-synthez-praktychnyj-freymvork.md) | **Фінальний синтез** — робочий процес із 5 кроків, драбина надійності, чек-лист «перед продом», мета-уроки |
 | [08-vybir-modeli-haiku-opus-fable.md](08-vybir-modeli-haiku-opus-fable.md) | **Вибір моделі: Haiku vs Opus vs Fable** — механіка API (що приймається) + стиль промпта під кожну; що обирати. ⚠️ з офіційного `claude-api`, не з прогонів |
 
+> 🌐 **Браузерна версія:** відкрий [`index.html`](index.html) — самодостатній офлайн-рідер усіх 8 частин з боковою навігацією, пошуком і темною/світлою темою (без зовнішніх залежностей). Відтворити — [`build/build_html.py`](build/build_html.py).
+>
 > 📁 Сирі докази й скрипти генерації — у [`raw-outputs/`](raw-outputs/) (усі 104 прогони в JSON + workflow-скрипти). Відтворити DOCX — [`build/build_docx.sh`](build/build_docx.sh).
 
 ---
