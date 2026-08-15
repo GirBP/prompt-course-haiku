@@ -120,7 +120,7 @@ mark.s{background:var(--mark);color:var(--markfg);border-radius:3px;padding:0 1p
 </head>
 <body>
 <div class="topbar">
-  <div class="brand">Промт-інжиніринг на Haiku <small>· 8 частин · 104 прогони</small></div>
+  <div class="brand">Промт-інжиніринг на Haiku <small>· 8 частин · 118 прогонів</small></div>
   <div class="search"><input id="q" type="search" placeholder="Пошук по всьому курсу…" autocomplete="off"></div>
   <span class="hits" id="hits"></span>
   <button class="btn" id="theme" title="Перемкнути тему">☾ / ☀</button>

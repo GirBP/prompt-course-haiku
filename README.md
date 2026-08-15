@@ -31,7 +31,7 @@
 
 > 🌐 **Браузерна версія:** відкрий [`index.html`](index.html) — самодостатній офлайн-рідер усіх 8 частин з боковою навігацією, пошуком і темною/світлою темою (без зовнішніх залежностей). Відтворити — [`build/build_html.py`](build/build_html.py).
 >
-> 📁 Сирі докази й скрипти генерації — у [`raw-outputs/`](raw-outputs/) (усі 104 прогони в JSON + workflow-скрипти). Відтворити DOCX — [`build/build_docx.sh`](build/build_docx.sh).
+> 📁 Сирі докази й скрипти генерації — у [`raw-outputs/`](raw-outputs/) (усі 118 прогонів у JSON + workflow-скрипти). Відтворити DOCX — [`build/build_docx.sh`](build/build_docx.sh).
 
 ---
 

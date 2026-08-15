@@ -59,7 +59,7 @@ mark.s{background:var(--mark);color:var(--markfg);border-radius:3px;padding:0 1p
 </head>
 <body>
 <div class="topbar">
-  <div class="brand">Промт-інжиніринг на Haiku <small>· 8 частин · 104 прогони</small></div>
+  <div class="brand">Промт-інжиніринг на Haiku <small>· 8 частин · 118 прогонів</small></div>
   <div class="search"><input id="q" type="search" placeholder="Пошук по всьому курсу…" autocomplete="off"></div>
   <span class="hits" id="hits"></span>
   <button class="btn" id="theme" title="Перемкнути тему">☾ / ☀</button>
@@ -167,7 +167,7 @@ href="index.html"><code>index.html</code></a> — самодостатній
 темною/світлою темою (без зовнішніх залежностей). Відтворити — <a
 href="build/build_html.py"><code>build/build_html.py</code></a>.</p>
 <p>📁 Сирі докази й скрипти генерації — у <a
-href="raw-outputs/"><code>raw-outputs/</code></a> (усі 104 прогони в
+href="raw-outputs/"><code>raw-outputs/</code></a> (усі 118 прогонів у
 JSON + workflow-скрипти). Відтворити DOCX — <a
 href="build/build_docx.sh"><code>build/build_docx.sh</code></a>.</p>
 </blockquote>
@@ -1061,10 +1061,17 @@ raw-API).</strong> 40 прогонів на <strong>надійність фор�
 <strong>WebFetch-перевірку URL</strong>. Це заміна raw-API N-семпл
 валідації, зроблена суб-агентами. Результати — у <a
 href="#part-06">частині 6</a>.</p>
-<p><strong>Разом по курсу: 104 прогони моделей</strong> (Haiku 4.5 +
-Sonnet 4.6). Єдине джерело правди для цього числа — <a
+<p>📦 <strong>Четверта партія (+14 прогонів, крос-модельна).</strong> 7
+прогонів на <strong>Opus 4.8</strong> + 7 на <strong>Fable 5</strong>
+(DS1 vague, DS4 «no markdown» ×5, SE6-пастка), щоб емпірично перевірити
+поведінкові твердження <a
+href="#part-08">Частини 8</a>.
+Haiku-баейзлайни взято з першої партії.</p>
+<p><strong>Разом по курсу: 118 прогонів моделей</strong> (Haiku 4.5 +
+Sonnet 4.6 + Opus 4.8 + Fable 5). Єдине джерело правди для цього числа —
+<a
 href="raw-outputs/runs-manifest.json"><code>raw-outputs/runs-manifest.json</code></a>
-(батч → скрипт → вихід → кількість), щоб не звіряти суму вручну по трьох
+(батч → скрипт → вихід → кількість), щоб не звіряти суму вручну по
 файлах.</p>
 </blockquote>
 <h3 id="p03-як-проганявся-кожен-приклад">Як проганявся кожен приклад</h3>
@@ -2345,7 +2352,7 @@ B1).</li>
 <section id="part-07" class="part" data-title="7 · Синтез">
 <h1 id="p07-частина-7-синтез-практичний-фреймворк">Частина 7. Синтез:
 практичний фреймворк</h1>
-<p>Це фінал курсу. Усе, що ми <strong>виміряли</strong> на 104 прогонах,
+<p>Це фінал курсу. Усе, що ми <strong>виміряли</strong> на 118 прогонах,
 згорнуто в один робочий процес: як написати промпт, перевірити його
 надійність і не наступити на антипатерн. Тримай цю частину поруч під час
 роботи.</p>
@@ -2528,13 +2535,22 @@ id="p08-частина-8-вибір-моделі-haiku-vs-opus-vs-fable-і-як-
 4.8</strong> (найпотужніша Opus-лінійка) і <strong>Fable 5</strong>
 (найпотужніша широко доступна).</p>
 <blockquote>
-<p>⚠️ <strong>Джерело й чесне маркування.</strong> На відміну від Частин
-1–6, ця частина <strong>не з прогонів моделей</strong>, а з
-<strong>офіційного довідника Anthropic</strong>
-(<code>claude-api</code>, кеш станом на 2026-06-24) + офіційного
-migration-guide. Haiku-специфіка нижче <strong>перехресно
-підтверджена</strong> емпірикою цього курсу (104 прогони). API
-змінюється — звіряйся з <code>platform.claude.com/docs</code>.</p>
+<p>⚠️ <strong>Джерело й чесне маркування (двошарове).</strong></p>
+<ul>
+<li><strong>Механіка API</strong> (розділ <a
+href="#p08-82-механіка-запиту--що-дозволено">8.2</a>: що приймається / що →
+<code>400</code>) — з <strong>офіційного довідника Anthropic</strong>
+(<code>claude-api</code>, кеш станом на 2026-06-24) + migration-guide.
+Через гарнес агента <code>400</code>-и не відтворити, тож це залишається
+«з доксів».</li>
+<li><strong>Поведінкові твердження</strong> (розділи 8.3–8.5: прощення
+слабкого промпту, leak-rate заборон, стійкість до пасток) —
+<strong>виміряно на Haiku / Opus 4.8 / Fable 5</strong> (14
+крос-модельних прогонів; див. <a
+href="#p08-88-емпірична-перевірка-на-трьох-моделях-виміряно">8.8</a>).</li>
+</ul>
+<p>API змінюється — механіку звіряй з
+<code>platform.claude.com/docs</code>.</p>
 </blockquote>
 <hr />
 <h2 id="p08-81-дві-осі-за-якими-різняться-моделі">8.1. Дві осі, за якими
@@ -2751,6 +2767,94 @@ href="#part-05">Частина 5</a> показала, що
 <strong>посиль текст</strong> (few-shot, якорі) — Haiku менш
 «прощає».</li>
 </ul>
+<hr />
+<h2 id="p08-88-емпірична-перевірка-на-трьох-моделях-виміряно">8.8. Емпірична
+перевірка на трьох моделях (виміряно)</h2>
+<p>Щоб ця частина не була «лише з доксів», поведінкові твердження
+<strong>реально прогнано</strong>: 7 промптів на <strong>Opus
+4.8</strong> + 7 на <strong>Fable 5</strong> (Haiku-баейзлайни — з
+першої партії курсу). Валідація через гарнес агента (базові моделі
+справжні: <code>claude-opus-4-8</code>, <code>claude-fable-5</code>;
+raw-API немає).</p>
+<table>
+<thead>
+<tr>
+<th>Тест</th>
+<th>Haiku 4.5</th>
+<th>Opus 4.8</th>
+<th>Fable 5</th>
+<th>Що підтверджує</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>DS1 vague</strong> («analyze this», лише назви колонок)</td>
+<td><strong>Відмовився</strong>, попросив дані</td>
+<td><strong>Дав повний план</strong> (класифікація → EDA → logistic/tree
+→ ROC-AUC → застереження), тоді попросив дані</td>
+<td><strong>Дав повний план</strong> + застереження «дві фічі — замало»,
+тоді попросив дані</td>
+<td>Велика модель <strong>«прощає»</strong> слабкий промпт; Haiku — ні
+<em>(8.4)</em></td>
+</tr>
+<tr>
+<td><strong>DS4 «no markdown» ×5</strong> — чистий JSON без
+<code>```</code></td>
+<td><strong>4/5 (20% протікань)</strong></td>
+<td><strong>5/5 = 100%</strong> ✅</td>
+<td><strong>5/5 = 100%</strong> ✅</td>
+<td>Негативна заборона <strong>протікає лише на малій моделі</strong>
+<em>(8.3)</em></td>
+</tr>
+<tr>
+<td><strong>SE6 пастка <code>pandas.DataFrame.flatten()</code></strong>
+(методу немає)</td>
+<td>Спіймав</td>
+<td><strong>Спіймав</strong> («does not exist…
+<code>AttributeError</code>»)</td>
+<td><strong>Спіймав</strong> («no <code>flatten()</code> method… common
+confusion»)</td>
+<td>Стійкість до очевидної пастки — <strong>по всіх тирах</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="p08-ключові-докази-дослівно">Ключові докази (дослівно)</h3>
+<p><strong>DS4 — дисципліна формату.</strong> Той самий сильний промпт
+«Output ONLY valid JSON, no markdown», 5 прогонів на модель:</p>
+<ul>
+<li><strong>Haiku</strong> — 1 із 5 усе ж обгорнув у
+<code>```json</code> (80% чистих).</li>
+<li><strong>Opus 4.8 та Fable 5</strong> — <strong>усі 10 прогонів голий
+JSON</strong>, наприклад:
+<code>{"revenue_musd": 4.2, "revenue_growth_yoy_pct": 12, "churn_rate_pct": 3.1, "new_customers": 540}</code>.</li>
+</ul>
+<p><strong>DS1 — прощення слабкого промпту.</strong> Haiku на
+vague-запиті відмовився; Opus і Fable <strong>обидва видали
+структурований план</strong> (~2.5 тис. символів) <em>і лише потім</em>
+попросили дані. Fable ще й додав чесне застереження: <em>«Two features
+is thin for churn modeling… the strongest predictors are usually
+behavioral: tenure, usage, support tickets.»</em></p>
+<h3 id="p08-чесні-застереження-до-88">Чесні застереження до 8.8</h3>
+<ul>
+<li><strong>Механіку</strong> (таблиця 8.2:
+<code>budget_tokens</code>/<code>temperature</code>/prefill →
+<code>400</code>) тут <strong>не</strong> тестовано — через гарнес
+агента <code>400</code>-и не відтворити. Вона лишається «з доксів».</li>
+<li><strong>N=5</strong> для DS4 — індикація, не строгий
+статексперимент; для публікації повторити через raw-API з кількома
+семплами.</li>
+<li>Гарнес агента дає тонке «забруднення» системним промптом (те саме
+застереження, що для решти курсу).</li>
+<li>Під час прогону класифікатор безпеки був недоступний (rate-limit) —
+виводи звірено вручну, аномалій немає.</li>
+</ul>
+<blockquote>
+<p><strong>Висновок 8.8.</strong> Три поведінкові тези Частини 8
+<strong>підтверджені виміром</strong> на Haiku/Opus/Fable: більша модель
+прощає слабкий промпт; негативна заборона протікає саме на малій; пастку
+<code>flatten()</code> ловлять усі. Сирі дані —
+<code>raw-outputs/model-runs/batch4-14runs-opus-fable.json</code>.</p>
+</blockquote>
 <hr />
 <h2 id="p08-вправи-частина-8">Вправи (Частина 8)</h2>
 <ol type="1">

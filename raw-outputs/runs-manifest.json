@@ -1,7 +1,7 @@
 {
-  "description": "Single source of truth for every model run behind the course. The 104 total = sum of model_runs across the three content batches (the audit batch is meta, not course content).",
-  "models": ["claude-haiku-4-5", "claude-sonnet-4-6"],
-  "total_model_runs": 104,
+  "description": "Single source of truth for every model run behind the course. The 118 total = sum of model_runs across the four content batches (the audit batch is meta, not course content).",
+  "models": ["claude-haiku-4-5", "claude-sonnet-4-6", "claude-opus-4-8", "claude-fable-5"],
+  "total_model_runs": 118,
   "batches": [
     {
       "id": "batch1",
@@ -29,6 +29,15 @@
       "model_runs": 49,
       "breakdown": "40 stability (8 prompts x5) + 8 antipatterns + 1 URL-check agent",
       "note": "N=5 format-reliability measurement"
+    },
+    {
+      "id": "batch4",
+      "task_id": "ww8cgfj4j",
+      "script": "workflow-scripts/validate-part8-cross-model-wf_0de86994-8d3.js",
+      "output": "model-runs/batch4-14runs-opus-fable.json",
+      "model_runs": 14,
+      "breakdown": "7 Opus 4.8 + 7 Fable 5 (DS1 vague, DS4 no-markdown x5, SE6 trap)",
+      "note": "Cross-model validation of Part 8 behavioral claims; Haiku baselines reused from batch1"
     }
   ],
   "audit": {
@@ -37,6 +46,6 @@
     "script": "workflow-scripts/course-liveness-audit-wf_367b5903-21a.js",
     "output": "model-runs/audit-liveness.json",
     "agents": 5,
-    "note": "Meta: 4 dimension analyses + 1 adversarial critic on Sonnet. Not counted in the 104."
+    "note": "Meta: 4 dimension analyses + 1 adversarial critic on Sonnet. Not counted in the 118."
   }
 }
