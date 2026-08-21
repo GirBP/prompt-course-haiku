@@ -4,51 +4,62 @@
 
 ## 🏆 Топ-3 сайти для навчання промт-інжинірингу
 
-Відібрано 3 дослідницькими агентами; посилання перевірені WebFetch'ем і **перепровірені 2026-08-21**. Критерії: авторитетність, актуальність, практичність і покриття *обох* доменів (DS + SWE).
+Відібрано дослідницькими агентами; посилання **перевірені WebFetch'ем на доступність І на свіжість змісту (2026-08-21)**. Критерії: авторитетність, актуальність, практичність і покриття *обох* доменів (DS + SWE).
 
-### 1. Anthropic Interactive Prompt Engineering Tutorial (GitHub) — найкращий для практики
-🔗 https://github.com/anthropics/prompt-eng-interactive-tutorial
+> ⚠️ **Доступність ≠ актуальність.** Серпнева перевірка показала: усі 10 посилань відкриваються, але **зміст деяких застарів**. Нижче кожен ресурс має чесну позначку свіжості.
 
-Інтерактивний курс із 9 розділів із **запускними прикладами**, які працюють **прямо на Claude Haiku** — тобто максимально близько до того, що ми робили в цьому курсі. Вчить від базової структури промпта до складних промислових кейсів. **№1, бо це єдиний з топу, де ти сам проганяєш промпти на Haiku й бачиш різницю на дотик.**
-*Кому:* розробникам, які вчаться на практиці й хочуть одразу мацати модель.
-
-### 2. Prompt Engineering Guide — DAIR.AI — найкращий vendor-neutral довідник
-🔗 https://www.promptingguide.ai/
-
-Найбільш цитований відкритий гайд, що активно оновлюється. Дистилює дослідницькі техніки (chain-of-thought, few-shot, RAG, ReAct, агенти) з нотатками під конкретні моделі, включно з Claude. Розділ **Applications** покриває і DS (генерація даних, синтетичні датасети, класифікація), і SWE (генерація коду, агенти). **№2, бо це найкращий єдиний крос-доменний референс, не прив'язаний до вендора.**
-*Кому:* усім, хто хоче зрозуміти техніки «з-під капота», що переносяться між моделями.
-
-### 3. Anthropic — Prompting Best Practices (офіційні докси Claude) — найкращий авторитетний референс
+### 1. Anthropic — Prompting Best Practices (офіційні докси Claude) — ✅ актуальний
 🔗 https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices
 
-Офіційний, постійно оновлюваний довідник: чіткість, приклади, XML-структурування, tool use, extended thinking, агентний промптинг — з нотатками під **конкретні моделі, включно з Claude Haiku 4.5**. **№3, бо це першоджерело істини саме для тих моделей, на яких ми валідували курс.**
-*Кому:* розробникам на Claude API, яким потрібна точна model-specific настройка.
+Офіційний, **постійно оновлюваний** довідник: чіткість, приклади, XML-структурування, tool use, extended/adaptive thinking, агентний промптинг — з нотатками під **конкретні моделі**. **№1, бо це єдине джерело, яке не застаріває**: воно оновлюється разом із моделями (перевірено — містить актуальні Opus 5 / Sonnet 5 / Fable 5).
+*Кому:* усім, хто пише промпти під Claude; обов'язково — розробникам на API.
 
-> **Якщо обирати один:** для нашого контексту (навчання + Haiku) — почни з **#1** (практика), тримай **#3** як довідник під рукою, а **#2** читай для глибини технік.
+### 2. Prompt Engineering Guide — DAIR.AI — ✅ актуальний
+🔗 https://www.promptingguide.ai/
+
+Найбільш цитований відкритий гайд, що активно оновлюється. Дистилює дослідницькі техніки (chain-of-thought, few-shot, RAG, ReAct, агенти) з нотатками під конкретні моделі. Розділ **Applications** покриває і DS (генерація даних, синтетичні датасети, класифікація), і SWE (генерація коду, агенти). **№2, бо це найкращий крос-доменний референс, не прив'язаний до вендора.**
+*Кому:* усім, хто хоче зрозуміти техніки «з-під капота», що переносяться між моделями.
+
+### 3. Anthropic Interactive Prompt Engineering Tutorial (GitHub) — ⚠️ потребує правки перед запуском
+🔗 https://github.com/anthropics/prompt-eng-interactive-tutorial
+
+Єдиний ресурс топу, де ти **сам проганяєш промпти** в Jupyter і бачиш різницю на дотик. 9 розділів + додатки; концепції (чіткість, XML-теги, роль, few-shot, CoT, анти-галюцинації, chaining/tool-use/RAG) — **досі валідні** й майже дослівно збігаються з тим, що ми виміряли в цьому курсі.
+
+> 🔧 **Але з коробки він НЕ запуститься.** Ноутбуки жорстко зашиті на `claude-3-haiku-20240307`, яку Anthropic **зняла з експлуатації 20 квітня 2026** («Requests to retired models will fail»). Репозиторій не оновлювався з **квітня 2024**.
+> **Фікс — один рядок:** заміни у ноутбуці
+> ```python
+> MODEL_NAME = "claude-3-haiku-20240307"   # ❌ retired
+> MODEL_NAME = "claude-haiku-4-5-20251001" # ✅ офіційна заміна
+> ```
+> Також прибери `temperature=0.0` з `get_completion()`, якщо перейдеш на Opus 4.7+/Fable (там нестандартний `temperature` → `400`, див. [Частину 8](08-vybir-modeli-haiku-opus-fable.md)).
+
+*Кому:* тим, хто вчиться руками і не боїться однорядкової правки.
+
+> **Якщо обирати один:** почни з **#1** (не застаріває) → **#2** для глибини технік → **#3**, коли захочеш практики (після фіксу моделі).
 
 ---
 
 ## Додаткові сайти за доменами (бонус)
 
 ### Для Data Science
-- **The Data Scientist's Prompt Playbook (Towards Data Science)** — серія 2026 з copy-paste промптами й pandas-снипетами для planning / cleaning / EDA.
+- **The Data Scientist's Prompt Playbook (Towards Data Science)** — ⚠️ *стаття від 30.06.2025* — copy-paste промпти й pandas-снипети для planning / cleaning / EDA. Техніки валідні, але **моделі, які вона називає (GPT-4, o3-pro), уже застаріли** — не бери її як орієнтир щодо вибору моделі.
   🔗 https://towardsdatascience.com/become-a-better-data-scientist-with-these-prompt-engineering-hacks/
-- **Advanced Prompt Engineering for DS (TDS, частина 2)** — feature engineering, вибір моделі/AutoML, LLM-оцінка з явними JSON/CSV-схемами.
+- **Advanced Prompt Engineering for DS (частина 2)** — ⚠️ *стаття від 19.08.2025* — feature engineering, вибір моделі/AutoML, LLM-оцінка з JSON/CSV-схемами. **Обережно з порадою «тримай `temperature` ≤ 0.3»**: на сучасних Claude (Opus 4.7+, Fable 5) нестандартний `temperature` повертає `400` — там детермінізм задають промптом і `effort` (див. [Частину 8](08-vybir-modeli-haiku-opus-fable.md)).
   🔗 https://towardsdatascience.com/advanced-prompt-engineering-for-data-science-projects/
-- **promptingguide.ai/applications** — data generation, синтетичні датасети, класифікація.
+- **promptingguide.ai/applications** — ✅ актуальний — data generation, синтетичні датасети, класифікація.
   🔗 https://www.promptingguide.ai/applications
 
 ### Для Software Engineering
-- **Best practices for Claude Code (Anthropic)** — офіційний плейбук агентного кодингу: explore-plan-code-commit, верифіковані перевірки, CLAUDE.md, subagents, рев'ю.
+- **Best practices for Claude Code (Anthropic)** — ✅ актуальний — офіційний плейбук агентного кодингу: explore-plan-code-commit, верифіковані перевірки, CLAUDE.md, subagents, рев'ю.
   🔗 https://code.claude.com/docs/en/best-practices
-- **Effective context engineering for AI agents (Anthropic Engineering)** — найбільший важіль якості агента: керування контекстним вікном (just-in-time loading, compaction, sub-agents).
+- **Effective context engineering for AI agents (Anthropic Engineering)** — ✅ актуальний — керування контекстним вікном (just-in-time loading, compaction, sub-agents).
   🔗 https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents
-- **Agentic Engineering Patterns (Simon Willison)** — практичні патерни щоденного агентного кодингу, TDD для агентів.
-  🔗 https://simonwillison.net/2026/Feb/23/agentic-engineering-patterns/
-- **OpenAI Prompt Engineering Guide** — якщо працюєш і з OpenAI-моделями: кодинг, frontend, агентні воркфлоу.
+- **Agentic Engineering Patterns (Simon Willison)** — ⚠️ *не оновлювався з квітня 2026* — практичні патерни агентного кодингу, TDD для агентів. Методологія не застаріває, але приклади моделей — на покоління позаду. **Читай живий покажчик, а не анонс:** https://simonwillison.net/guides/agentic-engineering-patterns/
+  🔗 https://simonwillison.net/2026/Feb/23/agentic-engineering-patterns/ *(анонс)*
+- **OpenAI Prompt Engineering Guide** — ✅ актуальний (посилається на GPT-5-серію) — якщо працюєш і з OpenAI-моделями: кодинг, frontend, агентні воркфлоу.
   🔗 https://developers.openai.com/api/docs/guides/prompt-engineering
 
-> **Усі 10 посилань цього файлу реально перевірені WebFetch'ем** (а не лише прапорцем `verified_live` дослідницького агента), і **перепровірені 2026-08-21 — усі 10 живі**. Історія: 6 перевірені у [Частині 6](06-stabilnist-ta-antypaterny.md#c-пере-перевірка-топ-сайтів-webfetch-2026-06-27), 3 (2× Towards Data Science, Simon Willison) — окремим проходом, 10-те (`promptingguide.ai/applications`) дозвірене у серпні. Якщо щось переїхало — шукай за назвою ресурсу.
+> **Перевірка 2026-08-21:** усі 10 посилань **живі**; додатково перевірено **зміст** кожного. Результат: 6 — актуальні, 3 — старіють (позначено ⚠️), 1 — потребує однорядкової правки перед запуском (туторіал Anthropic). Історія перевірок доступності — у [Частині 6](06-stabilnist-ta-antypaterny.md#c-пере-перевірка-топ-сайтів-webfetch-2026-06-27).
 
 ---
 
