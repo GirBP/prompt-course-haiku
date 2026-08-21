@@ -155,12 +155,21 @@ href="#part-07">07-synthez-praktychnyj-freymvork.md</a></td>
 <td><a
 href="#part-08">08-vybir-modeli-haiku-opus-fable.md</a></td>
 <td><strong>Вибір моделі: Haiku vs Opus vs Fable</strong> — механіка API
-(що приймається) + стиль промпта під кожну; що обирати. ⚠️ з офіційного
-<code>claude-api</code>, не з прогонів</td>
+(з офіц. доксів, звірено 2026-08) + стиль промпта під кожну +
+<strong>8.8: емпірична перевірка на 3 моделях</strong> (14
+прогонів)</td>
 </tr>
 </tbody>
 </table>
 <blockquote>
+<p>✅ <strong>Перевірка актуальності (2026-08-21).</strong> Курс звірено
+з <strong>живими</strong> доксами Anthropic: усі 11 тверджень механіки
+API (Частина 8) — <strong>підтверджені</strong>; ціни й ліміти Haiku 4.5
+/ Opus 4.8 / Fable 5 — <strong>без змін</strong>; усі 10 зовнішніх
+посилань — <strong>живі</strong>. Оновлено: вийшли <strong>Opus
+5</strong> (новий флагман) і <strong>Sonnet 5</strong> — див. <a
+href="#part-08">8.2a «Свіжість
+лінійки»</a>.</p>
 <p>🌐 <strong>Браузерна версія:</strong> відкрий <a
 href="index.html"><code>index.html</code></a> — самодостатній
 офлайн-рідер усіх 8 частин з боковою навігацією, пошуком і
@@ -1074,6 +1083,14 @@ href="raw-outputs/runs-manifest.json"><code>raw-outputs/runs-manifest.json</code
 (батч → скрипт → вихід → кількість), щоб не звіряти суму вручну по
 файлах.</p>
 </blockquote>
+<blockquote>
+<p>🔍 <strong>Перевірка актуальності (2026-08-21).</strong> Окремим
+проходом курс звірено з живими доксами: механіка API Частини 8 — 11/11
+підтверджено; ціни/ліміти трьох моделей — без змін; 10/10 URL живі.
+Виправлено: формулювання про CoT-<code>display</code> у Fable, облік
+посилань (9→10), додано нотатку про <strong>Opus 5 / Sonnet
+5</strong>.</p>
+</blockquote>
 <h3 id="p03-як-проганявся-кожен-приклад">Як проганявся кожен приклад</h3>
 <p>Кожному Haiku-агенту давали обгортку, що змушувала його відповідати
 <strong>як звичайна LLM-модель</strong> (без інструментів, без
@@ -1318,8 +1335,8 @@ JSON:</p>
 <hr />
 <h2 id="p04-trophy-топ-3-сайти-для-навчання-промт-інжинірингу">🏆 Топ-3
 сайти для навчання промт-інжинірингу</h2>
-<p>Відібрано 3 дослідницькими агентами з перевіркою, що посилання
-<strong>живі</strong> станом на 2026 рік. Критерії: авторитетність,
+<p>Відібрано 3 дослідницькими агентами; посилання перевірені WebFetch'ем
+і <strong>перепровірені 2026-08-21</strong>. Критерії: авторитетність,
 актуальність, практичність і покриття <em>обох</em> доменів (DS +
 SWE).</p>
 <h3
@@ -1402,13 +1419,14 @@ OpenAI-моделями: кодинг, frontend, агентні воркфлоу
 href="https://developers.openai.com/api/docs/guides/prompt-engineering">https://developers.openai.com/api/docs/guides/prompt-engineering</a></li>
 </ul>
 <blockquote>
-<p><strong>Усі 9 посилань цього файлу реально перевірені
+<p><strong>Усі 10 посилань цього файлу реально перевірені
 WebFetch'ем</strong> (а не лише прапорцем <code>verified_live</code>
-дослідницького агента): 6 — у <a
+дослідницького агента), і <strong>перепровірені 2026-08-21 — усі 10
+живі</strong>. Історія: 6 перевірені у <a
 href="#part-06">Частині
-6</a>, 3 (2× Towards Data Science, Simon Willison) — окремим проходом.
-Усі живі станом на 2026-06. Якщо щось переїхало — шукай за назвою
-ресурсу.</p>
+6</a>, 3 (2× Towards Data Science, Simon Willison) — окремим проходом,
+10-те (<code>promptingguide.ai/applications</code>) дозвірене у серпні.
+Якщо щось переїхало — шукай за назвою ресурсу.</p>
 </blockquote>
 <hr />
 <h2 id="p04-шпаргалка-13-принципів">Шпаргалка: 13 принципів</h2>
@@ -2224,7 +2242,9 @@ and explain when each is faster.»</em> — явний дозвіл виправ
 <h2 id="p06-c-пере-перевірка-топ-сайтів-webfetch-2026-06-27">C.
 Пере-перевірка топ-сайтів (WebFetch, 2026-06-27)</h2>
 <p>Не на віру до прапорця — суб-агент реально зробив
-<code>WebFetch</code> кожного URL:</p>
+<code>WebFetch</code> кожного URL. <strong>Перепровірено 2026-08-21: усі
+10 і далі живі</strong> (OpenAI-URL при автоперевірці дав транзієнтний
+збій, але при ручній звірці — 200 OK):</p>
 <table>
 <thead>
 <tr>
@@ -2244,6 +2264,12 @@ and explain when each is faster.»</em> — явний дозвіл виправ
 href="http://www.promptingguide.ai">www.promptingguide.ai</a></td>
 <td style="text-align: center;">✅ 200</td>
 <td>Хаб технік промптингу</td>
+</tr>
+<tr>
+<td><a
+href="http://www.promptingguide.ai/applications">www.promptingguide.ai/applications</a></td>
+<td style="text-align: center;">✅ 200</td>
+<td>Applications-хаб (дозвірено 2026-08)</td>
 </tr>
 <tr>
 <td>platform.claude.com/.../claude-prompting-best-practices</td>
@@ -2282,12 +2308,12 @@ href="http://www.promptingguide.ai">www.promptingguide.ai</a></td>
 </tr>
 </tbody>
 </table>
-<p><strong>Усі 9 унікальних зовнішніх посилань курсу — живі.</strong> 6
-технічних URL перевірені WebFetch у <a
-href="#p06-c-пере-перевірка-топ-сайтів-webfetch-2026-06-27">Частині 6</a>; 3
-доменно-специфічні URL (2× Towards Data Science, Simon Willison)
-дозвірені окремим WebFetch-проходом. Жодне посилання не спирається лише
-на прапорець <code>verified_live</code> дослідницького агента.</p>
+<p><strong>Усі 10 унікальних зовнішніх посилань курсу — живі</strong>
+(перепровірено 2026-08-21). 6 технічних URL перевірені WebFetch тут; 3
+доменно-специфічні (2× Towards Data Science, Simon Willison) — окремим
+проходом; 10-те (<code>promptingguide.ai/applications</code>) дозвірене
+у серпні. Жодне посилання не спирається лише на прапорець
+<code>verified_live</code> дослідницького агента.</p>
 <hr />
 <h2 id="p06-підсумок-частини-6">Підсумок частини 6</h2>
 <ul>
@@ -2298,8 +2324,8 @@ href="#p06-c-пере-перевірка-топ-сайтів-webfetch-2026-06-27
 суперечливі інструкції (тиха втрата контролю) і перевантаження
 (поверхневість). Заборони-обсягу протікають. Хибні засновки Haiku поки
 що спростовує сам.</li>
-<li><strong>Усі 9 посилань курсу перевірені</strong> реальним
-WebFetch.</li>
+<li><strong>Усі 10 посилань курсу перевірені</strong> реальним WebFetch
+(і перепровірені 2026-08-21).</li>
 </ul>
 <hr />
 <h2 id="p06-вправи-частина-6">Вправи (Частина 6)</h2>
@@ -2548,6 +2574,9 @@ id="p08-частина-8-вибір-моделі-haiku-vs-opus-vs-fable-і-як-
 крос-модельних прогонів; див. <a
 href="#p08-88-емпірична-перевірка-на-трьох-моделях-виміряно">8.8</a>).</li>
 </ul>
+<p>✅ <strong>Перепровірено на живих доксах 2026-08-21:</strong> усі 11
+тверджень механіки (розділ 8.2) — <strong>підтверджені</strong>; ціни й
+ліміти Haiku 4.5 / Opus 4.8 / Fable 5 — <strong>без змін</strong>.</p>
 <p>API змінюється — механіку звіряй з
 <code>platform.claude.com/docs</code>.</p>
 </blockquote>
@@ -2579,11 +2608,12 @@ href="#p08-87-практичне-правило-переносу">8.7</a>).</p>
 <tr>
 <td><strong>Thinking</strong></td>
 <td><code>type:"enabled"</code> + <code>budget_tokens:N</code> (старий
-стиль)</td>
+стиль); <code>adaptive</code> → <strong>400</strong></td>
 <td>лише <code>type:"adaptive"</code>; <code>budget_tokens</code> →
 <strong>400</strong></td>
-<td><strong>завжди увімкнене</strong> — параметр <code>thinking</code>
-прибрати; <code>disabled</code> і <code>budget_tokens</code> →
+<td><strong>завжди увімкнене</strong> — <code>thinking</code> прибрати
+<strong>або</strong> явно <code>{type:"adaptive"}</code>;
+<code>disabled</code> і <code>budget_tokens</code> →
 <strong>400</strong></td>
 </tr>
 <tr>
@@ -2607,8 +2637,11 @@ href="#p08-87-практичне-правило-переносу">8.7</a>).</p>
 <tr>
 <td><strong>Сирий chain-of-thought</strong></td>
 <td>видно у відповіді</td>
-<td>приховано (summary через <code>display</code>)</td>
-<td><strong>ніколи не повертається</strong> (лише summary)</td>
+<td>не повертається; за замовч. поле <strong>порожнє</strong>, summary —
+через <code>display:"summarized"</code></td>
+<td><strong>сирий — ніколи</strong>; за замовч. поле
+<strong>порожнє</strong>, summary — лише з
+<code>display:"summarized"</code></td>
 </tr>
 <tr>
 <td><strong><code>refusal</code> stop_reason</strong></td>
@@ -2635,9 +2668,35 @@ href="#p08-87-практичне-правило-переносу">8.7</a>).</p>
 <p><strong>Наслідок для коду:</strong> що потужніша модель, то суворіший
 запит. Haiku приймає старий стиль (<code>budget_tokens</code>,
 <code>temperature</code>, prefill); Opus/Fable їх відкидають. Fable ще й
-вимагає <strong>прибрати весь <code>thinking</code>-блок</strong> (думає
-завжди).</p>
+думає завжди: <code>thinking</code> треба <strong>прибрати або лишити
+лише <code>{type:"adaptive"}</code></strong>.</p>
 </blockquote>
+<h3 id="p08-stopwatch-свіжість-лінійки-станом-на-2026-08-21">⏱️ Свіжість
+лінійки (станом на 2026-08-21)</h3>
+<p>Курс писався в червні 2026 на трійці <strong>Haiku 4.5 / Opus 4.8 /
+Fable 5</strong>. За перевіркою живих доксів у серпні:</p>
+<ul>
+<li><strong>Усі цифри й механіка вище лишаються чинними</strong> — Haiku
+4.5, Opus 4.8 і Fable 5 активні, ціни й ліміти не змінились.</li>
+<li><strong>Але зʼявилось нове покоління:</strong> <strong>Claude Opus
+5</strong> (<code>claude-opus-5</code>) — тепер топова рекомендація
+Anthropic, а <strong>Opus 4.8 перейшов у Legacy</strong> (повністю
+підтримується). Також GA — <strong>Claude Sonnet 5</strong>
+(<code>claude-sonnet-5</code>, <span class="math inline">2/</span>10 за
+1M; анонсоване підвищення до <span class="math inline">3/</span>15 з 1
+вересня <strong>скасовано</strong>, <span
+class="math inline">2/</span>10 стала постійною ціною).</li>
+<li><strong>Практичний наслідок:</strong> усе, що ця частина каже про
+<strong>Opus 4.8</strong>, застосовне й до <strong>Opus 5</strong> (та
+сама сімʼя обмежень: adaptive-only thinking,
+<code>temperature</code>/prefill → 400). Одна відмінність Opus 5:
+<strong>adaptive-мислення увімкнене за замовчуванням</strong> (в Opus
+4.8 — вимкнене), і <code>thinking:{type:"disabled"}</code> приймається
+лише при <code>effort</code> ≤ <code>high</code>.</li>
+<li><strong>Haiku 4.5</strong> лишається найдешевшою ланкою — головний
+висновок курсу («що менша модель, то важливіший промпт») не
+змінився.</li>
+</ul>
 <hr />
 <h2 id="p08-83-стиль--haiku-45-пиши-максимально-явно">8.3. Стиль — Haiku
 4.5: пиши максимально явно</h2>
@@ -2728,14 +2787,18 @@ concise/warmer», писані під 4.7, можуть перестати бу�
 трансформації. Компенсуй якістю промпта.</td>
 </tr>
 <tr>
-<td><em>(Sonnet — середня ланка)</em></td>
-<td>Баланс ціна/якість для типового продакшену (у курсі порівнювався
-Sonnet 4.6).</td>
+<td><strong>Sonnet 5</strong> <em>(середня ланка)</em></td>
+<td>Баланс ціна/якість (<span class="math inline">2/</span>10) для
+типового продакшену; у курсі порівнювався попередник Sonnet 4.6.</td>
 </tr>
 <tr>
-<td><strong>Opus 4.8</strong></td>
-<td>Дефолт на більшість задач; складна агентика — з явним тригерингом
-інструментів.</td>
+<td><strong>Opus 5</strong> <em>(новий флагман)</em></td>
+<td>Дефолт на більшість задач станом на серпень 2026; правила Opus 4.8
+нижче застосовні.</td>
+</tr>
+<tr>
+<td><strong>Opus 4.8</strong> <em>(Legacy)</em></td>
+<td>Те саме, але вже не топ-рекомендація; повністю підтримується.</td>
 </tr>
 <tr>
 <td><strong>Fable 5</strong></td>
@@ -2758,10 +2821,11 @@ href="#part-05">Частина 5</a> показала, що
 <code>budget_tokens</code>,
 <code>temperature</code>/<code>top_p</code>/<code>top_k</code>, prefill
 (усі → <code>400</code> на Opus/Fable).</li>
-<li><strong>Opus → Fable:</strong> додатково <strong>прибери весь
-<code>thinking</code>-блок</strong> (Fable думає завжди;
-<code>disabled</code> → <code>400</code>) і <strong>додай обробку
-<code>refusal</code></strong> + fallback.</li>
+<li><strong>Opus → Fable:</strong> додатково <strong>прибери
+<code>thinking</code>-блок</strong> (або лиши лише
+<code>{type:"adaptive"}</code> — Fable думає завжди;
+<code>disabled</code> та <code>budget_tokens</code> → <code>400</code>)
+і <strong>додай обробку <code>refusal</code></strong> + fallback.</li>
 <li><strong>Будь-куди → Haiku:</strong> можна лишити старий стиль, але
 <strong>посиль текст</strong> (few-shot, якорі) — Haiku менш
 «прощає».</li>
@@ -2872,8 +2936,9 @@ behavioral: tenure, usage, support tickets.»</em></p>
 <h3 id="p08-відповіді-частина-8">Відповіді (Частина 8)</h3>
 <ol type="1">
 <li><strong>8-A.</strong> Зламаються: (1)
-<code>thinking:{type:"enabled", budget_tokens:N}</code> — прибрати весь
-<code>thinking</code> (Fable думає завжди); (2)
+<code>thinking:{type:"enabled", budget_tokens:N}</code> — прибрати
+<code>thinking</code> або лишити лише <code>{type:"adaptive"}</code>
+(Fable думає завжди); (2)
 <code>temperature</code>/<code>top_p</code>/<code>top_k</code> —
 прибрати, керувати стилем через промпт; (3) prefill (останній
 assistant-turn) — замінити на <code>output_config.format</code> або

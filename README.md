@@ -27,8 +27,10 @@
 | [05-rozshyrennya-haiku-vs-sonnet-uk.md](05-rozshyrennya-haiku-vs-sonnet-uk.md) | **Haiku vs Sonnet 4.6**, нові техніки (RAG-grounding, prompt chaining, вкладений JSON), **українські промпти на Haiku** — ще 25 прогонів |
 | [06-stabilnist-ta-antypaterny.md](06-stabilnist-ta-antypaterny.md) | **Надійність формату (N=5)** — числа замість здогадок, **антипатерни** промптів (fail→fix), пере-перевірка URL — ще 49 прогонів |
 | [07-synthez-praktychnyj-freymvork.md](07-synthez-praktychnyj-freymvork.md) | **Фінальний синтез** — робочий процес із 5 кроків, драбина надійності, чек-лист «перед продом», мета-уроки |
-| [08-vybir-modeli-haiku-opus-fable.md](08-vybir-modeli-haiku-opus-fable.md) | **Вибір моделі: Haiku vs Opus vs Fable** — механіка API (що приймається) + стиль промпта під кожну; що обирати. ⚠️ з офіційного `claude-api`, не з прогонів |
+| [08-vybir-modeli-haiku-opus-fable.md](08-vybir-modeli-haiku-opus-fable.md) | **Вибір моделі: Haiku vs Opus vs Fable** — механіка API (з офіц. доксів, звірено 2026-08) + стиль промпта під кожну + **8.8: емпірична перевірка на 3 моделях** (14 прогонів) |
 
+> ✅ **Перевірка актуальності (2026-08-21).** Курс звірено з **живими** доксами Anthropic: усі 11 тверджень механіки API (Частина 8) — **підтверджені**; ціни й ліміти Haiku 4.5 / Opus 4.8 / Fable 5 — **без змін**; усі 10 зовнішніх посилань — **живі**. Оновлено: вийшли **Opus 5** (новий флагман) і **Sonnet 5** — див. [8.2a «Свіжість лінійки»](08-vybir-modeli-haiku-opus-fable.md).
+>
 > 🌐 **Браузерна версія:** відкрий [`index.html`](index.html) — самодостатній офлайн-рідер усіх 8 частин з боковою навігацією, пошуком і темною/світлою темою (без зовнішніх залежностей). Відтворити — [`build/build_html.py`](build/build_html.py).
 >
 > 📁 Сирі докази й скрипти генерації — у [`raw-outputs/`](raw-outputs/) (усі 118 прогонів у JSON + workflow-скрипти). Відтворити DOCX — [`build/build_docx.sh`](build/build_docx.sh).

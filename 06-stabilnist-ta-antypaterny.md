@@ -135,12 +135,13 @@ fix(docs): fix typo in README
 
 ## C. Пере-перевірка топ-сайтів (WebFetch, 2026-06-27)
 
-Не на віру до прапорця — суб-агент реально зробив `WebFetch` кожного URL:
+Не на віру до прапорця — суб-агент реально зробив `WebFetch` кожного URL. **Перепровірено 2026-08-21: усі 10 і далі живі** (OpenAI-URL при автоперевірці дав транзієнтний збій, але при ручній звірці — 200 OK):
 
 | URL | Статус | Що це |
 |-----|:------:|-------|
 | github.com/anthropics/prompt-eng-interactive-tutorial | ✅ 200 | Інтерактивний туторіал, Jupyter-ноутбуки |
 | www.promptingguide.ai | ✅ 200 | Хаб технік промптингу |
+| www.promptingguide.ai/applications | ✅ 200 | Applications-хаб (дозвірено 2026-08) |
 | platform.claude.com/.../claude-prompting-best-practices | ✅ 200 | Офіційні best practices, model-specific |
 | code.claude.com/docs/en/best-practices | ✅ 200 | Best practices для Claude Code |
 | anthropic.com/engineering/effective-context-engineering-for-ai-agents | ✅ 200 | Стаття про context engineering |
@@ -149,14 +150,14 @@ fix(docs): fix typo in README
 | towardsdatascience.com/advanced-prompt-engineering-... | ✅ live | TDS, частина 2: features/modeling/eval |
 | simonwillison.net/2026/Feb/23/agentic-engineering-patterns | ✅ live | Патерни агентного кодингу |
 
-**Усі 9 унікальних зовнішніх посилань курсу — живі.** 6 технічних URL перевірені WebFetch у [Частині 6](#c-пере-перевірка-топ-сайтів-webfetch-2026-06-27); 3 доменно-специфічні URL (2× Towards Data Science, Simon Willison) дозвірені окремим WebFetch-проходом. Жодне посилання не спирається лише на прапорець `verified_live` дослідницького агента.
+**Усі 10 унікальних зовнішніх посилань курсу — живі** (перепровірено 2026-08-21). 6 технічних URL перевірені WebFetch тут; 3 доменно-специфічні (2× Towards Data Science, Simon Willison) — окремим проходом; 10-те (`promptingguide.ai/applications`) дозвірене у серпні. Жодне посилання не спирається лише на прапорець `verified_live` дослідницького агента.
 
 ---
 
 ## Підсумок частини 6
 - **Надійність формату виміряна, а не припущена:** закритий набір / sentinel / якір = ~100%; негативні заборони = ~80%. Для критичних пайплайнів — додавай prefill + валідацію схемою.
 - **Антипатерни валідовані:** найнебезпечніші на Haiku — суперечливі інструкції (тиха втрата контролю) і перевантаження (поверхневість). Заборони-обсягу протікають. Хибні засновки Haiku поки що спростовує сам.
-- **Усі 9 посилань курсу перевірені** реальним WebFetch.
+- **Усі 10 посилань курсу перевірені** реальним WebFetch (і перепровірені 2026-08-21).
 
 ---
 
