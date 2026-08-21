@@ -2765,7 +2765,11 @@ concise/warmer», писані під 4.7, можуть перестати бу�
 <code>effort</code>: навіть <code>low</code> часто б'є
 <code>xhigh</code> старих моделей.</li>
 <li><strong>Обробляй <code>refusal</code></strong> (класифікатори
-безпеки) — у продакшені додай fallback на Opus 4.8.</li>
+безпеки). У продакшені став server-side fallback: актуальний спосіб
+(звірено 2026-08) — <code>fallbacks: "default"</code> з бета-хедером
+<code>server-side-fallback-2026-07-01</code>; він сам добирає модель за
+категорією відмови, без ручного списку. Недоступний на Batch API,
+Bedrock, Google Cloud і Foundry — там роби ретрай на клієнті.</li>
 </ul>
 <blockquote>
 <p><strong>Правило 8.5.</strong> Fable 5 = «менше інструкцій, більше
@@ -2825,7 +2829,9 @@ href="#part-05">Частина 5</a> показала, що
 <code>thinking</code>-блок</strong> (або лиши лише
 <code>{type:"adaptive"}</code> — Fable думає завжди;
 <code>disabled</code> та <code>budget_tokens</code> → <code>400</code>)
-і <strong>додай обробку <code>refusal</code></strong> + fallback.</li>
+і <strong>додай обробку <code>refusal</code></strong> +
+<code>fallbacks: "default"</code> (бета
+<code>server-side-fallback-2026-07-01</code>).</li>
 <li><strong>Будь-куди → Haiku:</strong> можна лишити старий стиль, але
 <strong>посиль текст</strong> (few-shot, якорі) — Haiku менш
 «прощає».</li>
@@ -2942,8 +2948,9 @@ behavioral: tenure, usage, support tickets.»</em></p>
 <code>temperature</code>/<code>top_p</code>/<code>top_k</code> —
 прибрати, керувати стилем через промпт; (3) prefill (останній
 assistant-turn) — замінити на <code>output_config.format</code> або
-системну інструкцію. Плюс додати обробку <code>refusal</code> + fallback
-на Opus 4.8.</li>
+системну інструкцію. Плюс додати обробку <code>refusal</code> +
+server-side fallback (<code>fallbacks: "default"</code>, бета
+<code>server-side-fallback-2026-07-01</code>).</li>
 <li><strong>8-B.</strong> (1) Підняти <code>effort</code> до
 <code>high</code>/<code>xhigh</code> — на них Opus помітно активніше
 користується інструментами; (2) явний тригеринг: у <strong>системному
