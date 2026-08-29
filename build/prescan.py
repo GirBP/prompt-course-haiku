@@ -103,6 +103,9 @@ expected = [
     "batch2-25runs-haiku-vs-sonnet-uk.json",
     "batch3-49runs-stability-antipatterns.json",
     "batch4-14runs-opus-fable.json",
+    "aug2026-third-party-content-check.json",
+    "aug2026-research-5-directions.json",
+    "aug2026-research-context-mgmt.json",
     "audit-liveness.json",
 ]
 for name in expected:

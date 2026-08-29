@@ -1,0 +1,109 @@
+{
+ "direction": "Agent context management (context engineering), mid-2026",
+ "key_findings": [
+  {
+   "finding": "Anthropic frames context engineering as the successor discipline to prompt engineering: 'the set of strategies for curating and maintaining the optimal set of tokens during LLM inference.' Context is finite with diminishing marginal returns due to 'context rot' — degradation as tokens increase, rooted in transformer n² pairwise attention and training distributions skewed toward shorter sequences. Four core strategies: just-in-time retrieval (lightweight file paths/queries loaded at runtime, as in Claude Code, vs. pre-loading everything), compaction (summarize-and-reinitialize near the context limit, preserving architectural decisions/unresolved bugs over redundant tool output), structured note-taking/memory (notes persisted outside the context window and pulled back later, demonstrated by Claude playing Pokémon maintaining maps and strategy notes across thousands of steps), and sub-agent architectures (specialized agents with clean context windows returning condensed 1,000–2,000 token summaries).",
+   "source_url": "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents",
+   "source_authority": "Anthropic engineering blog (primary lab source)",
+   "date": "2025-09-29",
+   "fetched": true
+  },
+  {
+   "finding": "Chroma's 'Context Rot' technical report tested 18 frontier models (Claude Opus/Sonnet/Haiku, GPT-4.1/4o/o3, Gemini 2.5, Qwen3) across controlled NIAH variants, LongMemEval, and a repeated-words task, holding task difficulty constant while varying only input length. Finding: 'models do not use their context uniformly; instead, their performance grows increasingly unreliable as input length grows.' Effects are non-uniform and depend on needle-question lexical similarity, presence of distractors, and haystack structure. Counterintuitively, shuffled/incoherent haystacks outperformed logically coherent ones across all 18 models — the authors flag this as unexplained and call for mechanistic-interpretability follow-up.",
+   "source_url": "https://www.trychroma.com/research/context-rot",
+   "source_authority": "Chroma research report (Kelly Hong, Anton Troynikov, Jeff Huber)",
+   "date": "2025-07-14",
+   "fetched": true
+  },
+  {
+   "finding": "NoLiMa (arXiv:2502.05167, ICML 2025) extends needle-in-a-haystack to remove lexical overlap between question and needle, forcing semantic/associative inference instead of literal matching. Across 13 LLMs claiming 128K+ context support, 11 dropped below 50% of their short-context (<1K) baseline performance by 32K tokens; GPT-4o fell from 99.3% to 69.7%. Reasoning/chain-of-thought models still degraded substantially, indicating the failure is not simply solved by more reasoning tokens.",
+   "source_url": "https://arxiv.org/abs/2502.05167",
+   "source_authority": "arXiv paper (Modarressi et al., Adobe Research), accepted ICML 2025",
+   "date": "2025-02-07 (v3: 2025-07-09)",
+   "fetched": true
+  },
+  {
+   "finding": "A separate EMNLP 2025 Findings paper shows context length itself — independent of retrieval success — degrades LLM performance: across 5 LLMs on math/QA/coding tasks, accuracy dropped 13.9%–85% as input length grew even within supported context windows, and the decline persisted even when irrelevant tokens were replaced with whitespace or masked so attention only needed to cover relevant content. A 'recite the retrieved evidence before answering' prompting trick improved GPT-4o by up to 4% on RULER, suggesting partial mitigation but not a fix.",
+   "source_url": "https://arxiv.org/abs/2510.05381",
+   "source_authority": "arXiv paper, accepted EMNLP 2025 Findings",
+   "date": "2025-10-06",
+   "fetched": true
+  },
+  {
+   "finding": "Anthropic's Claude API now ships first-class, non-prompting mechanisms for context management: (1) 'context editing' — clear_tool_uses_20250919 automatically clears the oldest tool results (keeping the last N, configurable trigger/keep/clear_at_least/exclude_tools), and clear_thinking_20251015 prunes old extended-thinking blocks with model-specific defaults; both run server-side before the prompt reaches Claude and interact with prompt-cache invalidation. (2) Server-side 'compaction' (compact_20260112, beta as of Jan 2026) automatically summarizes older conversation into a compaction block once input tokens cross a threshold (default 150K, min 50K), which the client must pass back; billing is itemized per iteration since summarization itself costs tokens.",
+   "source_url": "https://platform.claude.com/docs/en/build-with-claude/context-editing",
+   "source_authority": "Anthropic official API docs",
+   "date": "beta headers dated 2025-09-19 / 2025-10-15; page current 2026",
+   "fetched": true
+  },
+  {
+   "finding": "Anthropic's memory tool (memory_20250818) is a client-executed tool giving Claude a persistent /memories file directory (view/create/str_replace/insert/delete/rename) that survives across separate context windows, explicitly implementing just-in-time retrieval: 'Rather than loading all relevant information up front, an agent records what it learns in memory files and reads them back on demand.' Anthropic recommends pairing it with compaction: compaction keeps active context small without client bookkeeping, while memory preserves information that must survive summarization. A documented 'multisession software development' pattern uses an initializer session to set up a progress log + feature checklist + init script, with each subsequent session reading and updating that log before ending — detailed further in Anthropic's 'Effective harnesses for long-running agents' (Nov 26, 2025), which adds git-based recovery and end-to-end verification before marking features done.",
+   "source_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/memory-tool",
+   "source_authority": "Anthropic official API docs (cross-referencing anthropic.com/engineering/effective-harnesses-for-long-running-agents)",
+   "date": "tool released 2025-08-18; harness post 2025-11-26",
+   "fetched": true
+  },
+  {
+   "finding": "Anthropic's multi-agent research system post is the origin case study for sub-agent context isolation: subagents get their own context windows to explore in parallel and 'condense the most important tokens for the lead research agent' before returning only a distilled result. The lead agent saves its plan to persistent memory specifically because 'if the context window exceeds 200,000 tokens it will be truncated' — memory as insurance against context loss, not just knowledge accumulation. The tradeoff is explicit and quantified: 'agents typically use about 4× more tokens than chat interactions, and multi-agent systems use about 15× more tokens than chats,' justified in their evals only because the multi-agent (Opus lead + Sonnet subagents) configuration outperformed single-agent Opus 4 by 90.2% on complex research tasks.",
+   "source_url": "https://www.anthropic.com/engineering/built-multi-agent-research-system",
+   "source_authority": "Anthropic engineering blog (primary lab source)",
+   "date": "2025-06-13",
+   "fetched": true
+  },
+  {
+   "finding": "Cognition AI (Devin team) directly counters the sub-agent-isolation consensus in 'Don't Build Multi-Agents': naive multi-agent setups violate two principles — 'share context, and share full agent traces, not just individual messages' and 'actions carry implicit decisions, and conflicting decisions carry bad results.' Their illustrative failure: parallel subagents building incompatible game assets (Mario-style background vs. Flappy Bird character) because neither saw the other's context, forcing a downstream reconciliation the coordinator can't reliably do. Their recommendation is the opposite of Anthropic's: default to single-threaded linear agents with an LLM-based context-compression layer for long tasks, treating full multi-agent collaboration as still unreliable as of 2025.",
+   "source_url": "https://cognition.com/blog/dont-build-multi-agents",
+   "source_authority": "Cognition AI engineering blog (Walden Yan, Devin team) — recognized practitioner lab, opposing view to Anthropic",
+   "date": "2025-06-12",
+   "fetched": true
+  },
+  {
+   "finding": "Anthropic's prompt-caching docs quantify the economics that make context-window discipline pay off: cache reads cost 0.1x base input price (90% discount) vs. 1.25x for a 5-minute cache write or 2x for a 1-hour write. The entire benefit depends on prefix stability — cache hits require byte-identical content up to the cache_control breakpoint, so placing any per-request-variable content (timestamps, dynamic user text) before the breakpoint silently guarantees 100% cache misses. Changing tool definitions invalidates the entire cache hierarchy (tools → system → messages), which is why context-editing operations that clear tool inputs/results are engineered to interact carefully with cache invalidation (clear_at_least exists specifically to ensure a cache rewrite is worth it).",
+   "source_url": "https://platform.claude.com/docs/en/build-with-claude/prompt-caching",
+   "source_authority": "Anthropic official API docs",
+   "date": "2026 (current docs; ephemeral cache_control feature)",
+   "fetched": true
+  },
+  {
+   "finding": "Claude Code's official docs describe two complementary, currently-shipping structured-note mechanisms: CLAUDE.md (human-written, hierarchical — managed/user/project/local scopes, concatenated in context, capped at 200 lines / 4MiB recommended, reloaded from disk after /compact so root-level instructions survive compaction) and 'auto memory' (Claude-written notes in ~/.claude/projects/<project>/memory/, categorized as user/feedback/project/reference, with a MEMORY.md index capped at 200 lines or 25KB loaded every session and topic files loaded on demand). This is a direct, currently-deployed instance of the 'structured note-taking' pattern Anthropic's context-engineering post describes abstractly — CLAUDE.md content is explicitly noted to survive /compact while conversation-only instructions do not.",
+   "source_url": "https://code.claude.com/docs/en/memory",
+   "source_authority": "Anthropic official Claude Code docs",
+   "date": "current, references Claude Code v2.1.2xx (2026)",
+   "fetched": true
+  }
+ ],
+ "consensus": [
+  "Context degrades model performance as it grows ('context rot') even well within advertised context-window limits — independently corroborated by Anthropic's own framing, Chroma's 18-model empirical study, NoLiMa's semantic-matching benchmark, and a separate EMNLP 2025 paper showing the effect persists even with perfect/masked retrieval.",
+  "Just-in-time retrieval (storing lightweight references — file paths, IDs, queries — and loading data at runtime via tools) is preferred over exhaustively preloading context, across Anthropic's context-engineering guide, the memory tool docs, and LangChain's 'select context' pattern.",
+  "Compaction/summarization and pruning of stale tool results have moved from ad hoc prompting hacks to first-class, server-side API primitives (Anthropic's compact_20260112 and clear_tool_uses_20250919/clear_thinking_20251015), reflecting convergence on this as necessary infrastructure rather than an optional trick.",
+  "File-based external memory (memory tool, CLAUDE.md, auto-memory, progress logs) is the standard way to persist knowledge and enable recovery across sessions/context-window resets, explicitly designed on the assumption that 'your context window might be reset at any moment.'",
+  "Prompt-cache economics (roughly 10x cheaper on hits) strongly reward keeping the front of the prompt (system prompt, tool definitions) stable and pushing variable content later — this shapes how context-editing and compaction features are designed to avoid needlessly invalidating caches."
+ ],
+ "controversies": [
+  "Sub-agent context isolation as a reliability tool vs. a reliability risk: Anthropic's multi-agent research system post reports isolated subagent contexts (returning condensed summaries) drove a 90.2% improvement over single-agent Opus 4 on complex research, at ~15x the token cost of a single chat. Cognition AI's 'Don't Build Multi-Agents' (same month, June 2025) argues the opposite for most tasks — subagents that don't share full context/traces make conflicting implicit decisions and produce incompatible outputs, so they recommend single-threaded agents with compression instead of parallel isolated subagents. Both are credible frontier-lab engineering teams reaching different conclusions, likely because they optimize for different task shapes (broad parallel research/retrieval vs. tightly coupled creative/coding work).",
+  "Root cause of context rot remains unsettled: Anthropic attributes it to architectural n² attention costs and training-distribution bias toward shorter sequences; Chroma's study surfaces the unexplained finding that logically coherent (structured) context degrades performance MORE than shuffled/incoherent context, which the authors themselves say may require mechanistic-interpretability research to explain rather than being resolved; the EMNLP 2025 paper (2510.05381) separately argues the effect is not primarily a retrieval failure at all, since it persists even when irrelevant tokens are masked out — implying at least two distinct, only partly overlapping degradation mechanisms are being studied under the same 'context rot' label."
+ ],
+ "top_resources": [
+  {
+   "name": "Effective context engineering for AI agents (Anthropic)",
+   "url": "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents",
+   "why": "The primary, most current vendor synthesis anchoring the whole field's vocabulary (context rot, JIT retrieval, compaction, note-taking, sub-agents) and directly linked from Anthropic's own memory-tool and context-editing docs."
+  },
+  {
+   "name": "Context Rot: How Increasing Input Tokens Impacts LLM Performance (Chroma)",
+   "url": "https://www.trychroma.com/research/context-rot",
+   "why": "The empirical study that gave 'context rot' its evidentiary backing across 18 models with controlled experiments — the study to cite when a claim needs a number, not just a vendor assertion."
+  },
+  {
+   "name": "Claude Platform docs: Compaction, Context Editing, and Memory Tool",
+   "url": "https://platform.claude.com/docs/en/build-with-claude/compaction",
+   "why": "Canonical, versioned technical reference for actually implementing the patterns (exact API parameters, defaults, billing semantics, cache interactions) rather than just conceptual guidance."
+  },
+  {
+   "name": "Context Engineering for Agents (LangChain)",
+   "url": "https://www.langchain.com/blog/context-engineering-for-agents",
+   "why": "The best cross-vendor practitioner synthesis (write/select/compress/isolate framework), explicitly citing and reconciling Anthropic's, Cognition's, and Drew Breunig's failure-taxonomy work — useful as the course's 'map of the map.'"
+  }
+ ],
+ "gaps": "No independent (non-vendor) quantitative benchmark was found comparing compaction vs. note-taking/memory vs. sub-agent isolation head-to-head on identical tasks for quality/cost/latency — Anthropic's guidance on when to use which is qualitative. The compact_20260112 API feature is very new (beta dated Jan 2026) with no third-party evaluation yet located. Claude Code's own auto-memory/MEMORY.md system is likewise recent (v2.1.59+) and documented only by Anthropic itself — no outside audit of its effectiveness was found. Finally, the foundational long-context degradation studies (Chroma, NoLiMa, arXiv:2510.05381) were run on 2025-era models (Claude 4-series, GPT-4.1/4o, Gemini 2.5); no 2026 replication against the newest model generation (Sonnet 5/Opus 5/Fable 5) was found, so it is unverified how much — if at all — context rot has been mitigated in current-generation models."
+}

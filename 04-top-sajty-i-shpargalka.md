@@ -59,6 +59,13 @@
 - **OpenAI Prompt Engineering Guide** — ✅ актуальний (посилається на GPT-5-серію) — якщо працюєш і з OpenAI-моделями: кодинг, frontend, агентні воркфлоу.
   🔗 https://developers.openai.com/api/docs/guides/prompt-engineering
 
+### Ресурси Модуля 2026 (Частини 9–13, перевірені при дослідженні 2026-08)
+- **Промптинг reasoning-моделей:** OpenAI Reasoning Best Practices — https://developers.openai.com/api/docs/guides/reasoning-best-practices
+- **Автоматизована розробка:** DORA 2025 — https://dora.dev/dora-report-2025/ · METR RCT — https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/ · Effective harnesses (Anthropic) — https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents
+- **Мультиагенти:** Anthropic multi-agent research system — https://www.anthropic.com/engineering/multi-agent-research-system · Cognition «Don't Build Multi-Agents» — https://cognition.com/blog/dont-build-multi-agents · Claude Code sub-agents — https://code.claude.com/docs/en/sub-agents
+- **Контекст агентів:** Chroma «Context Rot» — https://www.trychroma.com/research/context-rot · Harness engineering (Fowler/Böckeler) — https://martinfowler.com/articles/harness-engineering.html
+- **Локальні LLM:** llama.cpp quantize README — https://github.com/ggml-org/llama.cpp/blob/master/tools/quantize/README.md · vLLM quantization — https://docs.vllm.ai/en/latest/features/quantization/ · Willison local-llms — https://simonwillison.net/tags/local-llms/
+
 > **Перевірка 2026-08-21:** усі 10 посилань **живі**; додатково перевірено **зміст** кожного. Результат: 6 — актуальні, 3 — старіють (позначено ⚠️), 1 — потребує однорядкової правки перед запуском (туторіал Anthropic). Історія перевірок доступності — у [Частині 6](06-stabilnist-ta-antypaterny.md#c-пере-перевірка-топ-сайтів-webfetch-2026-06-27).
 
 ---
@@ -89,6 +96,8 @@
 **Роль і чесність**
 12. Роль + контекст + обмеження разом (роль сама по собі слабка). *(DS5)*
 13. Завжди давай «вихід»: «if X is not in the context / does not exist — say so, don't invent» — і перевіряй на *своїх* рідкісних кейсах. *(SE6)*
+
+> ➕ **Принципи 14–17 (reasoning-моделі 2026)** — у [Частині 9.7](09-promt-inzhyniring-2026-reasoning.md); ресурси пʼяти нових напрямів — нижче.
 
 ---
 

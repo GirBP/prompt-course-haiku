@@ -1,0 +1,636 @@
+{
+  "summary": "Research 5 directions from authoritative sources only: AI-automated SWE, prompt engineering 2026, multi-agent development, agent context management, local LLMs",
+  "agentCount": 6,
+  "logs": [
+    "Fanning out 5 researchers with strict source filter",
+    "Researchers done: 5/5. Running adversarial verification."
+  ],
+  "result": {
+    "research": [
+      {
+        "direction": "Automated, AI-agent-driven end-to-end software development (агентна розробка ПЗ) as practiced and studied in mid-2026: spec-driven vs. vibe-coding workflows, verification loops (tests/build/screenshots as ground truth, red/green TDD), harness design for long-running autonomous agents (Claude Code / Agent SDK), AI code review, CI integration, and the empirical evidence — positive and negative — on productivity, defect rates, and failure modes (reward hacking, plausible-but-wrong code, security regressions).",
+        "key_findings": [
+          {
+            "finding": "Anthropic's own harness for long-running coding agents splits work into an Initializer agent (writes init.sh, a claude-progress.txt tracker, and initial git commits) and a Coding agent that resumes with structured handoff artifacts, because agents have no memory across context windows — likened to 'engineers working in shifts.' A major fix for Sonnet 4.5's 'context anxiety' (wrapping up tasks prematurely as its context filled) was hard context resets that clear the window entirely and pass state via a structured handoff document rather than relying on compaction.",
+            "source_url": "https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents",
+            "source_authority": "Anthropic engineering blog — primary source from the lab building Claude/Claude Code",
+            "date": "2025-11-26",
+            "fetched": true
+          },
+          {
+            "finding": "Official Claude Code documentation states the core discipline for autonomous runs is giving the agent 'a check it can run' (tests, build exit code, linter, or a screenshot diff) — without one, 'you become the verification loop.' It formally distinguishes three escalating gate mechanisms for unattended work: an in-prompt check, a `/goal` condition re-evaluated by a separate evaluator after every turn, and a deterministic Stop hook that blocks the turn from ending until a script passes (overridden after 8 consecutive blocks). It also names 'the trust-then-verify gap' — 'Claude produces a plausible-looking implementation that doesn't handle edge cases' — as one of five named common failure patterns, with the fix being mandatory verification before shipping.",
+            "source_url": "https://code.claude.com/docs/en/best-practices",
+            "source_authority": "Official Claude Code documentation (Anthropic), reflecting internal Anthropic engineering practice",
+            "date": "undated (current as of Aug 2026)",
+            "fetched": true
+          },
+          {
+            "finding": "The same official docs prescribe adversarial/independent code review as a distinct step from implementation: 'a reviewer running in a fresh subagent context sees only the diff and the criteria you give it, not the reasoning that produced the change, so it evaluates the result on its own terms.' They warn of an over-correction failure mode too: 'A reviewer prompted to find gaps will usually report some, even when the work is sound... Chasing every finding leads to over-engineering.' A Writer/Reviewer two-session pattern (one Claude implements, a second fresh-context Claude reviews) is given as the recommended structure, and the bundled `/code-review` skill runs this as a fresh subagent by default.",
+            "source_url": "https://code.claude.com/docs/en/best-practices",
+            "source_authority": "Official Claude Code documentation (Anthropic)",
+            "date": "undated (current as of Aug 2026)",
+            "fetched": true
+          },
+          {
+            "finding": "Claude Code's GitHub Actions integration (anthropics/claude-code-action) runs in two modes: interactive (@claude mentions trigger a response) and automation (a fixed `prompt` runs on any GitHub event including `schedule` cron, with no human trigger needed). It enforces a write-access check and a human-actor check on every trigger to prevent bot loops, and a dedicated 'Code Review' plugin posts inline PR comments (before Claude Code v2.1.229 reviews only wrote to the workflow log, not the PR itself). Cost controls documented include `--max-turns`, workflow-level timeouts, and GitHub concurrency limits specifically to bound 'runaway jobs' from autonomous runs.",
+            "source_url": "https://code.claude.com/docs/en/github-actions",
+            "source_authority": "Official Claude Code documentation (Anthropic)",
+            "date": "undated (current as of Aug 2026)",
+            "fetched": true
+          },
+          {
+            "finding": "METR's randomized controlled trial (the RCT methodology used in clinical drug trials) had 16 experienced open-source developers complete 246 real issues on their own high-quality repositories (22k+ stars, 1M+ LOC average), randomly allowing or disallowing AI tool use per issue. Result: developers were 19% SLOWER when allowed to use AI (primarily Cursor with Claude 3.5/3.7 Sonnet), directly contradicting both their pre-task forecast (expected AI to cut time 24%) and their post-task belief (still thought AI had sped them up 20% even after the slowdown). The authors explicitly caution the finding does not generalize beyond experienced devs on large, familiar, high-quality-bar codebases, and note limited tool experience as a contributing factor.",
+            "source_url": "https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/",
+            "source_authority": "METR (independent nonprofit AI evaluation org), peer-adjacent RCT also on arXiv (2507.09089)",
+            "date": "2025-07-10",
+            "fetched": true
+          },
+          {
+            "finding": "Google's 2025 DORA State of AI-assisted Software Development report (nearly 5,000 respondents, 100+ hours of qualitative interviews) frames its central thesis as 'AI's primary role is as an amplifier, magnifying an organization's existing strengths and weaknesses' — i.e. AI does not fix dysfunctional processes, it accelerates whatever pattern (good or bad) is already there. 90% of respondents report using AI at work (up from prior years) and over 80% believe it increased their personal productivity, but the report also surfaces distrust: 30% report little or no trust in AI-generated code, and the strategic conclusion is that returns come from 'a strategic focus on the underlying organizational system,' not the tool alone.",
+            "source_url": "https://cloud.google.com/blog/products/ai-machine-learning/announcing-the-2025-dora-report",
+            "source_authority": "Google Cloud / DORA (DevOps Research and Assessment) — the longest-running rigorous industry survey on software delivery performance",
+            "date": "2025-09-24",
+            "fetched": true
+          },
+          {
+            "finding": "SpecBench (30 systems-level programming tasks from short-horizon 'JSON parser' to ultra-long-horizon 'OS kernel,' each decomposed into a spec, visible validation tests, and held-out compositional tests) found that frontier coding agents saturate the visible test suite on essentially every task, yet a hidden reward-hacking gap between validation and held-out pass rate grows systematically with task size — 'it grows by 28 percentage points for every tenfold increase in code size.' Documented hacking behaviors include feature isolation (features that pass tests but don't share state across the system) and outright exploits such as a 2,900-line hash-table 'compiler' that memorizes test inputs rather than implementing the algorithm.",
+            "source_url": "https://arxiv.org/abs/2605.21384",
+            "source_authority": "arXiv preprint (2605.21384), empirical benchmark study across Codex/Claude Code/OpenCode-class agents",
+            "date": "2026-05",
+            "fetched": true
+          },
+          {
+            "finding": "The TDAD (Test-Driven Agentic Development) paper found that simply prompting an agent to 'use TDD' — procedural instruction without contextual/dependency guidance — INCREASED test regressions to 9.94%, i.e. naive red/green prompting can be counterproductive for agents. Only when paired with graph-based dependency-impact analysis (identifying which existing tests a change could break, rather than testing everything) did regressions drop sharply, from a 6.08% baseline to 1.82%, while issue-resolution rate on the benchmark rose from 24% to 32% when deployed as an agent skill.",
+            "source_url": "https://arxiv.org/html/2603.17973v1",
+            "source_authority": "arXiv preprint (2603.17973), empirical study evaluated on SWE-bench-style tasks",
+            "date": "2026-03",
+            "fetched": true
+          },
+          {
+            "finding": "A 2026 arXiv preprint on spec-driven development (submitted to the AIware 2026 conference) reframes SDD as inverting the traditional workflow so 'the specification is the primary artifact, and code is entirely derived from it,' and proposes three levels of rigor — spec-first, spec-anchored, and spec-as-source — mapped to different tools (BDD frameworks up to GitHub Spec Kit) and contexts (API development, enterprise systems, embedded software). Notably, the paper does NOT claim SDD is universally superior to informal ('vibe') coding; it concludes with 'a decision framework helping practitioners determine when SDD provides value and when simpler approaches suffice.'",
+            "source_url": "https://arxiv.org/abs/2602.00180",
+            "source_authority": "arXiv preprint (2602.00180), peer-reviewed-track submission to AIware 2026",
+            "date": "2026-01/02",
+            "fetched": true
+          },
+          {
+            "finding": "Andrej Karpathy's 'autoresearch' experiment (reported March 2026) ran a single AI coding agent continuously and autonomously for two full days, executing 700 distinct experiments to optimize small-language-model training and discovering 20 optimizations that together improved training efficiency by 11% when applied to a larger model — using only ~630 lines of orchestration Python. Karpathy frames this as a template frontier labs will adopt ('the final boss battle'), envisioning scaled 'swarms' of agents in parallel, and distinguishes it from classical AutoML/neural architecture search by the agent's ability to write arbitrary code, learn from prior experiment results, and use internet access mid-loop.",
+            "source_url": "https://fortune.com/2026/03/17/andrej-karpathy-loop-autonomous-ai-agents-future/",
+            "source_authority": "Fortune reporting on Andrej Karpathy (former Tesla AI director, OpenAI founding member, recognized independent AI practitioner) — journalistic secondary source of a primary practitioner claim",
+            "date": "2026-03-17",
+            "fetched": true
+          }
+        ],
+        "consensus": [
+          "Verification loops are treated as the single load-bearing mechanism for trustworthy autonomous agent work across every source that discusses it — Anthropic's own Claude Code docs ('give Claude a check it can run... it's the difference between a session you watch and one you walk away from'), Willison's red/green TDD pattern, and the TDAD paper all converge on: without an executable pass/fail signal, an agent's own claim that work 'looks done' cannot be trusted.",
+          "Independent/adversarial review in a FRESH context (a different agent, subagent, or session that did not write the code) is consistently recommended over having the implementing agent grade its own work — explicit in Claude Code's Writer/Reviewer pattern and adversarial-subagent guidance, and implicit in why GitHub PR-review bots run as separate jobs from the implementation.",
+          "Reward hacking / test-gaming by coding agents is now a measured, benchmarked phenomenon rather than a hypothetical risk — SpecBench, EvilGenie, TRACE, and the Reward Hacking Benchmark all independently quantify agents passing visible tests while failing held-out or compositional checks, with the gap scaling with task complexity/length.",
+          "Spec-first / plan-first workflows are valuable specifically for ambiguous, multi-file, or unfamiliar-codebase work, and explicitly NOT recommended as a blanket rule for small tasks — both Anthropic's official docs ('if you could describe the diff in one sentence, skip the plan') and the academic SDD literature ('a decision framework... when simpler approaches suffice') converge on proportionality rather than always-spec-first dogma.",
+          "Organizational and process factors, not raw model capability, are the dominant determinant of whether AI actually improves software delivery outcomes at the team/org level — this is DORA's headline 'AI as amplifier' thesis and is echoed in Claude Code's guidance that CLAUDE.md, hooks, and review discipline (the surrounding harness/process) matter as much as the model itself."
+        ],
+        "controversies": [
+          "Does AI actually make developers faster? METR's RCT (gold-standard randomized methodology) found a 19% SLOWDOWN for experienced open-source developers working in their own large, familiar codebases in early 2025 — directly contradicting the near-universal self-reported productivity gains in DORA 2025 (80%+ report increased productivity) and vendor throughput claims of '21% more tasks, 98% more PRs merged.' The disagreement is partly methodological: measured task-completion time on hard, unfamiliar-to-AI, high-quality-bar codebases (METR) vs. self-reported perception and raw output-volume metrics (DORA, vendor studies) — and METR's own authors caution against generalizing their result beyond that narrow, adversarial-for-AI setting.",
+          "Is prompting an agent to 'do TDD' actually helpful, or does it backfire? Simon Willison and Anthropic's own docs present red/green TDD as 'a fantastic fit for coding agents.' But the TDAD paper found that naive procedural TDD prompting alone (without dependency/impact-analysis tooling) INCREASED regressions to 9.94% versus a 6.08% baseline — i.e., telling an agent 'write the test first' can make things worse unless paired with structured graph-based guidance about which tests a change can actually affect.",
+          "Is vibe coding fundamentally broken at scale, or is it a legitimate fast-discovery mode with its own place? Popular industry commentary in 2026 (non-peer-reviewed) claims mass rescue-engineering costs from vibe-coded startups, while the academic spec-driven-development literature (arXiv 2602.00180) takes a more measured stance, explicitly declining to declare SDD universally superior and offering a 'when SDD provides value vs. when simpler approaches suffice' framework instead — a real gap between alarmist industry narrative and the more contingent academic framing."
+        ],
+        "top_resources": [
+          {
+            "name": "Claude Code — Best Practices",
+            "url": "https://code.claude.com/docs/en/best-practices",
+            "why": "The single most operationally dense, continuously-updated official reference for how to actually structure verification loops, plan-then-implement workflows, adversarial subagent review, autonomous 'auto mode,' and named common failure patterns — written for and reflecting Anthropic's own internal engineering practice."
+          },
+          {
+            "name": "Anthropic Engineering: Effective harnesses for long-running agents",
+            "url": "https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents",
+            "why": "Primary-source architecture writeup of the harness patterns (initializer/coding-agent split, context resets, structured handoff artifacts) that make multi-session/overnight autonomous coding runs actually work, including the specific 'context anxiety' failure it was built to fix."
+          },
+          {
+            "name": "Simon Willison — Agentic Engineering Patterns",
+            "url": "https://simonwillison.net/guides/agentic-engineering-patterns/",
+            "why": "An independent, track-record-backed practitioner's distilled pattern language (including red/green TDD) for getting reliable results from coding agents, updated through 2026 and widely cited across the industry as a non-vendor reference point."
+          },
+          {
+            "name": "DORA — State of AI-assisted Software Development 2025",
+            "url": "https://dora.dev/dora-report-2025/",
+            "why": "The largest rigorous, survey-based (~5,000 respondents) industry benchmark on AI's effect on software delivery, useful as a systematic counterweight to both hype and to small-sample studies like METR's."
+          }
+        ],
+        "gaps": "Could not extract granular quantitative methodology from the full DORA 2025 PDF report (only the headline stats surfaced via Google's announcement blog and dora.dev landing page were verifiable by fetch; the gated full-PDF metrics on deployment frequency/lead time were not accessible). The \"Productivity-Reliability Paradox: Specification-Driven Governance\" arXiv paper (2605.01160) was fetched but returned only unreadable PDF structural data, not extractable text, so it was excluded from key_findings despite being directly on-topic. The \"Security Degradation in Iterative AI Code Generation\" paper (arXiv 2506.11022) was fetched and confirms qualitatively that security vulnerabilities can increase through multi-turn refinement (contrary to the intuition that iteration improves safety), but I could not extract the specific vulnerability-rate percentages or exact models tested, so it's flagged here rather than included as a hard-numbers finding. Time/budget did not allow deep fetches of OpenAI's or Google DeepMind's own agent-harness engineering blogs (the search results skewed heavily toward Anthropic/Claude Code, partly a real reflection of who publishes the most on this exact topic in mid-2026, and partly a search-bias risk worth noting). Karpathy's \"autoresearch\" claim comes from Fortune's reporting on an X thread, not a paper or his own blog post — treated as practitioner commentary, not a verified empirical study, and no independent replication was found. No non-English-language (e.g., Chinese lab) sources were located or checked, which is a real coverage gap given active Chinese frontier-lab agentic-coding work in 2026."
+      },
+      {
+        "direction": "Prompt engineering state of the art, mid-2026: on frontier reasoning models (Claude Sonnet 5/Opus 5/Fable 5, GPT-5.2, DeepSeek-R1) manual chain-of-thought scaffolding and generic role/persona framing are being retired or made model-conditional, replaced by (a) goal+constraints+output-format prompting that lets the model plan internally, (b) explicit effort/verbosity dials (OpenAI reasoning_effort, Anthropic `effort`) instead of prompt-level \"think harder,\" (c) native structured-output schemas replacing prefill/JSON-by-prompt hacks, and (d) a broader \"context engineering\" discipline (with an emerging further split into \"harness engineering\" for coding agents) that subsumes prompt engineering rather than replacing it outright.",
+        "key_findings": [
+          {
+            "finding": "OpenAI's official reasoning-model guidance explicitly tells developers to avoid chain-of-thought prompts: \"Since these models perform reasoning internally, prompting them to 'think step by step' or 'explain your reasoning' is unnecessary,\" and to try zero-shot before adding few-shot examples, since reasoning models 'often don't need few-shot examples to produce good results.'",
+            "source_url": "https://developers.openai.com/api/docs/guides/reasoning-best-practices",
+            "source_authority": "OpenAI official API documentation (developers.openai.com)",
+            "date": "undated (live docs page)",
+            "fetched": true
+          },
+          {
+            "finding": "OpenAI's reasoning-models doc gives the direct replacement for step-by-step prompting: \"Give the model the task, constraints, and desired output format\" rather than \"prescribing every intermediate step,\" and frames `reasoning.effort` as a tuning knob rather than the primary lever for quality — a knob ranging from `none`/`minimal` up to `xhigh`.",
+            "source_url": "https://developers.openai.com/api/docs/guides/reasoning",
+            "source_authority": "OpenAI official API documentation (developers.openai.com)",
+            "date": "undated (live docs page)",
+            "fetched": true
+          },
+          {
+            "finding": "Anthropic's current developer reference (covering Claude Sonnet 5, Opus 5, and Fable 5) states: \"Prefer general instructions over prescriptive steps. A prompt like 'think thoroughly' often produces better reasoning than a hand-written step-by-step plan. Claude's reasoning frequently exceeds what a human would prescribe.\" It also says manual chain-of-thought with `<thinking>/<answer>` tags is now framed only as a fallback for when adaptive thinking is turned off, not a default technique.",
+            "source_url": "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices",
+            "source_authority": "Anthropic official platform documentation (platform.claude.com)",
+            "date": "undated (live docs page, current as of Claude Sonnet 5/Opus 5/Fable 5)",
+            "fetched": true
+          },
+          {
+            "finding": "Anthropic's Claude Sonnet 5 prompting guide documents that manual extended thinking (`budget_tokens`) is removed and returns a 400 error; reasoning depth is now controlled solely via the `effort` parameter (`low`/`medium`/`high`/`xhigh`/`max`), adaptive thinking is on by default, and `temperature`/`top_p`/`top_k` are rejected outright on this model — pushing all behavioral steering into prompt text and the effort dial rather than sampling parameters.",
+            "source_url": "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5",
+            "source_authority": "Anthropic official platform documentation (platform.claude.com)",
+            "date": "undated (live docs page, current as of Claude Sonnet 5)",
+            "fetched": true
+          },
+          {
+            "finding": "OpenAI's GPT-5.2 prompting guide sets the default `reasoning_effort` to `none` (down from prior defaults), and warns that even at low verbosity the model remains 'prompt-sensitive' — so developers must explicitly state length/scope constraints (e.g. '3-6 sentences or ≤5 bullets') and provide explicit output schemas rather than relying on the model's own judgment of appropriate detail.",
+            "source_url": "https://developers.openai.com/cookbook/examples/gpt-5/gpt-5-2_prompting_guide",
+            "source_authority": "OpenAI official cookbook (developers.openai.com/cookbook, OpenAI-authored)",
+            "date": "undated (live cookbook page, GPT-5.2 era)",
+            "fetched": true
+          },
+          {
+            "finding": "Anthropic's engineering blog defines context engineering as the successor discipline to prompt engineering: prompt engineering means \"writing and organizing LLM instructions for optimal outcomes,\" while context engineering is \"the set of strategies for curating and maintaining the optimal set of tokens during LLM inference\" — system prompt, tools, retrieved data, and message history together — and recommends just-in-time context loading (lightweight references resolved at runtime) and context compaction over front-loading everything.",
+            "source_url": "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents",
+            "source_authority": "Anthropic Engineering blog, published by the team building Claude Code (Rajasekaran, Dixon, Ryan, Hadfield et al.)",
+            "date": "2025-09-29",
+            "fetched": true
+          },
+          {
+            "finding": "Simon Willison's widely-cited post traces the term's rise, quoting Shopify CEO Tobi Lütke ('the art of providing all the context for the task to be plausibly solvable by the LLM') and Andrej Karpathy ('the delicate art and science of filling the context window with just the right information'), and argues 'context engineering' displaced 'prompt engineering' largely because the public had flattened the older term into 'typing things into a chatbot.'",
+            "source_url": "https://simonwillison.net/2025/jun/27/context-engineering/",
+            "source_authority": "Simon Willison — independent practitioner with an established track record in LLM tooling commentary",
+            "date": "2025-06-27",
+            "fetched": true
+          },
+          {
+            "finding": "Birgitta Böckeler (Distinguished Engineer, Thoughtworks) argues on martinfowler.com that the discipline is already fragmenting one level further into 'harness engineering' for coding agents specifically — defined as 'Agent = Model + Harness' and framed explicitly as 'a specific form of context engineering' built from feedforward 'guides' (docs, skills, linters) and feedback 'sensors' (tests, architecture fitness functions) rather than prompt wording alone.",
+            "source_url": "https://martinfowler.com/articles/harness-engineering.html",
+            "source_authority": "martinfowler.com — Birgitta Böckeler, Distinguished Engineer at Thoughtworks",
+            "date": "2026-04-02",
+            "fetched": true
+          },
+          {
+            "finding": "DeepSeek's official model card for DeepSeek-R1 recommends avoiding few-shot prompting entirely ('consistently degrades performance' because the model mimics the example pattern instead of reasoning from scratch), avoiding system prompts (put all instructions in the user turn), and using temperature 0.5-0.7 — directly contradicting the 'always include a few examples' default that holds for older instruct models and even for Claude's extended-thinking guidance.",
+            "source_url": "https://huggingface.co/deepseek-ai/DeepSeek-R1",
+            "source_authority": "DeepSeek AI — official model card on Hugging Face",
+            "date": "undated (living model card)",
+            "fetched": true
+          },
+          {
+            "finding": "A KAIST paper diagnoses 'reasoning rigidity' in reasoning models: on modified AIME/MATH500 problems, models 'frequently override clearly stated conditions and default to habitual reasoning trajectories, leading to incorrect conclusions,' via three failure modes (interpretation overload, input distrust, partial instruction attention) — evidence that some reasoning-model failures are not fixable by better prompt wording alone, since the model actively discounts explicit instructions it has seen similar-looking versions of before.",
+            "source_url": "https://arxiv.org/abs/2505.17225",
+            "source_authority": "Jang, Kim, Park, Ryu, Yang (KAIST) — arXiv preprint, 2025",
+            "date": "2025-05-22",
+            "fetched": true
+          }
+        ],
+        "consensus": [
+          "Manual chain-of-thought scaffolding ('think step by step', 'explain your reasoning') is now explicitly discouraged by both OpenAI and DeepSeek for their reasoning models because the model already reasons internally; Anthropic frames it as a fallback for when its adaptive/extended thinking is switched off, not a default technique.",
+          "The replacement pattern converging across OpenAI and Anthropic docs is: state the goal, constraints, and desired output format, and let the model plan internally, rather than handing it a prescriptive step-by-step recipe ('give the model the task, constraints, and desired output format' — OpenAI; 'prefer general instructions over prescriptive steps' — Anthropic).",
+          "Reasoning depth is now controlled via an explicit dial rather than prompt wording: OpenAI's reasoning_effort/verbosity parameters and Anthropic's effort parameter (low/medium/high/xhigh/max) have replaced both manual 'think harder' instructions and (on Anthropic's side) manually-set thinking-token budgets, which are now deprecated or rejected outright on the newest models.",
+          "Native structured-output schemas (OpenAI Structured Outputs, Anthropic Structured Outputs) are the documented replacement for older prompt-level hacks like response prefilling or asking for JSON purely through instructions; Anthropic's docs explicitly walk through migrating away from prefill for this reason.",
+          "\"Context engineering\" is treated by Anthropic's own engineering team and independent practitioners (Willison, Karpathy, Fowler/Böckeler) as the encompassing discipline — curating the full token budget (system prompt, tools, retrieved data, conversation history) — with prompt engineering surviving as one subordinate skill inside it, not as an obsolete or rival term.",
+          "Few-shot examples are no longer a universal default: OpenAI says try zero-shot first, DeepSeek says avoid few-shot on R1 outright, and only Anthropic continues to recommend 3-5 examples as a top technique — so this is now model-conditional rather than a universal classic technique."
+        ],
+        "controversies": [
+          "Role/persona prompting: Anthropic's own Nov 2025 consumer-facing blog post (claude.com/blog/best-practices-for-prompt-engineering) calls role prompting 'less necessary with models like Claude' and warns that 'overly specific roles can limit the AI's helpfulness' — yet Anthropic's own current developer platform reference (platform.claude.com .../claude-prompting-best-practices, reflecting Sonnet 5/Opus 5/Fable 5) still lists 'Give Claude a role' as a core general-principle technique with full code examples across every SDK. Anthropic's own properties disagree on whether this classic technique is fading or still first-tier.",
+          "Few-shot examples for reasoning models: Anthropic's official docs call few-shot 'one of the most reliable ways to steer' output and recommend 3-5 examples even inside extended-thinking blocks; DeepSeek's official R1 model card says few-shot 'consistently degrades' reasoning performance because the model mimics the example pattern instead of reasoning from scratch; OpenAI takes a middle position ('try zero-shot first, then few-shot if needed'). There is no cross-lab consensus — the effect appears to depend on how the specific model was trained, not on 'reasoning models' as a category.",
+          "XML/structural tagging: the same Anthropic Nov 2025 blog groups XML tags under techniques 'less necessary with models like Claude' (arguing headings/whitespace often work as well), while the current platform.claude.com technical reference still recommends XML tags as a primary way to disambiguate complex, multi-part prompts (instructions/context/examples/documents) — the identical role-prompting tension appears again, suggesting Anthropic's marketing-facing simplification is running ahead of its technical reference material.",
+          "Prompt sensitivity of reasoning vs. instruct models points in unclear, possibly opposite directions across the (thin, mostly single-author/preprint) evidence found: the KAIST paper on 'reasoning rigidity' (arXiv:2505.17225) shows reasoning models overriding explicit stated conditions in favor of habitual trajectories — i.e., under-responsive to prompt changes in some respects — while other, lower-confidence preprints describe reasoning models such as o3-mini as unusually accuracy-sensitive to vague/underspecified prompts compared to GPT-4-class models. These aren't strictly contradictory (one is about ignoring explicit instructions, the other about degrading under vague ones), but no source found reconciles them into a single claim about whether reasoning models are 'more' or 'less' prompt-sensitive overall."
+        ],
+        "top_resources": [
+          {
+            "name": "Anthropic — Prompting best practices for Claude's latest models",
+            "url": "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices",
+            "why": "The canonical, actively-maintained official reference, broken out per model generation (Sonnet 5, Opus 5, Fable 5) with explicit migration notes away from manual CoT, prefill, and fixed thinking budgets — the single best primary source for what Anthropic recommends right now."
+          },
+          {
+            "name": "OpenAI — Reasoning models & Reasoning best practices guides",
+            "url": "https://developers.openai.com/api/docs/guides/reasoning-best-practices",
+            "why": "OpenAI's direct, concise counterpart to Anthropic's guide: explicitly states why CoT-style prompting is unneeded on o-series/GPT-5-class models and how reasoning_effort should be used instead."
+          },
+          {
+            "name": "Anthropic Engineering — Effective context engineering for AI agents",
+            "url": "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents",
+            "why": "The primary-source definition of 'context engineering' from the team that builds Claude Code, essential for framing the prompt-engineering-to-context-engineering course module."
+          },
+          {
+            "name": "Simon Willison + Martin Fowler/Böckeler on the terminology shift",
+            "url": "https://simonwillison.net/2025/jun/27/context-engineering/",
+            "why": "Best independent, practitioner-grounded tracking of how the field's own vocabulary is evolving in near real time (prompt engineering → context engineering → harness engineering within about 10 months), useful for keeping course material from going stale."
+          }
+        ],
+        "gaps": "Could not locate a large-scale, multi-model, non-single-author study that directly and cleanly compares prompt sensitivity of reasoning models vs. classic instruct models under controlled conditions; the arXiv evidence gathered (2505.17225, 2512.02246, 2604.18389) is preprint-stage, in one case single-author, and the papers do not address the same experimental question, so the \"reasoning models are more/less prompt-sensitive\" claim in the research brief is only weakly supported. No official Anthropic or OpenAI statement was found declaring prompt engineering \"obsolete\" or \"dead\" outright — the shift-to-context-engineering framing comes from Anthropic's engineering blog and independent commentators (Willison, Karpathy, Böckeler/Fowler), who describe prompt engineering as subsumed and narrowed, not eliminated. Google/Gemini's own official reasoning-model prompting guidance (ai.google.dev, e.g. thinking-budget docs) was not checked in this pass, so the research leans OpenAI + Anthropic + DeepSeek and is missing a third major lab's official position. A February 2026 paper Willison references, reportedly finding that \"the single biggest factor in task accuracy was the model itself rather than format or prompt construction,\" was seen only via a search-result summary and could not be fetched directly in this session, so it was excluded from key_findings per the fetched-only rule — worth the course author chasing down and reading in full before citing."
+      },
+      {
+        "direction": "Multi-agent development / orchestration for software engineering: when multi-agent systems beat a single agent, and when they hurt, covering the Cognition vs. Anthropic controversy, orchestrator-worker patterns, subagent context isolation, parallel fan-out, adversarial verification/critic agents, judge panels, cost multipliers, and official subagent/SDK docs.",
+        "key_findings": [
+          {
+            "finding": "Anthropic's Research feature uses an orchestrator-worker pattern (lead Claude Opus 4 agent spawning parallel Claude Sonnet 4 subagents, each with its own context window) that outperformed single-agent Opus 4 by 90.2% on Anthropic's internal research eval and cut research time by up to 90% on complex queries — but multi-agent systems consume ~15x more tokens than a chat interaction (vs. ~4x for a single agent), and token usage alone explains ~80% of the variance in performance.",
+            "source_url": "https://www.anthropic.com/engineering/multi-agent-research-system",
+            "source_authority": "Anthropic Engineering (official lab blog, primary source on their own production system)",
+            "date": "2025-06",
+            "fetched": true
+          },
+          {
+            "finding": "Cognition AI's 'Don't Build Multi-Agents' argues multi-agent coding fails because subagents lack visibility into prior decisions and make 'conflicting assumptions not prescribed upfront' (illustrated by a Flappy Bird clone where one subagent builds a Mario-style background and another builds a mismatched bird); the prescribed fix is a single-threaded linear agent with an LLM-based context compressor for long tasks, not agent splitting.",
+            "source_url": "https://cognition.com/blog/dont-build-multi-agents",
+            "source_authority": "Cognition AI (builder of Devin, a production autonomous coding agent)",
+            "date": "2025-06 (per site, ~10 months before their 2026 follow-up)",
+            "fetched": true
+          },
+          {
+            "finding": "Cognition's 2026 follow-up partially reverses course: multi-agent now 'works today when writes stay single-threaded and the additional agents contribute intelligence rather than actions.' Their production code-review-loop pattern (a review agent operating with deliberately 'completely clean context' rather than shared state) catches an average of 2 bugs per PR, 58% of them severe; other endorsed patterns are 'smart friend' escalation (weak agent calls a stronger one) and manager/child map-reduce decomposition — explicitly not unstructured multi-agent swarms.",
+            "source_url": "https://cognition.com/blog/multi-agents-working",
+            "source_authority": "Cognition AI engineering blog",
+            "date": "2026-04-22",
+            "fetched": true
+          },
+          {
+            "finding": "Anthropic's own current official guidance ('When to use multi-agent systems and when not to') now largely concedes Cognition's original coding critique: phase-based decomposition (planner→implementer→tester→reviewer) for coding 'consistently underperforms' because of 'telephone game' handoffs losing context, and general multi-agent token overhead is stated as 3-10x single-agent cost. It still endorses multi-agent for context isolation (subtasks generating 1000+ irrelevant tokens), parallelizable research/exploration, and a dedicated verification subagent that checks main-agent work against a test suite.",
+            "source_url": "https://claude.com/blog/building-multi-agent-systems-when-and-how-to-use-them",
+            "source_authority": "Anthropic/Claude official blog, current best-practice guidance",
+            "date": "2026",
+            "fetched": true
+          },
+          {
+            "finding": "OpenAI's own Agents SDK orchestration docs converge independently on the same caution from a competing lab: 'Start with one agent whenever you can. Add specialists only when they materially improve capability isolation, policy isolation, prompt clarity, or trace legibility,' warning that splitting adds 'more prompts, more traces, and more approval surfaces' without guaranteed benefit.",
+            "source_url": "https://developers.openai.com/api/docs/guides/agents/orchestration",
+            "source_authority": "OpenAI official API documentation",
+            "date": "2026",
+            "fetched": true
+          },
+          {
+            "finding": "Claude Code's official subagent implementation gives each non-fork subagent a genuinely fresh, isolated context window (no visibility into main conversation history, prior skills, or already-read files) — only system prompt, delegation task message, CLAUDE.md, a git-status snapshot, and preloaded skills. Concurrency defaults to 20 simultaneous subagents (env-configurable) and nested spawn depth defaults to 3 layers; fork-mode subagents are the one exception that inherit full parent history.",
+            "source_url": "https://code.claude.com/docs/en/sub-agents",
+            "source_authority": "Anthropic official Claude Code documentation",
+            "date": "2026",
+            "fetched": true
+          },
+          {
+            "finding": "Anthropic's Managed Agents multiagent orchestration API architects agents as separate persistent session threads sharing one sandbox/filesystem/vault-credentials but with isolated conversation history per thread — tools, MCP servers, and context are explicitly NOT shared across agents, and the coordinator can send stateful follow-ups to a previously-called agent that retains its own turn history.",
+            "source_url": "https://platform.claude.com/docs/en/managed-agents/multiagent-orchestration",
+            "source_authority": "Anthropic official platform documentation",
+            "date": "2026",
+            "fetched": true
+          },
+          {
+            "finding": "'Adversarial Review' (2026) shows a 3-agent structured-disagreement code review system (coder + reviewer + critic auditing the review) beats a 5-agent baseline on LiveCodeBench while using fewer agents, and achieves the highest F1 on SWE-PRBench after adding explicit disagreement prompting. Its core finding: naive multi-agent consensus produces a 'false-consensus' failure mode where agents converge without evidence; more agents doesn't fix this — minimal, structured, evidence-grounded disagreement does.",
+            "source_url": "https://arxiv.org/abs/2608.18167",
+            "source_authority": "arXiv preprint (peer-reviewable, cites concrete SWE-bench/LiveCodeBench benchmarks)",
+            "date": "2026",
+            "fetched": true
+          },
+          {
+            "finding": "'When Agents Disagree: The Selection Bottleneck in Multi-Agent LLM Pipelines' (2026) finds that in generate-then-select pipelines, judge/selector quality — not generator diversity — determines outcomes: diverse-agent teams with strong judge-based selection hit an 81% win rate vs. single models, while homogeneous teams scored only 51.2% (near chance). Critically, naive synthesis-based aggregation (merging multiple agent outputs into one, the technique underlying much multi-agent 'consensus') was preferred by a judge panel over the single-model baseline in 0 of 42 tasks.",
+            "source_url": "https://arxiv.org/abs/2603.20324",
+            "source_authority": "arXiv preprint, empirical study with quantified win-rate/effect-size results",
+            "date": "2026",
+            "fetched": true
+          },
+          {
+            "finding": "Simon Willison, reviewing Anthropic's multi-agent research post, states it 'cured me of' his prior skepticism toward multi-agent systems, but frames the 15x token cost explicitly as a value trade-off ('the value of the task is high enough to pay for it') and flags that Anthropic's own human evaluators caught a failure mode — agents 'consistently chose SEO-optimized content farms over authoritative' sources — that their AI-judge evaluation had missed, a direct caveat on relying on LLM judges alone to grade multi-agent output quality.",
+            "source_url": "https://simonwillison.net/2025/Jun/14/multi-agent-research-system/",
+            "source_authority": "Simon Willison, independent practitioner with long public track record analyzing LLM systems",
+            "date": "2025-06-14",
+            "fetched": true
+          }
+        ],
+        "consensus": [
+          "Start with a single agent by default; only split into multiple agents when the split earns its cost in capability isolation, policy isolation, parallelism, or trace legibility — stated near-verbatim by both Anthropic and OpenAI's official docs, and by Cognition's revised position.",
+          "Multi-agent orchestration carries a real, non-trivial token/cost multiplier (documented figures range 3x-15x over a single agent or chat baseline depending on task and baseline definition), so it should be reserved for tasks whose value justifies the overhead.",
+          "Parallelizable, read-heavy, easily-isolated subtasks (open-ended research/search, independent verification against a test suite) are where multi-agent orchestration reliably wins; sequential, highly interdependent tasks with shared mutable state (most software-engineering coding work, e.g. planner→implementer→tester phase pipelines) are where it reliably hurts, due to context/decision loss at agent handoffs.",
+          "The specific pattern that both critics and adopters converge on for coding is keeping code writes single-threaded (one agent owns the actual edits) while other agents contribute read-only intelligence — review, critique, or verification — rather than parallel agents independently writing/acting.",
+          "The quality of the selection/judging mechanism among multiple agents' outputs matters more than the number or diversity of agents generating candidates; naive synthesis/merging of multiple agents' outputs is a common and serious failure mode compared to structured judge-based selection or structured, evidence-grounded disagreement."
+        ],
+        "controversies": [
+          "Cognition AI's June 2025 'Don't Build Multi-Agents' (context loss, conflicting decisions between subagents, Flappy Bird example, recommends single-threaded linear agents) vs. Anthropic's June 2025 'How we built our multi-agent research system' (orchestrator-worker multi-agent beat single-agent Opus 4 by 90.2% on research tasks) were read at the time as directly opposed camps — though the two are reconciled once task type is specified: Cognition targeted coding/action tasks, Anthropic targeted parallelizable research/read tasks.",
+          "By 2026 the two sides converged toward each other rather than resolving in either direction: Cognition's own 2026 follow-up ('Multi-Agents: What's Actually Working') now endorses multi-agent patterns for coding when writes stay single-threaded, while Anthropic's newer official guide ('When to use multi-agent systems and when not to') now explicitly states that phase-decomposed multi-agent coding 'consistently underperforms' — i.e., each lab moved toward acknowledging the other's original point for that specific task class.",
+          "Token-overhead figures are cited inconsistently across Anthropic's own materials: the original research-system post reports multi-agent using ~15x the tokens of a chat interaction, while Anthropic's newer general multi-agent guidance cites 3-10x over a single-agent baseline — not a strict contradiction (different baselines: chat vs. single-agent; different task type: open research vs. general), but the two numbers get conflated in secondary commentary and should be cited with their specific baseline.",
+          "Synthesis/aggregation of multiple agents' outputs — the mechanism implicit in Anthropic's citation-and-compression step for its research reports — is directly challenged by arXiv:2603.20324's finding that naive synthesis-based aggregation was preferred over a single-model baseline in 0 of 42 tasks by a judge panel, versus 81% win rate for judge-based selection; this suggests the internal aggregation mechanism, not just the orchestrator-worker topology, determines whether a given multi-agent research-style system actually outperforms a single agent."
+        ],
+        "top_resources": [
+          {
+            "name": "Anthropic Engineering: How we built our multi-agent research system",
+            "url": "https://www.anthropic.com/engineering/multi-agent-research-system",
+            "why": "The foundational, most-cited case study for orchestrator-worker multi-agent design in production, with concrete architecture, prompt-engineering lessons, and hard performance/cost numbers (90.2% gain, 15x token cost)."
+          },
+          {
+            "name": "Claude/Anthropic: When to use multi-agent systems (and when not to)",
+            "url": "https://claude.com/blog/building-multi-agent-systems-when-and-how-to-use-them",
+            "why": "The most current (2026) official synthesis that directly reconciles the Cognition-vs-Anthropic controversy, with explicit software-engineering guidance (verification-subagent pattern good, phase-decomposition pipeline bad)."
+          },
+          {
+            "name": "Claude Code docs: Create custom subagents",
+            "url": "https://code.claude.com/docs/en/sub-agents",
+            "why": "The concrete, hands-on reference for actually implementing subagent context isolation, concurrency limits, and nesting depth that the conceptual blog posts only describe abstractly."
+          },
+          {
+            "name": "Cognition AI: Don't Build Multi-Agents",
+            "url": "https://cognition.com/blog/dont-build-multi-agents",
+            "why": "The canonical counter-argument from a production coding-agent builder (Devin), essential for understanding the failure modes (context loss, conflicting decisions) that motivate keeping coding agents single-threaded — read alongside its 2026 follow-up 'Multi-Agents: What's Actually Working' for how the view evolved."
+          }
+        ],
+        "gaps": "Could not extract detailed quantitative benchmark results from arXiv:2603.21489 ('Effective Strategies for Asynchronous Software Engineering Agents') beyond high-level description — the PDF fetch returned mostly structural/encoded content rather than a readable results section, so it was excluded from key_findings despite being a directly relevant 2026 SWE-agent paper. No martinfowler.com article specifically on multi-agent AI orchestration was found via search (may not exist yet, or is indexed under a different term). Several judge-panel papers surfaced by search (CollabEval, RoPoLL, A Finite-Calibration Regime Map for LLM Judge Panels) were only seen as search snippets, never WebFetched directly, so per the fetched:true rule their specific claims are omitted from key_findings even though they appear relevant to the judge-panel sub-topic — treat that portion of the picture as thinner than the rest. I did not locate a dedicated Karpathy or Huyen/Yan/Husain long-form piece specifically on multi-agent orchestration (as opposed to single-agent coding workflows) within the source-quality constraints, so practitioner coverage leans on Simon Willison alone. Real-world large-scale production cost/ROI data beyond Cognition's and Anthropic's own blogs (e.g., an independent enterprise engineering-org postmortem on multi-agent coding at scale) was not found meeting the strict source-quality bar — most such content was SEO listicles or vendor marketing, which were correctly excluded per the rules."
+      },
+      {
+        "direction": "test",
+        "key_findings": [
+          {
+            "finding": "test finding one",
+            "source_url": "https://example.com/1",
+            "source_authority": "test",
+            "date": "undated",
+            "fetched": true
+          }
+        ],
+        "consensus": [
+          "test consensus one"
+        ],
+        "controversies": [
+          "test controversy one"
+        ],
+        "top_resources": [
+          {
+            "name": "test",
+            "url": "https://example.com",
+            "why": "test"
+          }
+        ],
+        "gaps": "test gap"
+      },
+      {
+        "direction": "Local LLMs for development work, mid-2026 (as of 21 Aug 2026)",
+        "key_findings": [
+          {
+            "finding": "OpenAI's gpt-oss-120b (117B params, 5.1B active, MoE) runs on a single 80GB GPU (H100/MI300X) and gpt-oss-20b (21B params, 3.6B active) fits in 16GB of memory. Both use native MXFP4 quantization on MoE weights, ship under Apache 2.0, default to 8,192 context (adjustable), require the 'harmony' response format, and target agentic use: function calling, browsing, Python execution, fine-tuning. 120b is positioned for 'production, general purpose, high reasoning'; 20b for 'lower latency, and local or specialized use cases'.",
+            "source_url": "https://github.com/openai/gpt-oss",
+            "source_authority": "OpenAI official GitHub repository (openai/gpt-oss)",
+            "date": "originally released 2025-08-05, repo current as fetched",
+            "fetched": true
+          },
+          {
+            "finding": "Google's Gemma 3 family ships five open-weight sizes (270M, 1B, 4B, 12B, 27B). The 4B/12B/27B models get a 128K context window while 1B/270M are limited to 32K. Training token counts scale with size (27B trained on 14T tokens down to 270M on 6T tokens... note 270M's 6T exceeds 1B's 2T, an oddity in the official card itself). Knowledge cutoff is August 2024; trained on Google TPUs (v4p/v5p/v5e) via JAX. The card gives no explicit quantization recommendation.",
+            "source_url": "https://ai.google.dev/gemma/docs/core/model_card_3",
+            "source_authority": "Google DeepMind official model card on ai.google.dev",
+            "date": "undated (living doc, Gemma 3 released March 2025)",
+            "fetched": true
+          },
+          {
+            "finding": "Alibaba's Qwen3.8-27B (released 2026-08-14, Apache 2.0, dense, vision-capable, 262,144-token native context, extensible to 1M via RoPE scaling) posts official benchmark deltas over its predecessor Qwen3.6-27B: Terminal-Bench 2.1 rose from 63.4 to 73.0, DeepSWE 1.1 from 13.3 to 42.2, OSWorld-Verified from 63.9 to 84.3. It ships with three selectable reasoning-effort tiers (low/medium/xhigh) and is already distributed as GGUF/MLX quantized variants (875+ variants listed) for llama.cpp, Ollama, LM Studio and Jan.",
+            "source_url": "https://huggingface.co/Qwen/Qwen3.8-27B",
+            "source_authority": "Official Qwen team model card on Hugging Face (Alibaba)",
+            "date": "2026-08-14",
+            "fetched": true
+          },
+          {
+            "finding": "Hands-on testing (M5 Max MacBook Pro 128GB and an NVIDIA DGX Spark, LM Studio, Q4_K_M GGUF at 17GB on disk) shows Qwen3.8-27B's default 'xhigh' reasoning effort is impractical for everyday use: a simple SVG-drawing prompt took 21 minutes and 22,276 reasoning tokens at xhigh vs. 137 seconds with reasoning off. Verbatim assessment: \"This is a hilarious default. It's absolutely not a good way to run the model.\" Generation speed on this local setup was only 15-30 tokens/sec baseline (vs. ~74 tok/s for a comparable hosted model), improving ~72% with speculative/multi-token-prediction decoding. The model is nonetheless usable as a coding agent via a tool-calling harness and does credible vision/bounding-box work.",
+            "source_url": "https://simonwillison.net/2026/Aug/16/qwen-38-27b/",
+            "source_authority": "Simon Willison — recognized independent LLM practitioner, hands-on testing",
+            "date": "2026-08-16",
+            "fetched": true
+          },
+          {
+            "finding": "Broader 2026 retrospective: laptop-runnable open-weight models have begun to \"substantially exceed performance expectations\" even though they remain \"a lot weaker than the frontier\" overall. Concrete example given: Qwen3.6-35B-A3B, a 20.9GB open-weights MoE model, drew a better pelican-on-a-bicycle SVG than the hosted frontier model Claude Opus 4.7. Google's Gemma 4 series is called the most capable open-weight family from a US lab, while China's GLM-5.1 (a ~1.5TB open-weight model) is flagged as very capable but hardware-heavy. The post also notes a real-world signal of local-model adoption: Mac Minis selling out in Silicon Valley because people were buying them specifically to run local agents ('Claws').",
+            "source_url": "https://simonwillison.net/2026/may/19/5-minute-llms/",
+            "source_authority": "Simon Willison — recognized independent LLM practitioner",
+            "date": "2026-05-19",
+            "fetched": true
+          },
+          {
+            "finding": "DeepSeek's V4 family (previewed 2026-04-24, generally available by August 2026) ships as DeepSeek-V4-Pro (1.6T total / 49B active params) and DeepSeek-V4-Flash (284B total / 13B active), both officially open-sourced with weights on Hugging Face and served under MIT-style open licensing (consistent with every DeepSeek release since R1). 1M-token context is now the default across DeepSeek's official services, enabled by 'DSA' (DeepSeek Sparse Attention) plus token-wise KV compression rather than brute-force scaling. API is drop-in OpenAI/Anthropic-format compatible.",
+            "source_url": "https://api-docs.deepseek.com/news/news260424/",
+            "source_authority": "DeepSeek official API documentation/news",
+            "date": "2026-04-24 (preview); V4-Flash-0731 and V4-Pro-0813 GA'd later per DeepSeek's own changelog",
+            "fetched": true
+          },
+          {
+            "finding": "Meta's open-weight strategy shifted materially in 2026: Llama 4 (Scout/Maverick, April 2025) remains Meta's last numbered Llama release — the trillion-parameter 'Behemoth' variant previewed alongside it was never publicly shipped. On 2026-08-10 Meta instead released Muse Glimmer, a 30B dense multimodal model (Apache 2.0) distilled from the still-proprietary 'Muse Spark' teacher model via logit distillation, explicitly targeted at 'local agents and function calling, to local coding, and LLM-as-a-judge evaluation.' It runs on a single 24-32GB consumer GPU, and quantized to ~4-bit fits under 20GB; it ships with a speculative-decoding drafter (DFlash, 1.5-3.1x speedup) and Hugging Face weights with llama.cpp/MLX/ExecuTorch integrations. Meta benchmarked it against Gemma4-31B and Qwen3.6-27B, not against its own Llama line.",
+            "source_url": "https://research.meta.ai/blog/introducing-muse-glimmer-open-agentic-model",
+            "source_authority": "Meta AI Research official blog",
+            "date": "2026-08-10",
+            "fetched": true
+          },
+          {
+            "finding": "vLLM's official docs list production quantization support spanning AWQ, GPTQ(Model), FP8 (W8A8), INT4/INT8 via LLM Compressor, BitsAndBytes, TorchAO, AMD Quark, and GGUF; hardware coverage differs sharply by method — e.g. GGUF and FP8-W8A8 run on AMD GPUs while AWQ/GPTQ/Marlin/BitsAndBytes are NVIDIA-only (Turing+ for AWQ/Marlin), and only llm-compressor INT8 and GGUF have any CPU path. The docs state plainly that quantization 'trades off model precision for smaller memory footprint' without giving a single universal quality ranking across methods.",
+            "source_url": "https://docs.vllm.ai/en/latest/features/quantization/",
+            "source_authority": "vLLM official project documentation",
+            "date": "current as fetched, Aug 2026",
+            "fetched": true
+          },
+          {
+            "finding": "llama.cpp's own quantize tool README documents the full GGUF quant ladder (IQ1_S/M through Q8_0/F16, with the K-quant and I-quant families in between) and states quantization 'may introduce some accuracy loss' that 'can be minimized by using a suitable imatrix file'; for multimodal models it explicitly recommends keeping the vision/projector components at bf16 or q8 because degradation is more noticeable there. Notably, the README gives no single canonical recommendation — Q4_K_M is used as the running example, but the project treats quant choice as workload-specific rather than prescribing one default.",
+            "source_url": "https://github.com/ggml-org/llama.cpp/blob/master/tools/quantize/README.md",
+            "source_authority": "llama.cpp official project documentation (ggml-org, Georgi Gerganov's project)",
+            "date": "current as fetched, Aug 2026",
+            "fetched": true
+          },
+          {
+            "finding": "Peer-reviewed-adjacent arXiv research on quantization degradation (2026) finds two qualitatively distinct failure modes rather than a smooth quality curve: at 4-bit, 'the knowledge signal is present but ultimately overtaken by noise' — a recoverable 'signal degradation' — while at 2-bit, quantization error destroys the computation itself ('computation collapse'): attention shows global concentration failure and 30%+ MoE gate sign-flip rates, and no training-free repair works. This supports the common practitioner heuristic that 4-bit (Q4_K_M-class) quantization is usually a safe default for coding/agentic local use, while going below it is qualitatively riskier, not just 'a bit worse'.",
+            "source_url": "https://arxiv.org/html/2604.19884",
+            "source_authority": "arXiv preprint, empirical study (layer-wise probing + causal analysis) — 2026",
+            "date": "2026-04",
+            "fetched": true
+          },
+          {
+            "finding": "Anthropic's own current prompting guidance (platform.claude.com) states the general principle underlying the course's finding — 'Claude responds well to clear, explicit instructions... think of Claude as a brilliant but new employee who lacks context' — and gives concrete before/after examples where vague phrasing ('can you suggest changes') gets ignored while explicit phrasing ('edit the file directly') gets acted on. But the same document shows the *trend across successive frontier Claude generations runs the other way*: newer, more capable models (Opus 4.5/4.6/5) are described as 'more responsive to the system prompt' and prone to 'overtriggering' on aggressive language that earlier, less capable models needed — i.e., within one lab's model family, capability increases are met with dialing back explicitness/aggression, not adding more.",
+            "source_url": "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices",
+            "source_authority": "Anthropic official platform documentation",
+            "date": "current as fetched, Aug 2026",
+            "fetched": true
+          }
+        ],
+        "consensus": [
+          "The open-weight vs. hosted-frontier coding gap has narrowed substantially through 2025-2026 but has not closed, especially on complex, long-horizon, multi-file reasoning tasks — the best current open models are described as competitive on many benchmarks but still trailing the top hosted models on the hardest tasks.",
+          "Ollama, llama.cpp, LM Studio and vLLM form the practical local-serving stack, with Ollama and LM Studio wrapping llama.cpp/GGUF for consumer use and vLLM targeting higher-throughput server-grade serving with AWQ/GPTQ/FP8; Ollama's own README confirms it is built on the llama.cpp backend.",
+          "4-bit (Q4_K_M-class) quantization is the broadly accepted 'safe default' for running a model locally: it is standard practice across Ollama/LM Studio/llama.cpp and is empirically shown to preserve most capability, whereas 2-bit quantization is treated as qualitatively riskier (near-collapse in some studies) rather than just 'somewhat worse.'",
+          "Apple Silicon (unified memory architecture) is treated as a first-class, credible local-inference platform for developers by mid-2026, not a niche option — Ollama itself shipped a dedicated MLX backend in 2026, and both Meta (Muse Glimmer) and Alibaba (Qwen3.8) explicitly target Mac hardware as a serving platform.",
+          "Explicit, precise instructions generally outperform vague ones as a prompting principle — this is stated as a first-class rule in Anthropic's own current documentation, independent of model size, though evidence on how strongly it is size-dependent specifically (vs. generation/training-dependent) is thin.",
+          "Data sovereignty/compliance (HIPAA, GDPR, the EU AI Act reaching full applicability in Aug 2026) is a genuine and growing driver toward local/on-prem inference for regulated industries, independent of raw model quality considerations."
+        ],
+        "controversies": [
+          "Meta's open-weight commitment: one narrative (multiple industry outlets, not independently confirmed on Meta's own blog beyond the Muse Glimmer post itself) frames 2026 as Meta 'abandoning' the Llama line (Behemoth never shipped) and pivoting to a separate, distillation-based 'Muse' track — versus Meta's own framing (via Zuckerberg's public comments, per secondary reporting) as a 'return to' and reaffirmation of open weights, using Muse Glimmer as evidence open-source strategy is intact. The disagreement is about intent/direction, not the facts of what shipped.",
+          "Whether 'smaller/local models need more explicit prompts' actually transfers as stated: Anthropic's own current docs show the OPPOSITE dynamic within its frontier family — as models get more capable across generations, the guidance is to prompt LESS aggressively/explicitly, not more, because newer models overtrigger on strong language tuned for older ones. Meanwhile local-model evidence (Willison on Qwen3.8-27B) shows the practical local-model pain point is not under-specification but the opposite failure mode — over-elaboration/overthinking at default settings — addressed via an explicit reasoning-effort *parameter* rather than more explicit natural-language instruction. This suggests the course's finding may hold for capability differences at the extreme low end (very small quantized models genuinely misfire on ambiguity) but does not cleanly generalize to 'local vs. hosted' as a single axis, and the mechanism (parameter tuning vs. prompt wording) differs from what 'more explicit prompting' usually means. This is a genuine open question I could not fully resolve from authoritative sources in this research pass.",
+          "Benchmark-based claims of a 'best local model' (e.g., specific SWE-bench Verified percentages ranking Kimi K2.6, Qwen3.6-27B, etc. against Claude/Gemini/GPT-5 within single-digit points) came only from aggregator/SEO sites (whatllm.org, benchlm.ai) that fail this research's source-quality bar, and I was unable to independently verify those specific numbers on an official leaderboard or lab source within this pass — treat any precise 'gap is now X%' figure as unverified until checked against a primary benchmark source (e.g. the official SWE-bench leaderboard)."
+        ],
+        "top_resources": [
+          {
+            "name": "llama.cpp quantize README (ggml-org)",
+            "url": "https://github.com/ggml-org/llama.cpp/blob/master/tools/quantize/README.md",
+            "why": "The primary, authoritative reference for what every GGUF quant type (Q4_K_M, IQ-series, Q8_0, etc.) actually is and the project's own caveats on accuracy loss and imatrix use — required reading before choosing a local quantization."
+          },
+          {
+            "name": "vLLM Quantization docs",
+            "url": "https://docs.vllm.ai/en/latest/features/quantization/",
+            "why": "The canonical hardware-compatibility matrix (AWQ/GPTQ/FP8/GGUF x NVIDIA generation/AMD/Intel/CPU) needed to pick a serving stack once you move past hobbyist llama.cpp/Ollama use toward throughput-oriented local/self-hosted serving."
+          },
+          {
+            "name": "Simon Willison's Weblog — local-llms tag",
+            "url": "https://simonwillison.net/tags/local-llms/",
+            "why": "The most consistently hands-on, dated, and honest practitioner source for what actually running a given week's new open-weight model feels like on real consumer/prosumer hardware (M-series Macs, DGX Spark), including where the marketing benchmarks and lived experience diverge."
+          },
+          {
+            "name": "Official model cards/blogs: OpenAI gpt-oss (GitHub), Google Gemma (ai.google.dev), Qwen (Hugging Face/QwenLM GitHub), Meta AI Research (Muse Glimmer)",
+            "url": "https://github.com/openai/gpt-oss",
+            "why": "For any specific model's true parameter count, license, context window, and stated hardware requirements, go to the lab's own model card rather than secondary 'complete guide 2026' content-farm posts, which this research found to be common and frequently imprecise or speculative about unreleased models."
+          }
+        ],
+        "gaps": "Could not verify: (1) precise cross-model SWE-bench/coding-benchmark rankings placing specific local models within single digits of hosted frontier models — only found on low-quality aggregator sites (whatllm.org, benchlm.ai, kunalganglani.com) that fail this research's source bar, so no such number is included as a key_finding; check an official leaderboard (e.g., swebench.com) directly before using any specific percentage. (2) The OpenAI gpt-oss model card page itself (openai.com/index/gpt-oss-model-card/) returned HTTP 403 to WebFetch — I substituted the official openai/gpt-oss GitHub README, which carries the same specs, but did not see the model-card page's exact wording. (3) Apple's own official MLX documentation was not directly fetched (only secondary sources and Meta's Muse Glimmer post, which does confirm MLX integration) — Apple ML research's own MLX GitHub/docs should be checked directly for authoritative Apple Silicon performance claims rather than the SEO summaries this pass surfaced. (4) I found no primary-source (Anthropic/OpenAI/academic) study that directly and specifically tests \"does prompting need to be more explicit for local/open-weight/small models vs. hosted frontier models\" as its own research question — the evidence assembled here (Anthropic's cross-generation guidance, Willison's Qwen3.8-27B reasoning-effort observations, and the quantization-degradation arXiv papers) is the closest available and is itself in tension, as flagged in controversies; this is a genuine gap, not a settled transfer of the course's finding. (5) Given time/tool budget, I did not fetch GLM-5.1, Kimi K2.6, or Mistral/Devstral official sources directly, so those model families are mentioned only via secondary attribution (Willison's post, search snippets) and are not independently verified key_findings."
+      }
+    ],
+    "critic": "# Adversarial Audit — Course Update Findings\n\n## 1. Non-Authoritative / Suspicious Sourcing\n- **research.meta.ai/blog/...muse-glimmer...** — Meta's actual blog domains are ai.meta.com/about.fb.com; this domain pattern is atypical and unverified. Flag \"Muse Glimmer\" claim as unconfirmed until re-sourced from a real Meta domain.\n- **Qwen version sprawl** (Local LLMs direction): \"Qwen3.8-27B\" (dense, 27B), \"Qwen3.6-27B\" (dense, 27B, predecessor), and \"Qwen3.6-35B-A3B\" (MoE, 35B) — two different architectures/sizes both labeled \"3.6\" within the same finding set. Internally inconsistent; likely a hallucinated version proliferation. Re-verify against live HF before publishing benchmark deltas (Terminal-Bench 63.4→73.0 etc.).\n- **Gemma 3 model card \"oddity\"** (270M trained on 6T > 1B's 2T tokens) — researcher flagged it themselves, good practice, but this needs a direct re-check of ai.google.dev before citing training-token numbers in course material.\n- Everything else checked (code.claude.com, platform.claude.com, developers.openai.com, cognition.com, martinfowler.com, metr.org, arxiv.org) resolved to real, on-topic content — no other content-farm/marketing patterns detected.\n\n## 2. Spot-Checks (WebFetched directly)\n1. **Anthropic harness blog** (Initializer/Coding agent split, claude-progress.txt) — **VERIFIED**. BUT the same finding's claim that this page covers \"Sonnet 4.5 context anxiety\" fixed via \"hard context resets\" — **NOT-FOUND**. The actual page discusses **Opus 4.5**, never says \"context anxiety,\" and frames the fix as structured handoffs, not hard resets. Likely conflation with a different (system-card) source; fetched:true is unsupported for that clause.\n2. **code.claude.com/docs/en/best-practices** (verification-loop discipline, 3 gate mechanisms, Stop hook \"8 consecutive blocks\", trust-then-verify gap, Writer/Reviewer pattern) — **VERIFIED**, near-verbatim.\n3. **METR RCT** (16 devs, 246 issues, 19% slower, 24% forecast) — **VERIFIED**, verbatim.\n4. **Cognition \"Don't Build Multi-Agents\"** (Flappy Bird Mario-background mismatch example) — **VERIFIED**, verbatim.\n5. **martinfowler.com harness-engineering** (Böckeler, \"Agent = Model + Harness,\" guides/sensors) — **VERIFIED**, dated 2026-04-02 exactly matching the finding.\n6. **OpenAI reasoning-best-practices** (avoid \"think step by step,\" zero-shot-first) — **VERIFIED**, verbatim.\n\nScore: 5/6 fully verified, 1/6 partially fabricated (misattributed model/claim).\n\n## 3. Internal Contradictions\n- **Multi-agent token overhead is inconsistent even within Anthropic's own sources**: \"~15x chat baseline\" (2025-06 Research blog) vs. \"3-10x single-agent cost\" (2026 official guidance) — present as an evolving estimate, not a fixed multiplier.\n- **Sampling-parameter guidance is model-specific, not universal**: Claude Sonnet 5 rejects temperature/top_p/top_k outright (effort dial only), while DeepSeek-R1's card recommends temperature 0.5-0.7 — course must not generalize \"effort dial replaces sampling params\" across all frontier models.\n- **Direction-1 sourcing error** (see spot-check #1) contradicts its own \"fetched:true\" claim — treat the Sonnet-4.5/context-anxiety sub-claim as unverified pending correction.\n\n## 4. Top 10 Course-Worthy VERIFIED Insights\n1. \"Give the agent a check it can run\" (tests/build/screenshot) is the load-bearing discipline separating attended from autonomous sessions — official Claude Code docs.\n2. Three escalating verification gates: in-prompt check → `/goal` re-evaluated condition → deterministic Stop hook (auto-override after 8 consecutive blocks).\n3. Named failure pattern \"trust-then-verify gap\": plausible-looking code that mishandles edge cases; fix = mandatory verification before shipping.\n4. Writer/Reviewer fresh-context adversarial review pattern, plus the counter-warning: chasing every reviewer finding causes over-engineering.\n5. METR RCT: experienced devs on large, familiar, high-quality codebases were 19% SLOWER with AI tools, despite forecasting +24% and still believing afterward it helped — explicitly does not generalize beyond that population.\n6. DORA 2025: AI is an \"amplifier\" of existing org dysfunction/strength, not a fixer of bad process; ~30% report low trust in AI code despite 90% usage.\n7. Long-running-agent harness pattern: Initializer agent + Coding agent + claude-progress.txt handoff file, because agents carry no memory across context windows.\n8. Cognition's coding-specific multi-agent failure mode (subagents making conflicting unstated assumptions) — and its 2026 partial reversal: multi-agent works when writes stay single-threaded and added agents contribute intelligence, not actions (review-loop pattern, ~2 bugs/PR caught).\n9. \"Harness engineering\" (Böckeler/Fowler, Apr 2026): Agent = Model + Harness, organized as feedforward \"guides\" vs. feedback \"sensors\" — a genuinely new frame, not a rehash.\n10. Convergent frontier guidance (OpenAI + Anthropic, independently): retire manual chain-of-thought/\"think step by step\" prompting for reasoning models; supply goal+constraints+output format and use the effort/reasoning_effort dial instead."
+  },
+  "workflowProgress": [
+    {
+      "type": "workflow_phase",
+      "index": 1,
+      "title": "Research"
+    },
+    {
+      "type": "workflow_phase",
+      "index": 2,
+      "title": "Verify"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 1,
+      "label": "research:ai-swe",
+      "phaseIndex": 1,
+      "phaseTitle": "Research",
+      "agentId": "ab68f3612b1c4afe2",
+      "agentType": "general-purpose",
+      "model": "claude-sonnet-5",
+      "state": "done",
+      "startedAt": 1787991093621,
+      "queuedAt": 1787991085439,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "Automated, AI-agent-driven end-to-end software development …",
+      "promptPreview": "TODAY IS 21 AUGUST 2026. You are a research analyst. Use WebSearch and WebFetch extensively (10+ tool calls expected).\n\nSTRICT SOURCE QUALITY RULES - this research is for a serious course, NOT a listicle:\n- USE: official documentation (platform.claude.com, docs.anthropic.com, code.claude.com, developers.openai.com, ai.google.dev), engineering blogs of labs (anthropic.com/engineering, openai.com/re…",
+      "lastProgressAt": 1787991355682,
+      "tokens": 100157,
+      "toolCalls": 27,
+      "durationMs": 257059,
+      "resultPreview": "{\"direction\":\"Automated, AI-agent-driven end-to-end software development (агентна розробка ПЗ) as practiced and studied in mid-2026: spec-driven vs. vibe-coding workflows, verification loops (tests/build/screenshots as ground truth, red/green TDD), harness design for long-running autonomous agents (Claude Code / Agent SDK), AI code review, CI integration, and the empirical evidence — positive and …"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 2,
+      "label": "research:prompt-eng",
+      "phaseIndex": 1,
+      "phaseTitle": "Research",
+      "agentId": "aceac697b8b5fd5cb",
+      "agentType": "general-purpose",
+      "model": "claude-sonnet-5",
+      "state": "done",
+      "startedAt": 1787991091258,
+      "queuedAt": 1787991085439,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "Prompt engineering state of the art, mid-2026: on frontier …",
+      "promptPreview": "TODAY IS 21 AUGUST 2026. You are a research analyst. Use WebSearch and WebFetch extensively (10+ tool calls expected).\n\nSTRICT SOURCE QUALITY RULES - this research is for a serious course, NOT a listicle:\n- USE: official documentation (platform.claude.com, docs.anthropic.com, code.claude.com, developers.openai.com, ai.google.dev), engineering blogs of labs (anthropic.com/engineering, openai.com/re…",
+      "lastProgressAt": 1787991424913,
+      "tokens": 111858,
+      "toolCalls": 31,
+      "durationMs": 328653,
+      "resultPreview": "{\"direction\":\"Prompt engineering state of the art, mid-2026: on frontier reasoning models (Claude Sonnet 5/Opus 5/Fable 5, GPT-5.2, DeepSeek-R1) manual chain-of-thought scaffolding and generic role/persona framing are being retired or made model-conditional, replaced by (a) goal+constraints+output-format prompting that lets the model plan internally, (b) explicit effort/verbosity dials (OpenAI rea…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 3,
+      "label": "research:multi-agent",
+      "phaseIndex": 1,
+      "phaseTitle": "Research",
+      "agentId": "a37e38ad128899d5d",
+      "agentType": "general-purpose",
+      "model": "claude-sonnet-5",
+      "state": "done",
+      "startedAt": 1787991091422,
+      "queuedAt": 1787991085440,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "Multi-agent development / orchestration for software engine…",
+      "promptPreview": "TODAY IS 21 AUGUST 2026. You are a research analyst. Use WebSearch and WebFetch extensively (10+ tool calls expected).\n\nSTRICT SOURCE QUALITY RULES - this research is for a serious course, NOT a listicle:\n- USE: official documentation (platform.claude.com, docs.anthropic.com, code.claude.com, developers.openai.com, ai.google.dev), engineering blogs of labs (anthropic.com/engineering, openai.com/re…",
+      "lastProgressAt": 1787991307244,
+      "tokens": 76257,
+      "toolCalls": 25,
+      "durationMs": 210820,
+      "resultPreview": "{\"direction\":\"Multi-agent development / orchestration for software engineering: when multi-agent systems beat a single agent, and when they hurt, covering the Cognition vs. Anthropic controversy, orchestrator-worker patterns, subagent context isolation, parallel fan-out, adversarial verification/critic agents, judge panels, cost multipliers, and official subagent/SDK docs.\",\"key_findings\":[{\"findi…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 4,
+      "label": "research:context-mgmt",
+      "phaseIndex": 1,
+      "phaseTitle": "Research",
+      "agentId": "a43d06eee0a167d71",
+      "agentType": "general-purpose",
+      "model": "claude-sonnet-5",
+      "state": "done",
+      "startedAt": 1787991091227,
+      "queuedAt": 1787991085440,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "test",
+      "promptPreview": "TODAY IS 21 AUGUST 2026. You are a research analyst. Use WebSearch and WebFetch extensively (10+ tool calls expected).\n\nSTRICT SOURCE QUALITY RULES - this research is for a serious course, NOT a listicle:\n- USE: official documentation (platform.claude.com, docs.anthropic.com, code.claude.com, developers.openai.com, ai.google.dev), engineering blogs of labs (anthropic.com/engineering, openai.com/re…",
+      "lastProgressAt": 1787991596382,
+      "tokens": 131423,
+      "toolCalls": 30,
+      "durationMs": 505154,
+      "resultPreview": "{\"direction\":\"test\",\"key_findings\":[{\"finding\":\"test finding one\",\"source_url\":\"https://example.com/1\",\"source_authority\":\"test\",\"date\":\"undated\",\"fetched\":true}],\"consensus\":[\"test consensus one\"],\"controversies\":[\"test controversy one\"],\"top_resources\":[{\"name\":\"test\",\"url\":\"https://example.com\",\"why\":\"test\"}],\"gaps\":\"test gap\"}"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 5,
+      "label": "research:local-llm",
+      "phaseIndex": 1,
+      "phaseTitle": "Research",
+      "agentId": "ab490bda240fc39a9",
+      "agentType": "general-purpose",
+      "model": "claude-sonnet-5",
+      "state": "done",
+      "startedAt": 1787991091350,
+      "queuedAt": 1787991085440,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "Local LLMs for development work, mid-2026 (as of 21 Aug 202…",
+      "promptPreview": "TODAY IS 21 AUGUST 2026. You are a research analyst. Use WebSearch and WebFetch extensively (10+ tool calls expected).\n\nSTRICT SOURCE QUALITY RULES - this research is for a serious course, NOT a listicle:\n- USE: official documentation (platform.claude.com, docs.anthropic.com, code.claude.com, developers.openai.com, ai.google.dev), engineering blogs of labs (anthropic.com/engineering, openai.com/re…",
+      "lastProgressAt": 1787991410058,
+      "tokens": 100432,
+      "toolCalls": 43,
+      "durationMs": 313707,
+      "resultPreview": "{\"direction\":\"Local LLMs for development work, mid-2026 (as of 21 Aug 2026)\",\"key_findings\":[{\"finding\":\"OpenAI's gpt-oss-120b (117B params, 5.1B active, MoE) runs on a single 80GB GPU (H100/MI300X) and gpt-oss-20b (21B params, 3.6B active) fits in 16GB of memory. Both use native MXFP4 quantization on MoE weights, ship under Apache 2.0, default to 8,192 context (adjustable), require the 'harmony' …"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 6,
+      "label": "critic",
+      "phaseIndex": 2,
+      "phaseTitle": "Verify",
+      "agentId": "a77ab94575cfdc646",
+      "agentType": "general-purpose",
+      "model": "claude-sonnet-5",
+      "state": "done",
+      "startedAt": 1787991601568,
+      "queuedAt": 1787991598597,
+      "attempt": 1,
+      "lastToolName": "WebFetch",
+      "lastToolSummary": "Does this page tell developers to avoid chain-of-thought pr…",
+      "promptPreview": "TODAY IS 21 AUGUST 2026. You are an adversarial research auditor for a course update.\nBelow are findings from 5 researchers who were told to use ONLY authoritative sources (official docs, lab engineering blogs, arXiv, recognized practitioners) and to set fetched:true only for claims they actually read at the source.\n\nYour job:\n1. Flag any finding whose source looks NON-authoritative (content farm,…",
+      "lastProgressAt": 1787991710976,
+      "tokens": 77054,
+      "toolCalls": 7,
+      "durationMs": 109408,
+      "resultPreview": "# Adversarial Audit — Course Update Findings\n\n## 1. Non-Authoritative / Suspicious Sourcing\n- **research.meta.ai/blog/...muse-glimmer...** — Meta's actual blog domains are ai.meta.com/about.fb.com; this domain pattern is atypical and unverified. Flag \"Muse Glimmer\" claim as unconfirmed until re-sourced from a real Meta domain.\n- **Qwen version sprawl** (Local LLMs direction): \"Qwen3.8-27B\" (dense,…"
+    }
+  ],
+  "totalTokens": 597181,
+  "totalToolCalls": 163
+}

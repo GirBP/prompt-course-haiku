@@ -23,6 +23,11 @@ PARTS = [
     ("06-stabilnist-ta-antypaterny.md", "06", "6 · Надійність + антипатерни"),
     ("07-synthez-praktychnyj-freymvork.md", "07", "7 · Синтез"),
     ("08-vybir-modeli-haiku-opus-fable.md", "08", "8 · Вибір моделі"),
+    ("09-promt-inzhyniring-2026-reasoning.md", "09", "9 · Промптинг 2026"),
+    ("10-avtomatyzovana-rozrobka-z-shi.md", "10", "10 · Розробка з ШІ"),
+    ("11-multyagentna-rozrobka.md", "11", "11 · Мультиагенти"),
+    ("12-keruvannya-kontekstom-agentiv.md", "12", "12 · Контекст агентів"),
+    ("13-lokalni-llm.md", "13", "13 · Локальні LLM"),
 ]
 
 
@@ -39,7 +44,7 @@ def namespace_and_link(frag, num):
     frag = re.sub(r'\bid="([^"]+)"', lambda m: f'id="{pid}-{m.group(1)}"', frag)
     frag = re.sub(r'href="#([^"]+)"', lambda m: f'href="#{pid}-{m.group(1)}"', frag)
     # 2) cross-file .md links -> jump to that part's section (drop sub-anchor)
-    frag = re.sub(r'href="(0[1-8])-[^"]*?\.md(?:#[^"]*)?"', r'href="#part-\1"', frag)
+    frag = re.sub(r'href="(0[1-9]|1[0-3])-[^"]*?\.md(?:#[^"]*)?"', r'href="#part-\1"', frag)
     frag = re.sub(r'href="README\.md(?:#[^"]*)?"', r'href="#part-00"', frag)
     return frag
 
@@ -120,7 +125,7 @@ mark.s{background:var(--mark);color:var(--markfg);border-radius:3px;padding:0 1p
 </head>
 <body>
 <div class="topbar">
-  <div class="brand">Промт-інжиніринг на Haiku <small>· 8 частин · 118 прогонів</small></div>
+  <div class="brand">Промт-інжиніринг на Haiku <small>· 13 частин · 118 прогонів</small></div>
   <div class="search"><input id="q" type="search" placeholder="Пошук по всьому курсу…" autocomplete="off"></div>
   <span class="hits" id="hits"></span>
   <button class="btn" id="theme" title="Перемкнути тему">☾ / ☀</button>

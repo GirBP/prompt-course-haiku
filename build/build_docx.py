@@ -18,6 +18,11 @@ ORDER = [
     "06-stabilnist-ta-antypaterny.md",
     "07-synthez-praktychnyj-freymvork.md",
     "08-vybir-modeli-haiku-opus-fable.md",
+    "09-promt-inzhyniring-2026-reasoning.md",
+    "10-avtomatyzovana-rozrobka-z-shi.md",
+    "11-multyagentna-rozrobka.md",
+    "12-keruvannya-kontekstom-agentiv.md",
+    "13-lokalni-llm.md",
 ]
 
 PAGEBREAK = '\n\n```{=openxml}\n<w:p><w:r><w:br w:type="page"/></w:r></w:p>\n```\n\n'
