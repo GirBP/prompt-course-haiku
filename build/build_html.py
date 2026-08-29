@@ -38,6 +38,11 @@ def md_to_fragment(path):
     ).stdout
 
 
+def externalize_links(frag):
+    # external links open in a new tab on the published site
+    return __import__("re").sub(r'<a href="(https?://[^"]+)"', r'<a href="\1" target="_blank" rel="noopener"', frag)
+
+
 def namespace_and_link(frag, num):
     pid = "p" + num
     # 1) namespace in-file ids and same-page anchors so parts don't collide
@@ -46,7 +51,7 @@ def namespace_and_link(frag, num):
     # 2) cross-file .md links -> jump to that part's section (drop sub-anchor)
     frag = re.sub(r'href="(0[1-9]|1[0-3])-[^"]*?\.md(?:#[^"]*)?"', r'href="#part-\1"', frag)
     frag = re.sub(r'href="README\.md(?:#[^"]*)?"', r'href="#part-00"', frag)
-    return frag
+    return externalize_links(frag)
 
 
 def build():
