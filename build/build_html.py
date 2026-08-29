@@ -33,7 +33,7 @@ PARTS = [
 
 def md_to_fragment(path):
     return subprocess.run(
-        ["pandoc", path, "-f", "gfm", "-t", "html", "--no-highlight"],
+        ["pandoc", path, "-f", "gfm", "-t", "html", "--no-highlight", "--wrap=none"],
         capture_output=True, text=True, check=True,
     ).stdout
 
