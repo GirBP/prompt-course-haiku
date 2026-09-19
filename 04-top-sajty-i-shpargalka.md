@@ -26,16 +26,16 @@
 Єдиний ресурс топу, де ти **сам проганяєш промпти** в Jupyter і бачиш різницю на дотик. 9 розділів + додатки; концепції (чіткість, XML-теги, роль, few-shot, CoT, анти-галюцинації, chaining/tool-use/RAG) — **досі валідні** й майже дослівно збігаються з тим, що ми виміряли в цьому курсі.
 
 > 🔧 **Але з коробки він НЕ запуститься.** Ноутбуки жорстко зашиті на `claude-3-haiku-20240307`, яку Anthropic **зняла з експлуатації 20 квітня 2026** («Requests to retired models will fail»). Репозиторій не оновлювався з **квітня 2024**.
-> **Фікс — один рядок:** заміни у ноутбуці
+> **Виправлення — два рядки.** (1) Заміни у ноутбуці модель:
 > ```python
 > MODEL_NAME = "claude-3-haiku-20240307"   # ❌ retired
 > MODEL_NAME = "claude-haiku-4-5-20251001" # ✅ офіційна заміна
 > ```
-> Також прибери `temperature=0.0` з `get_completion()`, якщо перейдеш на Opus 4.7+/Fable (там нестандартний `temperature` → `400`, див. [Частину 8](08-vybir-modeli-haiku-opus-fable.md)).
+> (2) Зафіксуй SDK: заміни `!pip install anthropic` на `!pip install "anthropic<1"`. Причина: з версії 1.0 Python SDK узагалі не приймає `temperature` — `temperature=0.0` у `get_completion()` дає `TypeError` (перевірено локально 2026-09-19: SDK 1.7.0 падає, 0.125.0 працює). Альтернатива — прибрати `temperature=0.0` з усіх викликів; на Opus 4.7+/Fable це однаково обовʼязково, бо там нестандартний `temperature` → `400` (див. [Частину 8](08-vybir-modeli-haiku-opus-fable.md)).
 
-*Кому:* тим, хто вчиться руками і не боїться однорядкової правки.
+*Кому:* тим, хто вчиться руками і не боїться дворядкової правки.
 
-> **Якщо обирати один:** почни з **#1** (не застаріває) → **#2** для глибини технік → **#3**, коли захочеш практики (після фіксу моделі).
+> **Якщо обирати один:** почни з **#1** (не застаріває) → **#2** для глибини технік → **#3**, коли захочеш практики (після заміни моделі).
 
 ---
 
@@ -56,17 +56,17 @@
   🔗 https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents
 - **Agentic Engineering Patterns (Simon Willison)** — ⚠️ *не оновлювався з квітня 2026* — практичні патерни агентного кодингу, TDD для агентів. Методологія не застаріває, але приклади моделей — на покоління позаду. **Читай живий покажчик, а не анонс:** https://simonwillison.net/guides/agentic-engineering-patterns/
   🔗 https://simonwillison.net/2026/Feb/23/agentic-engineering-patterns/ *(анонс)*
-- **OpenAI Prompt Engineering Guide** — ✅ актуальний (посилається на GPT-5-серію) — якщо працюєш і з OpenAI-моделями: кодинг, frontend, агентні воркфлоу.
+- **OpenAI Prompt Engineering Guide** — ✅ актуальний (оновлений під GPT-6 Astra; перевірено 2026-09-19) — якщо працюєш і з OpenAI-моделями: кодинг, frontend, агентні робочі процеси.
   🔗 https://developers.openai.com/api/docs/guides/prompt-engineering
 
 ### Ресурси Модуля 2026 (Частини 9–13, перевірені при дослідженні 2026-08)
 - **Промптинг reasoning-моделей:** OpenAI Reasoning Best Practices — https://developers.openai.com/api/docs/guides/reasoning-best-practices
-- **Автоматизована розробка:** DORA 2025 — https://dora.dev/dora-report-2025/ · METR RCT — https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/ · Effective harnesses (Anthropic) — https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents
+- **Автоматизована розробка:** DORA 2025 — https://dora.dev/research/2025/dora-report/ · METR RCT — https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/ · Effective harnesses (Anthropic) — https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents
 - **Мультиагенти:** Anthropic multi-agent research system — https://www.anthropic.com/engineering/multi-agent-research-system · Cognition «Don't Build Multi-Agents» — https://cognition.com/blog/dont-build-multi-agents · Claude Code sub-agents — https://code.claude.com/docs/en/sub-agents
 - **Контекст агентів:** Chroma «Context Rot» — https://www.trychroma.com/research/context-rot · Harness engineering (Fowler/Böckeler) — https://martinfowler.com/articles/harness-engineering.html
 - **Локальні LLM:** llama.cpp quantize README — https://github.com/ggml-org/llama.cpp/blob/master/tools/quantize/README.md · vLLM quantization — https://docs.vllm.ai/en/latest/features/quantization/ · Willison local-llms — https://simonwillison.net/tags/local-llms/
 
-> **Перевірка 2026-08-21:** усі 10 посилань **живі**; додатково перевірено **зміст** кожного. Результат: 6 — актуальні, 3 — старіють (позначено ⚠️), 1 — потребує однорядкової правки перед запуском (туторіал Anthropic). Історія перевірок доступності — у [Частині 6](06-stabilnist-ta-antypaterny.md#c-пере-перевірка-топ-сайтів-webfetch-2026-06-27).
+> **Перевірка 2026-08-21:** усі 10 посилань **живі**; додатково перевірено **зміст** кожного. Результат: 6 — актуальні, 3 — старіють (позначено ⚠️), 1 — потребує правки перед запуском (туторіал Anthropic; з 2026-09 — у два рядки, див. вище). Історія перевірок доступності — у [Частині 6](06-stabilnist-ta-antypaterny.md#c-пере-перевірка-топ-сайтів-webfetch-2026-06-27).
 
 ---
 
@@ -86,16 +86,16 @@
 **Міркування**
 6. Для задач на судження — «think step by step, then give your final answer». *(DS3)*
 7. Для дебагу — проси трасування виконання перед вердиктом. *(SE4)*
-8. Задавай і *процес*, і *структуру фіналу* (баг → причина → фікс). *(SE4)*
+8. Задавай і *процес*, і *структуру фіналу* (баг → причина → виправлення). *(SE4)*
 
 **Формат виводу**
 9. **Якоруй перший символ** («start with `{`») — надійніше за «no markdown». *(SE5 vs DS4)*
-10. У реальному API для гарантованого формату — **prefill** відповіді асистента. *(DS4)*
+10. Гарантований формат дає лише **structured outputs** (`output_config.format`; на Claude працює і з Haiku 4.5). Prefill задає тільки перший токен, а на Claude 4.6+ повертає 400. *(DS4, Ч.9)*
 11. Задавай JSON-схему: ключі, типи, поведінку для `null`. *(DS4)*
 
 **Роль і чесність**
 12. Роль + контекст + обмеження разом (роль сама по собі слабка). *(DS5)*
-13. Завжди давай «вихід»: «if X is not in the context / does not exist — say so, don't invent» — і перевіряй на *своїх* рідкісних кейсах. *(SE6)*
+13. Завжди давай «вихід»: «if X is not in the context / does not exist — say so, don't invent» — і перевіряй на *своїх* рідкісних випадках. *(SE6)*
 
 > ➕ **Принципи 14–17 (reasoning-моделі 2026)** — у [Частині 9.7](09-promt-inzhyniring-2026-reasoning.md); ресурси пʼяти нових напрямів — нижче.
 
@@ -104,7 +104,7 @@
 ## Відповіді до вправ
 
 ### Data Science
-1. **DS1.** Чотири елементи: (1) дані+типи — `transactions(user_id int, amount float, timestamp datetime, is_fraud 0/1)`; (2) ціль — «predict is_fraud»; (3) контекст — клас рідкісний (~0.5%), дані часові (ризик витоку через майбутнє); (4) формат — «in 4 bullets: одна фіча, baseline, метрика, ризик leakage».
+1. **DS1.** Чотири елементи: (1) дані+типи — `transactions(user_id int, amount float, timestamp datetime, is_fraud 0/1)`; (2) ціль — «predict is_fraud»; (3) контекст — клас рідкісний (~0.5%), дані часові (ризик витоку через майбутнє); (4) формат — «in 4 bullets: одна ознака, baseline, метрика, ризик leakage».
 2. **DS2.** Мінімум **3 приклади — по одному на клас** (`BUG`, `FEATURE`, `QUESTION`), бо модель має побачити межу кожної категорії хоча б раз. Плюс інструкція «output only the label». Для неоднозначних класів — 2 приклади на клас.
 3. **DS4.** «Позитивний якір першого символу виводу (`start with {`) надійніший за негативну заборону (`no markdown`)»: модель легше *виконує* конкретну дію, ніж *утримується* від звички обгортати код у блоки.
 4. **DS5.** `You are explaining to a non-technical product manager. Avoid statistical jargon; in 3 sentences explain what a p-value tells us about whether an A/B test result is likely real or just noise, and one common misinterpretation to avoid.`

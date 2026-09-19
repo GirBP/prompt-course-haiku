@@ -50,7 +50,7 @@ fix(docs): fix typo in README
 - 3/5: `"items": ["2 widgets", "1 gadget"]` (залишив кількість у рядку)
 - 2/5: `"items": ["widget", "widget", "gadget"]` (розгорнув у окремі елементи)
 
-Це **не баг моделі, а неоднозначність промпта** — ми не сказали, як трактувати кількість. Урок: якщо специфікація допускає два прочитання, модель **обере по-різному на різних прогонах**. Фікс: «expand quantities so each unit is a separate array element» (або навпаки).
+Це **не баг моделі, а неоднозначність промпта** — ми не сказали, як трактувати кількість. Урок: якщо специфікація допускає два прочитання, модель **обере по-різному на різних прогонах**. Виправлення: «expand quantities so each unit is a separate array element» (або навпаки).
 
 ### Контроль: слабкий промпт — нестабільний (як і має бути)
 `DS2 weak` (zero-shot) — **5/5 унікальних** багатослівних відповідей, мітка плаває: *mixed → neutral-to-positive → cautiously positive*. Підтверджує, що нестабільність — властивість слабкого промпта, а не моделі.
@@ -67,7 +67,7 @@ fix(docs): fix typo in README
 | 4 | Негативна заборона (`no markdown`) | ~80% | уникати як єдиний засіб |
 | 4 | Розмите структурне («one line») | ~80% | доповнювати явним обмеженням |
 
-> **Головне правило надійності.** Для критичного формату на малій моделі бери техніку рангу 1 (закритий набір / sentinel / якір). Якщо потрібні **100.0%** — додавай у реальному API **prefill** (підстав перший токен) + **валідацію виходу зі схемою** і повторний прогін на провалі. На самих інструкціях стелі ~80–100% залежно від типу обмеження.
+> **Головне правило надійності.** Для критичного формату на малій моделі бери техніку рангу 1 (закритий набір / sentinel / якір). Якщо потрібні **100.0%** — у реальному API вмикай **structured outputs** (`output_config.format`, є і на Haiku 4.5). Без них — prefill (лише Haiku 4.5 і старші) + **валідація виходу зі схемою** і повторний прогін на провалі. На самих інструкціях стелі ~80–100% залежно від типу обмеження.
 
 ---
 
@@ -83,7 +83,7 @@ fix(docs): fix typo in README
 
 **Що сталося:** модель **мовчки обрала одне** обмеження (одне речення) і викинула інше (вичерпний гайд). Вона не повідомила про конфлікт — ти просто **втрачаєш контроль** над тим, який бік переможе.
 
-✅ **Фікс:** *«In one sentence, state the single most important thing... about database indexing.»* — жодного конфлікту, передбачуваний результат.
+✅ **Виправлення:** *«In one sentence, state the single most important thing... about database indexing.»* — жодного конфлікту, передбачуваний результат.
 
 > **Правило:** не клади взаємовиключні вимоги в один промпт. Якщо є trade-off (стисло vs повно) — вибери явно.
 
@@ -94,7 +94,7 @@ fix(docs): fix typo in README
 
 **Що сталося:** заборони щодо *змісту* модель врахувала, але **негативні обмеження обсягу протікають** (той самий ефект, що з «no markdown» у DS4). Купа «don't» не дає моделі **позитивної цілі**.
 
-✅ **Фікс:** *«Explain gradient descent in **exactly 3 sentences** for a junior dev, using **one everyday analogy**. Avoid math notation.»* — позитивна ціль + точний обсяг. Результат — щільні 3 речення.
+✅ **Виправлення:** *«Explain gradient descent in **exactly 3 sentences** for a junior dev, using **one everyday analogy**. Avoid math notation.»* — позитивна ціль + точний обсяг. Результат — щільні 3 речення.
 
 > **Правило:** кажи що **робити**, не лише чого уникати. Позитивне обмеження («exactly 3 sentences») надійніше за «don't be too long».
 
@@ -105,9 +105,9 @@ fix(docs): fix typo in README
 
 **Що сталося:** 6 задач в одному промпті → увага «розмазана», глибина впала. На малій моделі це особливо помітно.
 
-✅ **Фікс:** одна сфокусована задача — *«write a function fetch_html(url)... retries 3 times... raises on non-200. Output only the code.»* — **повна, якісна, готова функція** (на відміну від 6 поверхневих шматків). Решту — окремими промптами (див. [prompt chaining](05-rozshyrennya-haiku-vs-sonnet-uk.md#b3-prompt-chaining-декомпозиція-замість-зроби-все-одразу)).
+✅ **Виправлення:** одна сфокусована задача — *«write a function fetch_html(url)... retries 3 times... raises on non-200. Output only the code.»* — **повна, якісна, готова функція** (на відміну від 6 поверхневих шматків). Решту — окремими промптами (див. [prompt chaining](05-rozshyrennya-haiku-vs-sonnet-uk.md#b3-prompt-chaining-декомпозиція-замість-зроби-все-одразу)).
 
-> ⚠️ **Чесне застереження (підтверджено аудитом).** Цей фікс вирішує проблему *перевантаження* — функція вийшла повна й якісна. Але вивід Haiku **усе ж прийшов обгорнутим у ```` ```python ````** попри «Output only the code» — рівно та слабкість негативної заборони, яку ми виміряли вище у розділі A цієї частини (DS4 = 80% проти SE5 = 100%). Тобто промпт виправляє *одну* ваду, але демонструє *іншу*: щоб отримати голий код без fences, треба додати **якір** — *«start with `def fetch_html`»*. Урок: антипатерни можуть накладатися; виправляючи один, перевіряй, чи не лишився інший.
+> ⚠️ **Чесне застереження (підтверджено аудитом).** Нова версія промпта прибирає *перевантаженість*: функція вийшла повна й якісна. Але вивід Haiku **усе ж прийшов обгорнутим у ```` ```python ````** попри «Output only the code» — рівно та слабкість негативної заборони, яку ми виміряли вище у розділі A цієї частини (DS4 = 80% проти SE5 = 100%). Тобто промпт виправляє *одну* ваду, але демонструє *іншу*: щоб отримати голий код без fences, треба додати **якір** — *«start with `def fetch_html`»*. Урок: антипатерни можуть накладатися; виправляючи один, перевіряй, чи не лишився інший.
 
 > **Правило:** один промпт — одна задача. Багатокрокове — через ланцюжок, не через «зроби все». А для голого коду без обгортки — додай якір першого рядка.
 
@@ -119,7 +119,7 @@ fix(docs): fix typo in README
 
 **Що сталося (приємно):** Haiku **не повівся** на хибну засновку й одразу її спростував. Ще одне підтвердження, що сучасна модель стійка до простих маніпуляцій — **але** не варто розраховувати на це завжди (на нішевих/правдоподібніших хибних засновках може й погодитись).
 
-✅ **Фікс:** *«Compare Python and C++... **If the premise that one is "always faster" is wrong, correct it**, and explain when each is faster.»* — явний дозвіл виправити засновку → структурована, збалансована відповідь.
+✅ **Виправлення:** *«Compare Python and C++... **If the premise that one is "always faster" is wrong, correct it**, and explain when each is faster.»* — явний дозвіл виправити засновку → структурована, збалансована відповідь.
 
 > **Правило:** не «зашивай» припущення у питання. Якщо не впевнений — додай «if any premise here is wrong, correct it first».
 
@@ -139,20 +139,20 @@ fix(docs): fix typo in README
 
 | URL | Статус | Що це |
 |-----|:------:|-------|
-| github.com/anthropics/prompt-eng-interactive-tutorial | ✅ 200 | Інтерактивний туторіал, Jupyter-ноутбуки |
-| www.promptingguide.ai | ✅ 200 | Хаб технік промптингу |
-| www.promptingguide.ai/applications | ✅ 200 | Applications-хаб (дозвірено 2026-08) |
-| platform.claude.com/.../claude-prompting-best-practices | ✅ 200 | Офіційні best practices, model-specific |
-| code.claude.com/docs/en/best-practices | ✅ 200 | Best practices для Claude Code |
-| anthropic.com/engineering/effective-context-engineering-for-ai-agents | ✅ 200 | Стаття про context engineering |
-| developers.openai.com/api/docs/guides/prompt-engineering | ✅ 200 | Гайд OpenAI |
-| towardsdatascience.com/become-a-better-data-scientist-... | ✅ live | TDS, частина 1: planning/cleaning/EDA |
-| towardsdatascience.com/advanced-prompt-engineering-... | ✅ live | TDS, частина 2: features/modeling/eval |
-| simonwillison.net/2026/Feb/23/agentic-engineering-patterns | ✅ live | Патерни агентного кодингу |
+| [github.com/anthropics/prompt-eng-interactive-tutorial](https://github.com/anthropics/prompt-eng-interactive-tutorial) | ✅ 200 | Інтерактивний туторіал, Jupyter-ноутбуки |
+| [www.promptingguide.ai](https://www.promptingguide.ai/) | ✅ 200 | Хаб технік промптингу |
+| [www.promptingguide.ai/applications](https://www.promptingguide.ai/applications) | ✅ 200 | Applications-хаб (дозвірено 2026-08) |
+| [platform.claude.com/…/claude-prompting-best-practices](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices) | ✅ 200 | Офіційні best practices, model-specific |
+| [code.claude.com/docs/en/best-practices](https://code.claude.com/docs/en/best-practices) | ✅ 200 | Best practices для Claude Code |
+| [anthropic.com/engineering/effective-context-engineering-for-ai-agents](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) | ✅ 200 | Стаття про context engineering |
+| [developers.openai.com/api/docs/guides/prompt-engineering](https://developers.openai.com/api/docs/guides/prompt-engineering) | ✅ 200 | Гайд OpenAI |
+| [towardsdatascience.com/become-a-better-data-scientist-…](https://towardsdatascience.com/become-a-better-data-scientist-with-these-prompt-engineering-hacks/) | ✅ live | TDS, частина 1: planning/cleaning/EDA |
+| [towardsdatascience.com/advanced-prompt-engineering-…](https://towardsdatascience.com/advanced-prompt-engineering-for-data-science-projects/) | ✅ live | TDS, частина 2: features/modeling/eval |
+| [simonwillison.net/2026/Feb/23/agentic-engineering-patterns](https://simonwillison.net/2026/Feb/23/agentic-engineering-patterns/) | ✅ live | Патерни агентного кодингу |
 
 **Усі 10 унікальних зовнішніх посилань курсу — живі** (перепровірено 2026-08-21). 6 технічних URL перевірені WebFetch тут; 3 доменно-специфічні (2× Towards Data Science, Simon Willison) — окремим проходом; 10-те (`promptingguide.ai/applications`) дозвірене у серпні. Жодне посилання не спирається лише на прапорець `verified_live` дослідницького агента.
 
-> ⚠️ **Доступність ≠ актуальність (урок серпневої перевірки).** Окремим проходом ми прочитали **зміст** усіх ресурсів, не лише перевірили код 200. Результат: 6 актуальні, 3 старіють, **1 зламаний по суті** — інтерактивний туторіал Anthropic віддає 200 OK, але його ноутбуки зашиті на `claude-3-haiku-20240307`, знятий з експлуатації **20.04.2026**, тож приклади падають з помилкою API. Деталі й однорядковий фікс — у [Частині 4](04-top-sajty-i-shpargalka.md#-топ-3-сайти-для-навчання-промт-інжинірингу).
+> ⚠️ **Доступність ≠ актуальність (урок серпневої перевірки).** Окремим проходом ми прочитали **зміст** усіх ресурсів, не лише перевірили код 200. Результат: 6 актуальні, 3 старіють, **1 зламаний по суті** — інтерактивний туторіал Anthropic віддає 200 OK, але його ноутбуки зашиті на `claude-3-haiku-20240307`, знятий з експлуатації **20.04.2026**, тож приклади падають з помилкою API. Деталі й виправлення — у [Частині 4](04-top-sajty-i-shpargalka.md#-топ-3-сайти-для-навчання-промт-інжинірингу).
 >
 > **Метод-урок:** перевірка посилань на код 200 — необхідна, але **недостатня**. Для навчальних матеріалів треба окремо перевіряти, чи не застарів *зміст*.
 
@@ -170,11 +170,11 @@ fix(docs): fix typo in README
 1. **Надійність-вправа.** Тобі потрібен **100%-надійний** JSON-вивід від Haiku у проді. Назви три засоби в порядку від найнадійнішого і поясни, чому «no markdown» сам по собі недостатній.
 2. **AP1-вправа (суперечність).** Чому суперечливий промпт небезпечніший за просто поганий? Що конкретно ти втрачаєш?
 3. **AP2-вправа (заборони).** Перепиши «Explain Docker. Don't be long, don't use jargon, don't be boring» у позитивний промпт без жодного «don't».
-4. **AP3-вправа (перевантаження + накладання).** У фіксі AP3 код усе одно прийшов у ` ```python `. Який один рядок робить його голим, і яку техніку з Частини 2 ти застосовуєш?
+4. **AP3-вправа (перевантаження + накладання).** У виправленні AP3 код усе одно прийшов у ` ```python `. Який один рядок робить його голим, і яку техніку з Частини 2 ти застосовуєш?
 5. **AP4-вправа (хибна засновка).** Ти питаєш модель про дані, яких немає у наданому контексті. Який рядок не дасть їй вигадати?
 
 ### Відповіді (Частина 6)
-1. Порядок: (1) **prefill** у реальному API (підстав `{` у відповідь асистента — модель фізично не додасть преамбулу) → ~100%; (2) **якір першого символу** (`start with {`) → 100% у наших N=5; (3) **валідація схемою + повторний прогін** на провалі. «No markdown» недостатнє, бо це **негативна заборона**, що протікає ~20% (4/5 у DS4) — модель легше *виконує* дію, ніж *утримується* від звички.
+1. Порядок: (0) **structured outputs** у реальному API (`output_config.format`) — схему гарантує сервер; (1) **prefill** (лише Haiku 4.5 і старші; підстав `{` — модель фізично не додасть преамбулу) → ~100%; (2) **якір першого символу** (`start with {`) → 100% у наших N=5; (3) **валідація схемою + повторний прогін** на провалі. «No markdown» недостатнє, бо це **негативна заборона**, що протікає ~20% (4/5 у DS4) — модель легше *виконує* дію, ніж *утримується* від звички.
 2. Поганий промпт дає погану, але **передбачувану** відповідь. Суперечливий — модель **мовчки обирає одне** з вимог і викидає інше, не повідомляючи. Ти втрачаєш **контроль**: не знаєш, який бік переможе (в AP1 викинуло «comprehensive», лишило «one sentence»).
 3. Напр.: *«Explain Docker in 3 sentences for a developer who knows Git but not containers, using one analogy.»* — позитивна ціль (3 речення, аудиторія, аналогія) замість набору заборон.
 4. Рядок-якір: *«Output only the code, starting with `def fetch_html`»*. Техніка — **примус формату через якір першого символу** (SE5): позитивний якір надійніший за «output only the code».
