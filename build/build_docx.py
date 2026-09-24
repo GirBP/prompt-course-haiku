@@ -30,7 +30,7 @@ PAGEBREAK = '\n\n```{=openxml}\n<w:p><w:r><w:br w:type="page"/></w:r></w:p>\n```
 YAML = (
     "---\n"
     'title: "Промт-інжиніринг для Data Science та Software Engineering"\n'
-    'subtitle: "Курс, валідований на Claude Haiku 4.5 — 118 реальних прогонів моделей"\n'
+    'subtitle: "Курс, перевірений на Claude Haiku 4.5 — 118 реальних модельних прогонів"\n'
     "lang: uk\n"
     "---\n\n"
 )

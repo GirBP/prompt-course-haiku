@@ -11,7 +11,7 @@
 ### 1. Anthropic — Prompting Best Practices (офіційні докси Claude) — ✅ актуальний
 🔗 https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices
 
-Офіційний, **постійно оновлюваний** довідник: чіткість, приклади, XML-структурування, tool use, extended/adaptive thinking, агентний промптинг — з нотатками під **конкретні моделі**. **№1, бо це єдине джерело, яке не застаріває**: воно оновлюється разом із моделями (перевірено — містить актуальні Opus 5 / Sonnet 5 / Fable 5).
+Офіційний, **постійно оновлюваний** довідник: чіткість, приклади, XML-структурування, tool use, extended/adaptive thinking, агентний промптинг — з нотатками під **конкретні моделі**. **№1, бо це єдине джерело, яке не застаріває**: воно оновлюється разом із моделями (перевірено 2026-09-24 — містить Opus 5.5, Sonnet 5 і Fable 5.1).
 *Кому:* усім, хто пише промпти під Claude; обов'язково — розробникам на API.
 
 ### 2. Prompt Engineering Guide — DAIR.AI — ✅ актуальний
@@ -23,7 +23,7 @@
 ### 3. Anthropic Interactive Prompt Engineering Tutorial (GitHub) — ⚠️ потребує правки перед запуском
 🔗 https://github.com/anthropics/prompt-eng-interactive-tutorial
 
-Єдиний ресурс топу, де ти **сам проганяєш промпти** в Jupyter і бачиш різницю на дотик. 9 розділів + додатки; концепції (чіткість, XML-теги, роль, few-shot, CoT, анти-галюцинації, chaining/tool-use/RAG) — **досі валідні** й майже дослівно збігаються з тим, що ми виміряли в цьому курсі.
+Єдиний ресурс топу, де ти **сам проганяєш промпти** в Jupyter і бачиш різницю на дотик. 9 розділів + додатки; концепції (чіткість, XML-теги, роль, few-shot, CoT, анти-галюцинації, chaining/tool-use/RAG) — **досі чинні** й майже дослівно збігаються з тим, що ми виміряли в цьому курсі.
 
 > 🔧 **Але з коробки він НЕ запуститься.** Ноутбуки жорстко зашиті на `claude-3-haiku-20240307`, яку Anthropic **зняла з експлуатації 20 квітня 2026** («Requests to retired models will fail»). Репозиторій не оновлювався з **квітня 2024**.
 > **Виправлення — два рядки.** (1) Заміни у ноутбуці модель:
@@ -42,7 +42,7 @@
 ## Додаткові сайти за доменами (бонус)
 
 ### Для Data Science
-- **The Data Scientist's Prompt Playbook (Towards Data Science)** — ⚠️ *стаття від 30.06.2025* — copy-paste промпти й pandas-снипети для planning / cleaning / EDA. Техніки валідні, але **моделі, які вона називає (GPT-4, o3-pro), уже застаріли** — не бери її як орієнтир щодо вибору моделі.
+- **The Data Scientist's Prompt Playbook (Towards Data Science)** — ⚠️ *стаття від 30.06.2025* — copy-paste промпти й pandas-снипети для planning / cleaning / EDA. Техніки чинні, але **моделі, які вона називає (GPT-4, o3-pro), уже застаріли** — не бери її як орієнтир щодо вибору моделі.
   🔗 https://towardsdatascience.com/become-a-better-data-scientist-with-these-prompt-engineering-hacks/
 - **Advanced Prompt Engineering for DS (частина 2)** — ⚠️ *стаття від 19.08.2025* — feature engineering, вибір моделі/AutoML, LLM-оцінка з JSON/CSV-схемами. **Обережно з порадою «тримай `temperature` ≤ 0.3»**: на сучасних Claude (Opus 4.7+, Fable 5) нестандартний `temperature` повертає `400` — там детермінізм задають промптом і `effort` (див. [Частину 8](08-vybir-modeli-haiku-opus-fable.md)).
   🔗 https://towardsdatascience.com/advanced-prompt-engineering-for-data-science-projects/
@@ -50,13 +50,13 @@
   🔗 https://www.promptingguide.ai/applications
 
 ### Для Software Engineering
-- **Best practices for Claude Code (Anthropic)** — ✅ актуальний — офіційний плейбук агентного кодингу: explore-plan-code-commit, верифіковані перевірки, CLAUDE.md, subagents, рев'ю.
+- **Best practices for Claude Code (Anthropic)** — ✅ актуальний — офіційний плейбук агентного кодингу: explore-plan-code-commit, верифіковані перевірки, CLAUDE.md, subagents, рецензування.
   🔗 https://code.claude.com/docs/en/best-practices
 - **Effective context engineering for AI agents (Anthropic Engineering)** — ✅ актуальний — керування контекстним вікном (just-in-time loading, compaction, sub-agents).
   🔗 https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents
-- **Agentic Engineering Patterns (Simon Willison)** — ⚠️ *не оновлювався з квітня 2026* — практичні патерни агентного кодингу, TDD для агентів. Методологія не застаріває, але приклади моделей — на покоління позаду. **Читай живий покажчик, а не анонс:** https://simonwillison.net/guides/agentic-engineering-patterns/
+- **Agentic Engineering Patterns (Simon Willison)** — ⚠️ *дат оновлення на сторінці немає; найсвіжіший приклад, який ми знайшли в розділах, датований квітнем 2026* — практичні патерни агентного кодингу, TDD для агентів. Методологія не застаріває, але приклади моделей — на покоління позаду. **Читай живий покажчик, а не анонс:** https://simonwillison.net/guides/agentic-engineering-patterns/
   🔗 https://simonwillison.net/2026/Feb/23/agentic-engineering-patterns/ *(анонс)*
-- **OpenAI Prompt Engineering Guide** — ✅ актуальний (оновлений під GPT-6 Astra; перевірено 2026-09-19) — якщо працюєш і з OpenAI-моделями: кодинг, frontend, агентні робочі процеси.
+- **OpenAI Prompt Engineering Guide** — ✅ актуальний (оновлений під GPT-6; перевірено 2026-09-24) — якщо працюєш і з OpenAI-моделями: кодинг, frontend, агентні робочі процеси.
   🔗 https://developers.openai.com/api/docs/guides/prompt-engineering
 
 ### Ресурси Модуля 2026 (Частини 9–13, перевірені при дослідженні 2026-08)
@@ -86,7 +86,7 @@
 **Міркування**
 6. Для задач на судження — «think step by step, then give your final answer». *(DS3)*
 7. Для дебагу — проси трасування виконання перед вердиктом. *(SE4)*
-8. Задавай і *процес*, і *структуру фіналу* (баг → причина → виправлення). *(SE4)*
+8. Задавай і *процес*, і *структуру фіналу* (вада → причина → виправлення). *(SE4)*
 
 **Формат виводу**
 9. **Якоруй перший символ** («start with `{`») — надійніше за «no markdown». *(SE5 vs DS4)*
@@ -121,7 +121,7 @@
    SELECT ...
    </sql>
    ```
-   Вісь фокусу (performance) скеровує рев'ю — інакше модель може зачепитись за стиль.
+   Вісь фокусу (performance) скеровує рецензію — інакше модель може зачепитись за стиль.
 3. **SE5.** `Output ONLY the bash command, starting with the command name. No explanation, no markdown, no backticks.` Краще за «don't explain», бо задає **позитивну дію** (почни з імені команди), а не лише заборону — модель легше виконує конкретний старт виводу, ніж стримує звичку пояснювати.
 4. **SE6.** `Answer ONLY using the provided documentation. If the function is not described in the documentation above, reply exactly: "Not found in the provided docs." Do not use outside knowledge or invent behavior.`
 
@@ -129,4 +129,4 @@
 
 ## Підсумок одним абзацом
 
-Промт-інжиніринг — це не «магічні слова», а **інженерна дисципліна з вимірюваним ефектом**. У цьому курсі кожне правило підкріплене реальним прогоном на Claude Haiku 4.5: few-shot робить формат детермінованим (1 унікальна відповідь замість 3), якір першого символу б'є заборону обгортки, CoT перетворює вердикт на обґрунтування, а деякі «класичні» техніки на сучасній моделі дають менший ефект, ніж обіцяють старі гайди — і це теж треба перевіряти на власних задачах, а не приймати на віру.
+Промт-інжиніринг — не «магічні слова», а **інженерна дисципліна з вимірюваним ефектом**. Кожне правило курсу підкріплене реальним прогоном на Claude Haiku 4.5. Few-shot робить формат детермінованим (1 унікальна відповідь замість 3). Якір першого символу б'є заборону обгортки. CoT перетворює вердикт на обґрунтування. А деякі «класичні» техніки на сучасній моделі дають менший ефект, ніж обіцяють старі гайди. Тож перевіряй їх на власних задачах, а не приймай на віру.

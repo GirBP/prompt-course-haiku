@@ -91,7 +91,7 @@ mark.s{background:var(--mark);color:var(--markfg);border-radius:3px;padding:0 1p
 <li>У матеріали вставлено <strong>справжній вивід Haiku</strong> дослівно — включно з випадками, де навіть «сильний» промпт спрацював <strong>не ідеально</strong> (це найцінніше для навчання).</li>
 </ul>
 <blockquote>
-<p>Як саме валідовано і чому без raw-API — у <a href="#part-03">03-metodologiya-ta-syri-rezultaty.md</a>.</p>
+<p>Як саме перевіряли і чому без raw-API — у <a href="#part-03">03-metodologiya-ta-syri-rezultaty.md</a>.</p>
 </blockquote>
 <hr />
 <h2 id="p00-структура-курсу">Структура курсу</h2>
@@ -109,11 +109,11 @@ mark.s{background:var(--mark);color:var(--markfg);border-radius:3px;padding:0 1p
 </tr>
 <tr>
 <td><a href="#part-02">02-software-engineering.md</a></td>
-<td>6 технік на задачах SWE: специфікація, XML-теги, few-shot формат, пошук бага, примус формату, контроль галюцинацій</td>
+<td>6 технік на задачах SWE: специфікація, XML-теги, few-shot формат, пошук вади, примус формату, контроль галюцинацій</td>
 </tr>
 <tr>
 <td><a href="#part-03">03-metodologiya-ta-syri-rezultaty.md</a></td>
-<td>Як валідовано, чесні застереження, таблиця 30 прогонів Частин 1–2, підсумок усіх 118, як відтворити</td>
+<td>Як перевіряли, чесні застереження, таблиця 30 прогонів Частин 1–2, підсумок усіх 118, як відтворити</td>
 </tr>
 <tr>
 <td><a href="#part-04">04-top-sajty-i-shpargalka.md</a></td>
@@ -158,10 +158,10 @@ mark.s{background:var(--mark);color:var(--markfg);border-radius:3px;padding:0 1p
 </tbody>
 </table>
 <blockquote>
-<p>🧭 <strong>Два модулі курсу.</strong> Частини 1–8 — <strong>виміряне ядро</strong> (118 прогонів на 4 моделях). Частини 9–13 — <strong>дослідницький модуль 2026</strong>: пʼять напрямів (промптинг reasoning-моделей, автоматизована розробка з ШІ, мультиагенти, контекст агентів, локальні LLM), зібрані ТІЛЬКИ з першоджерел (офіційні докси, engineering-блоги лабораторій, arXiv, визнані практики) з правилом «кожне твердження реально прочитане за URL» і адверсаріальною перевіркою; сирі результати дослідження — у <code>raw-outputs/</code>.</p>
+<p>🧭 <strong>Два модулі курсу.</strong> Частини 1–8 — <strong>виміряне ядро</strong> (118 прогонів на 4 моделях). Частини 9–13 — <strong>дослідницький модуль 2026</strong> з пʼяти напрямів: промптинг reasoning-моделей, автоматизована розробка з ШІ, мультиагенти, контекст агентів, локальні LLM. Їх зібрано ТІЛЬКИ з першоджерел: офіційні докси, engineering-блоги лабораторій, arXiv, визнані практики. Правило — «кожне твердження реально прочитане за URL», плюс адверсаріальна перевірка. Сирі результати дослідження — у <code>raw-outputs/</code>.</p>
 <p>✅ <strong>Перевірка актуальності (2026-08-21).</strong> Курс звірено з <strong>живими</strong> доксами Anthropic: усі 11 тверджень механіки API (Частина 8) — <strong>підтверджені</strong>; ціни й ліміти Haiku 4.5 / Opus 4.8 / Fable 5 — <strong>без змін</strong>; усі 10 зовнішніх посилань — <strong>живі</strong>. Оновлено: вийшли <strong>Opus 5</strong> (новий флагман) і <strong>Sonnet 5</strong> — див. <a href="#part-08">8.2a «Свіжість лінійки»</a>.</p>
-<p>🔄 <strong>Повторна перевірка 2026-09-19.</strong> Усі матеріали звірено з першоджерелами ще раз: виправлено 11 фактичних неточностей (перелік — у <a href="#part-03">Частині 3</a>). Лінійка оновилась: вийшов <strong>Claude Fable 5.1</strong>, Fable 5 став Legacy; Haiku 4.5 — досі «не раніше 15.10.2026».</p>
-<p>⚠️ <strong>Перевірено й ЗМІСТ сторонніх ресурсів, не лише доступність.</strong> Знайдено: інтерактивний туторіал Anthropic віддає 200 OK, але зашитий на <strong>знятий з експлуатації</strong> <code>claude-3-haiku-20240307</code> — приклади падають, доки не заміниш модель і не зафіксуєш версію SDK (виправлення у два рядки — у <a href="#part-04">Частині 4</a>). Топ-3 перевпорядковано: №1 тепер офіційні докси Anthropic, що не застарівають.</p>
+<p>🔄 <strong>Повторні перевірки 2026-09-19 і 2026-09-24.</strong> Усі матеріали ще раз звірено з першоджерелами, перелік виправлень — у <a href="#part-03">Частині 3</a>. Лінійка оновилась: вийшли <strong>Claude Fable 5.1</strong> і <strong>Claude Opus 5.5</strong>, а Fable 5 та Opus 5 стали Legacy. Haiku 4.5 — досі «не раніше 15.10.2026».</p>
+<p>⚠️ <strong>Перевірено й ЗМІСТ сторонніх ресурсів, не лише доступність.</strong> Інтерактивний туторіал Anthropic віддає 200 OK, але зашитий на <strong>знятий з експлуатації</strong> <code>claude-3-haiku-20240307</code>. Приклади падають, доки не заміниш модель і не зафіксуєш версію SDK (виправлення у два рядки — у <a href="#part-04">Частині 4</a>). Топ-3 перевпорядковано: №1 тепер офіційні докси Anthropic, що не застарівають.</p>
 <p>🌐 <strong>Живий сайт:</strong> <strong><a href="https://girbp.github.io/prompt-course-haiku/" target="_blank" rel="noopener">https://girbp.github.io/prompt-course-haiku/</a></strong> — повноцінна веб-версія на GitHub Pages (навігація, пошук, теми; зовнішні посилання відкриваються в новій вкладці). Репозиторій: <a href="https://github.com/GirBP/prompt-course-haiku" target="_blank" rel="noopener">https://github.com/GirBP/prompt-course-haiku</a></p>
 <p>🌐 <strong>Браузерна версія:</strong> відкрий <a href="index.html"><code>index.html</code></a> — самодостатній офлайн-рідер усіх 13 частин з боковою навігацією, пошуком і темною/світлою темою (без зовнішніх залежностей). Відтворити — <a href="build/build_html.py"><code>build/build_html.py</code></a>.</p>
 <p>📁 Сирі докази й скрипти генерації — у <a href="raw-outputs/"><code>raw-outputs/</code></a> (усі 118 прогонів у JSON + workflow-скрипти). Відтворити DOCX — <a href="build/build_docx.sh"><code>build/build_docx.sh</code></a>.</p>
@@ -176,7 +176,7 @@ mark.s{background:var(--mark);color:var(--markfg);border-radius:3px;padding:0 1p
 <li>Структурований JSON-вивід зі схемою — <code>DS4</code></li>
 <li>Роль / персона — <code>DS5</code></li>
 </ol>
-<p><strong>Software Engineering</strong> 6. Чітка специфікація вимог — <code>SE1</code> 7. XML-теги для розділення інструкції й коду — <code>SE2</code> 8. Few-shot для строгого формату (Conventional Commits) — <code>SE3</code> 9. Пошук бага через CoT — <code>SE4</code> 10. Примус формату виводу — <code>SE5</code> 11. Контроль галюцинацій («дозвіл сказати не знаю») — <code>SE6</code></p>
+<p><strong>Software Engineering</strong> 6. Чітка специфікація вимог — <code>SE1</code> 7. XML-теги для розділення інструкції й коду — <code>SE2</code> 8. Few-shot для строгого формату (Conventional Commits) — <code>SE3</code> 9. Пошук вади через CoT — <code>SE4</code> 10. Примус формату виводу — <code>SE5</code> 11. Контроль галюцинацій («дозвіл сказати не знаю») — <code>SE6</code></p>
 <hr />
 <h2 id="p00-5-головних-висновків-з-реальних-прогонів">5 головних висновків з реальних прогонів</h2>
 <p>Це не теорія — це те, що <strong>виміряно</strong> на Haiku 4.5 у цьому курсі:</p>
@@ -194,7 +194,7 @@ mark.s{background:var(--mark);color:var(--markfg);border-radius:3px;padding:0 1p
 </ol>
 <h3 id="p00-надійність-формату-й-антипатерни-частина-6-n5-на-промпт">Надійність формату й антипатерни (<a href="#part-06">Частина 6</a>, N=5 на промпт)</h3>
 <ol start="8" type="1">
-<li><strong>Надійність формату — це число, а не «працює/не працює».</strong> Закритий набір міток, fixed sentinel і якір першого символу = <strong>~100% (5/5)</strong>. А негативна заборона «no markdown» протікає: <strong>80% (4/5)</strong> — раз із п'яти Haiku таки обгортає у <code>```json</code>. Для критичних пайплайнів вмикай structured outputs API (є і на Haiku 4.5), а де їх нема — валідацію схемою з повторним прогоном.</li>
+<li><strong>Надійність формату — це число, а не «працює/не працює».</strong> Закритий набір міток, fixed sentinel і якір першого символу = <strong>~100% (5/5)</strong>. А негативна заборона «no markdown» протікає: <strong>80% (4/5)</strong> — раз із п'яти Haiku таки обгортає у <code>```json</code>. Для критичних конвеєрів вмикай structured outputs API (є і на Haiku 4.5), а де їх нема — перевірку за схемою з повторним прогоном.</li>
 <li><strong>Найнебезпечніші антипатерни на Haiku</strong> — суперечливі інструкції (модель мовчки обирає одне, втрата контролю) і перевантажений промпт (усе виходить поверхневим). Усі 6 топ-URL пере-перевірено реальним WebFetch (200 OK).</li>
 </ol>
 <hr />
@@ -210,7 +210,7 @@ mark.s{background:var(--mark);color:var(--markfg);border-radius:3px;padding:0 1p
 <p>📄 <strong>DOCX-версія</strong> (<code>promt-inzhiniring-haiku-kurs.docx</code>): відкривши у Word, онови зміст — <code>F9</code> або ПКМ на «Table of Contents» → Update field.</p>
 </blockquote>
 <blockquote>
-<p>⚠️ <strong>Застереження про чесність.</strong> Валідація йшла через Haiku 4.5 у гарнесі агента (raw-API-ключа в системі не було). Це означає тонке «забруднення» системним промптом агента. Один прогін (<code>SE3 weak #1</code>) навіть протік рядок <code>Co-Authored-By</code>, що походить із інструкцій гарнесу, а не вигадки моделі. Деталі й вплив — у <a href="#part-03">методології</a>.</p>
+<p>⚠️ <strong>Застереження про чесність.</strong> Перевірка йшла через Haiku 4.5 у гарнесі агента (raw-API-ключа в системі не було). Це означає тонке «забруднення» системним промптом агента. Один прогін (<code>SE3 weak #1</code>) навіть протік рядок <code>Co-Authored-By</code>, що походить із інструкцій гарнесу, а не вигадки моделі. Деталі й вплив — у <a href="#part-03">методології</a>.</p>
 </blockquote>
 
 </section>
@@ -309,7 +309,7 @@ Then give your final verdict (good or not good) in one sentence with justificati
 <p><strong>Understanding the metrics:</strong> Precision 0.30: ...only 30% actually are fraud (70% false positives). Recall 0.90: ...catches 90% of actual fraud... <strong>False Positives:</strong> declined cards, account blocks, customer service calls... customer churn... <strong>False Negatives:</strong> Direct financial loss... but only 10% of fraud escapes... <strong>Verdict:</strong> This model is <strong>not good</strong> for production use because the 70% false positive rate will severely damage customer experience... A better approach would be to lower the detection threshold, accept some false negatives (e.g., 80% recall), and aim for 70-80% precision...</p>
 </blockquote>
 <h3 id="p01-що-ми-бачимо-2">Що ми бачимо</h3>
-<p>CoT збільшив вивід з 398 до 1806 символів — і це <strong>корисне</strong> зростання: модель розклала вартість обох типів помилок і дала <strong>інженерну рекомендацію щодо порогу</strong>, а не голий вердикт. Для рев'ю рішень або пояснення стейкхолдерам це незрівнянно цінніше.</p>
+<p>CoT збільшив вивід з 398 до 1806 символів — і це <strong>корисне</strong> зростання: модель розклала вартість обох типів помилок і дала <strong>інженерну рекомендацію щодо порогу</strong>, а не голий вердикт. Для рецензування рішень або пояснення стейкхолдерам це незрівнянно цінніше.</p>
 <blockquote>
 <p><strong>Правило DS3.</strong> Для задач на судження, вибір метрики, оцінку trade-off — додавай «think step by step, then give your final answer». Якщо потрібна лише коротка відповідь у проді — попроси міркування у <code>&lt;scratchpad&gt;</code>, а фінал окремо (prompt chaining).</p>
 </blockquote>
@@ -348,7 +348,7 @@ and we added 540 new customers.&#39;</code></pre>
 }
 ```</code></pre>
 <h3 id="p01-що-ми-бачимо-і-чесний-нюанс">Що ми бачимо (і чесний нюанс!)</h3>
-<p>Значення, ключі й типи — <strong>ідеальні</strong> (<code>4.2</code> число, <code>540</code> ціле). АЛЕ: попри явне «no markdown», Haiku <strong>все одно обгорнув JSON у <code>```json</code> блок</strong>. Тобто навіть сильний промпт на малій моделі <strong>не гарантує 100% слухняності щодо заборон</strong>.</p>
+<p>Значення, ключі й типи — <strong>ідеальні</strong> (<code>4.2</code> число, <code>540</code> ціле). АЛЕ: попри явне «no markdown», Haiku <strong>все одно обгорнув JSON у <code>```json</code> блок</strong>. Навіть сильний промпт на малій моделі <strong>не гарантує 100% слухняності щодо заборон</strong>.</p>
 <p>Порівняй із <a href="#part-02">SE5</a>, де інструкція «start with the character <code>{</code>» дала <strong>голий</strong> <code>{...}</code> без блоку. Звідси крос-висновок усього курсу:</p>
 <blockquote>
 <p><strong>Позитивний якір першого символу («починай з <code>{</code>») працює надійніше за негативну заборону («без markdown»).</strong></p>
@@ -384,7 +384,7 @@ Be practical.</code></pre>
 <p>• <strong>Don't use mean imputation.</strong> It will artificially compress variance, bias your churn predictions toward the mean income level, and mask the real pattern that high earners are missing—exactly when you need to see it most. • <strong>Create a "missing" indicator variable.</strong> ...High earners skipping the question is itself predictive of churn behavior, so preserve that signal... • <strong>Use multiple imputation by chained equations (MICE).</strong> This leverages other features (age, tenure, subscription tier)... • <strong>Validate your choice on holdout data.</strong> ...If a segment's predictions flip dramatically, your approach is leaking bias... The key: treat missingness as information, not just a problem to erase.</p>
 </blockquote>
 <h3 id="p01-що-ми-бачимо-3">Що ми бачимо</h3>
-<p>Роль + контекст «MNAR, високозаробітні пропускають» дали <strong>прицільну експертну пораду</strong>: попередження проти mean-imputation, конкретний MICE, missing-indicator як предиктивний сигнал, валідація на holdout. Вивід коротший (1189 проти 2429), але <strong>набагато глибший</strong>. Енциклопедія перетворилась на консультацію.</p>
+<p>Роль + контекст «MNAR, високозаробітні пропускають» дали <strong>прицільну експертну пораду</strong>: попередження проти mean-imputation, конкретний MICE, missing-indicator як предиктивний сигнал, перевірка на holdout. Вивід коротший (1189 проти 2429), але <strong>набагато глибший</strong>. Енциклопедія перетворилась на консультацію.</p>
 <blockquote>
 <p><strong>Правило DS5.</strong> Роль + конкретний контекст + обмеження («4 bullets», «name one specific technique», «warn against X»). Роль сама по собі слабка — вона працює в парі з контекстом і обмеженнями.</p>
 </blockquote>
@@ -401,7 +401,7 @@ Be practical.</code></pre>
 </section>
 <section id="part-02" class="part" data-title="2 · Software Engineering">
 <h1 id="p02-частина-2-промт-інжиніринг-для-software-engineering">Частина 2. Промт-інжиніринг для Software Engineering</h1>
-<p>6 технік на реальних задачах: написання функції, код-рев'ю, commit-меседжі, пошук бага, конвертація конфігу, перевірка факту про API. <strong>Усі відповіді нижче — справжній вивід Claude Haiku 4.5.</strong></p>
+<p>6 технік на реальних задачах: написання функції, рецензування коду, commit-меседжі, пошук вади, конвертація файлу налаштувань, перевірка факту про API. <strong>Усі відповіді нижче — справжній вивід Claude Haiku 4.5.</strong></p>
 <hr />
 <h2 id="p02-se1-чітка-специфікація-вимог">SE1. Чітка специфікація вимог</h2>
 <p><strong>Принцип:</strong> для коду неоднозначність = модель додумує. Точна сигнатура, правила, edge-cases і формат виводу дають передбачуваний результат замість «загального рішення на всі випадки».</p>
@@ -485,9 +485,9 @@ def transfer(a, b, amt):
 <h1 id="p02-corrected-version--з-docstring-valueerror-перевіркою-a-is-b-нотаткою-про-lock">Corrected Version ... (з docstring, ValueError, перевіркою <code>a is b</code>, нотаткою про lock)</h1>
 </blockquote>
 <h3 id="p02-що-ми-бачимо-1">Що ми бачимо</h3>
-<p>Чіткі межі <code>&lt;code&gt;</code> прибрали шум «missing colons» і дали <strong>пріоритезований рев'ю за категоріями, які ми задали</strong> (correctness/validation/concurrency). Модель знайшла те, що слабкий варіант пропустив: <strong>self-transfer bug</strong> і <strong>race condition</strong> — саме тому, що ми попросили подумати про concurrency. Виправлений код — з винятками й нотаткою про блокування.</p>
+<p>Чіткі межі <code>&lt;code&gt;</code> прибрали шум «missing colons» і дали <strong>пріоритезовану рецензію за категоріями, які ми задали</strong> (correctness/validation/concurrency). Модель знайшла те, що слабкий варіант пропустив: <strong>self-transfer bug</strong> і <strong>race condition</strong> — саме тому, що ми попросили подумати про concurrency. Виправлений код — з винятками й нотаткою про блокування.</p>
 <blockquote>
-<p><strong>Правило SE2.</strong> Розділяй частини промпта тегами: <code>&lt;task&gt;</code>, <code>&lt;code&gt;</code>, <code>&lt;data&gt;</code>, <code>&lt;example&gt;</code>. Це усуває плутанину «інструкція vs контент» і дозволяє точно скерувати фокус рев'ю (тут — додати вісь concurrency).</p>
+<p><strong>Правило SE2.</strong> Розділяй частини промпта тегами: <code>&lt;task&gt;</code>, <code>&lt;code&gt;</code>, <code>&lt;data&gt;</code>, <code>&lt;example&gt;</code>. Це усуває плутанину «інструкція vs контент» і дозволяє точно скерувати фокус рецензії (тут — додати вісь concurrency).</p>
 </blockquote>
 <hr />
 <h2 id="p02-se3-few-shot-для-строгого-формату-conventional-commits">SE3. Few-shot для строгого формату (Conventional Commits)</h2>
@@ -521,11 +521,11 @@ Now: added retry logic to the API client and fixed a typo in the README -&gt;</c
 <h3 id="p02-що-ми-бачимо-2">Що ми бачимо</h3>
 <p>Виміряно: слабкий — <strong>3 унікальні</strong> багаторядкові відповіді; сильний — <strong>усі 3 однорядкові</strong> у форматі <code>type(scope): ...</code>. Формулювання трохи варіюється (нормально), але <strong>структура замкнена намертво</strong> — це й можна класти в git-хук.</p>
 <blockquote>
-<p><strong>Правило SE3.</strong> Для будь-якого строгого текстового формату (commit, лог, changelog, docstring-стиль) — 3 приклади «вхід → вихід» надійніші за опис. «Output only the subject line» прибирає балакучі альтернативи.</p>
+<p><strong>Правило SE3.</strong> Для будь-якого строгого текстового формату (commit, журнал, changelog, docstring-стиль) — 3 приклади «вхід → вихід» надійніші за опис. «Output only the subject line» прибирає балакучі альтернативи.</p>
 </blockquote>
 <hr />
-<h2 id="p02-se4-пошук-бага-через-chain-of-thought">SE4. Пошук бага через Chain-of-Thought</h2>
-<p><strong>Принцип:</strong> для дебагу проси модель <em>простежити виконання крок за кроком</em>, перш ніж називати баг. Це особливо допомагає з багами стану/часу, які не видно з одного рядка.</p>
+<h2 id="p02-se4-пошук-вади-через-chain-of-thought">SE4. Пошук вади через Chain-of-Thought</h2>
+<p><strong>Принцип:</strong> для дебагу проси модель <em>простежити виконання крок за кроком</em>, перш ніж називати ваду. Це особливо допомагає з вадами стану й часу, які не видно з одного рядка.</p>
 <h3 id="p02-x-слабкий-промпт-1">❌ Слабкий промпт</h3>
 <pre><code>Does this function have a bug?
 def add_item(item, items=[]): items.append(item); return items</code></pre>
@@ -533,7 +533,7 @@ def add_item(item, items=[]): items.append(item); return items</code></pre>
 <blockquote>
 <p>Yes, this function has a classic Python bug called the <strong>mutable default argument problem</strong>. The default value <code>items=[]</code> is created once when the function is defined... <code>add_item(1)</code> → <code>[1]</code>, <code>add_item(2)</code> → <code>[1, 2]</code> — unexpected!... <strong>The fix</strong> is to use <code>None</code> as the default...</p>
 </blockquote>
-<p>Haiku і так знайшов баг (це класика). Відповідь хороша.</p>
+<p>Haiku і так знайшов ваду (це класика). Відповідь хороша.</p>
 <h3 id="p02-white_check_mark-сильний-промпт-cot--структура-відповіді">✅ Сильний промпт (CoT + структура відповіді)</h3>
 <pre><code>Analyze this Python function for bugs.
 def add_item(item, items=[]):
@@ -552,9 +552,9 @@ and the one-line fix.</code></pre>
 </ol>
 </blockquote>
 <h3 id="p02-що-ми-бачимо-3">Що ми бачимо</h3>
-<p>Обидва знайшли баг — але CoT-версія <strong>показала трасування трьох викликів</strong> і структурувала відповідь рівно як просили (баг → причина → однорядкове виправлення). Для навчального коду, рев'ю чи тікета це самодостатнє пояснення, а не просто вердикт. Тут CoT збільшив якість <em>подачі</em>, а не сам факт знахідки.</p>
+<p>Обидва знайшли ваду — але CoT-версія <strong>показала трасування трьох викликів</strong> і структурувала відповідь рівно як просили (вада → причина → однорядкове виправлення). Для навчального коду, рецензії чи тікета це самодостатнє пояснення, а не просто вердикт. Тут CoT збільшив якість <em>подачі</em>, а не сам факт знахідки.</p>
 <blockquote>
-<p><strong>Правило SE4.</strong> Для дебагу: «reason step by step about what happens, then state the bug, why, and the fix». Задавай і <em>процес</em> (трасування), і <em>структуру фіналу</em>. На складніших багах (race, off-by-one у циклі) саме трасування часто й рятує.</p>
+<p><strong>Правило SE4.</strong> Для дебагу: «reason step by step about what happens, then state the bug, why, and the fix». Задавай і <em>процес</em> (трасування), і <em>структуру фіналу</em>. На складніших вадах (race, off-by-one у циклі) саме трасування часто й рятує.</p>
 </blockquote>
 <hr />
 <h2 id="p02-se5-примус-формату-виводу">SE5. Примус формату виводу</h2>
@@ -612,7 +612,7 @@ pandas API.</code></pre>
 </blockquote>
 <h3 id="p02-що-ми-бачимо-чесний-висновок">Що ми бачимо (чесний висновок!)</h3>
 <p><strong>Обидва</strong> варіанти не галюцинували — Haiku 4.5 і так знає, що методу немає. Захисна інструкція зробила відповідь трохи прямішою й коротшою (826 проти 1153 символів), але <strong>не врятувала від галюцинації, якої й не було</strong>.</p>
-<p>Це важливий чесний урок: <strong>сучасні моделі (навіть мала Haiku 4.5) стійкіші до простих фактологічних пасток, ніж припускають старі гайди.</strong> Техніка не марна — але її реальна цінність проявляється на:</p>
+<p>Чесний урок: <strong>сучасні моделі, навіть мала Haiku 4.5, стійкіші до простих фактологічних пасток, ніж припускають старі гайди.</strong> Техніка не марна. Її реальна цінність проявляється на:</p>
 <ul>
 <li><em>по-справжньому</em> рідкісних/нішевих API та версіях,</li>
 <li>неоднозначних або суперечливих фактах,</li>
@@ -651,7 +651,7 @@ pandas API.</code></pre>
 </thead>
 <tbody>
 <tr>
-<td>Модель валідації</td>
+<td>Модель для перевірки</td>
 <td><code>claude-haiku-4-5</code></td>
 </tr>
 <tr>
@@ -678,7 +678,7 @@ pandas API.</code></pre>
 </table>
 <blockquote>
 <p>📦 <strong>Друга партія (+25 прогонів).</strong> Окремий workflow додав 12 прогонів на <strong>Sonnet 4.6</strong> (порівняння) + 13 на Haiku (нові техніки й українські промпти). Результати й висновки — у <a href="#part-05">частині 5</a>.</p>
-<p>📦 <strong>Третя партія (+49 прогонів, усе через суб-агентів, без raw-API).</strong> 40 прогонів на <strong>надійність формату</strong> (8 промптів × 5 семплів), 8 на <strong>антипатерни</strong>, 1 агент на <strong>WebFetch-перевірку URL</strong>. Це заміна raw-API N-семпл валідації, зроблена суб-агентами. Результати — у <a href="#part-06">частині 6</a>.</p>
+<p>📦 <strong>Третя партія (+49 прогонів, усе через підагентів, без raw-API).</strong> 40 прогонів на <strong>надійність формату</strong> (8 промптів × 5 семплів), 8 на <strong>антипатерни</strong>, 1 агент на <strong>WebFetch-перевірку URL</strong>. Так підагенти замінили перевірку через raw-API на N семплах. Результати — у <a href="#part-06">частині 6</a>.</p>
 <p>📦 <strong>Четверта партія (+14 прогонів, крос-модельна).</strong> 7 прогонів на <strong>Opus 4.8</strong> + 7 на <strong>Fable 5</strong> (DS1 vague, DS4 «no markdown» ×5, SE6-пастка), щоб емпірично перевірити поведінкові твердження <a href="#part-08">Частини 8</a>. Haiku-баейзлайни взято з першої партії.</p>
 <p><strong>Разом по курсу: 118 модельних прогонів</strong> (Haiku 4.5 + Sonnet 4.6 + Opus 4.8 + Fable 5). Єдине джерело правди для цього числа — <a href="raw-outputs/runs-manifest.json"><code>raw-outputs/runs-manifest.json</code></a> (батч → скрипт → вихід → кількість), щоб не звіряти суму вручну по файлах.</p>
 </blockquote>
@@ -689,8 +689,8 @@ pandas API.</code></pre>
 <p>Кожному Haiku-агенту давали обгортку, що змушувала його відповідати <strong>як звичайна LLM-модель</strong> (без інструментів, без мета-коментарів), а всередині — тестований промпт у тегах <code>&lt;user_message&gt;</code>. Структурований вивід (<code>{response: string}</code>) гарантував, що ми зчитуємо саме відповідь моделі дослівно.</p>
 <hr />
 <h2 id="p03-чому-не-raw-api">Чому не «raw API»</h2>
-<p>Найчистіша валідація — прямі HTTP-виклики до <code>api.anthropic.com</code> з <code>model: claude-haiku-4-5-...</code>. Це <strong>не вдалося</strong>, бо в системі <strong>немає API-ключа</strong> (<code>ANTHROPIC_API_KEY</code> не встановлено, пакета <code>anthropic</code> немає, CLI відсутній — перевірено на старті).</p>
-<p>Тому валідація йшла через <strong>Haiku 4.5 у гарнесі агента</strong>. Базова модель — справжня Haiku 4.5, тож її відповіді справжні. Але є нюанс ⬇️.</p>
+<p>Найчистіша перевірка — прямі HTTP-виклики до <code>api.anthropic.com</code> з <code>model: claude-haiku-4-5-...</code>. Це <strong>не вдалося</strong>, бо в системі <strong>немає API-ключа</strong> (<code>ANTHROPIC_API_KEY</code> не встановлено, пакета <code>anthropic</code> немає, CLI відсутній — перевірено на старті).</p>
+<p>Тому перевірка йшла через <strong>Haiku 4.5 у гарнесі агента</strong>. Базова модель — справжня Haiku 4.5, тож її відповіді справжні. Але є нюанс ⬇️.</p>
 <hr />
 <h2 id="p03-застереження">Застереження</h2>
 <p>Будь чесним щодо меж цього методу:</p>
@@ -700,7 +700,7 @@ pandas API.</code></pre>
 <li><strong>«Роль у system» апроксимована.</strong> У <code>DS5</code> роль передана в тексті промпта, а не в окремому <code>system</code>-полі (через API було б трохи сильніше).</li>
 <li><strong>Семплінг.</strong> Температура/семплінг — за замовчуванням гарнесу. Тому 3-разові прогони <code>DS2</code>/<code>SE3</code> — це індикація стабільності, а не строгий статистичний експеримент.</li>
 </ol>
-<p><strong>Висновок:</strong> напрям і величина ефектів — справжні й відтворювані. Точні формулювання відповідей можуть трохи відрізнятися від raw-API. Для навчальних цілей це повноцінна емпірична валідація; для наукової публікації — варто повторити через raw-API з фіксованими <code>temperature</code> і <code>seed</code>/кількома семплами.</p>
+<p><strong>Висновок:</strong> напрям і величина ефектів — справжні й відтворювані. Точні формулювання відповідей можуть трохи відрізнятися від raw-API. Для навчальних цілей це повноцінна емпірична перевірка; для наукової публікації — варто повторити через raw-API з фіксованими <code>temperature</code> і <code>seed</code>/кількома семплами.</p>
 <hr />
 <h2 id="p03-зведена-таблиця-всіх-прогонів">Зведена таблиця всіх прогонів</h2>
 <p><code>Δ символів</code> = довжина(сильний) − довжина(слабкий). Знак показує напрям, а не «краще/гірше» (іноді сильний має бути довшим — як у CoT).</p>
@@ -746,7 +746,7 @@ pandas API.</code></pre>
 <td>JSON зі схемою</td>
 <td style="text-align: right;">326</td>
 <td style="text-align: right;">118</td>
-<td>Сильний = валідний JSON з типами, але <strong>порушив «no markdown»</strong> (обгорнув у <code>```json</code>)</td>
+<td>Сильний = коректний JSON з типами, але <strong>порушив «no markdown»</strong> (обгорнув у <code>```json</code>)</td>
 </tr>
 <tr>
 <td>DS5</td>
@@ -783,7 +783,7 @@ pandas API.</code></pre>
 <tr>
 <td>SE4</td>
 <td>SWE</td>
-<td>Пошук бага (CoT)</td>
+<td>Пошук вади (CoT)</td>
 <td style="text-align: right;">1035</td>
 <td style="text-align: right;">1570</td>
 <td>Обидва знайшли mutable-default; CoT додав трасування 3 викликів + структуру</td>
@@ -829,7 +829,7 @@ pandas API.</code></pre>
 </tbody>
 </table>
 <hr />
-<h2 id="p03-три-крос-висновки-які-дала-саме-валідація-а-не-теорія">Три крос-висновки, які дала саме валідація (а не теорія)</h2>
+<h2 id="p03-три-крос-висновки-які-дала-саме-перевірка-а-не-теорія">Три крос-висновки, які дала саме перевірка (а не теорія)</h2>
 <ol type="1">
 <li><strong>Якір першого символу &gt; заборона обгортки.</strong> <code>SE5</code> («start with <code>{</code>») дав голий JSON; <code>DS4</code> («no markdown») — ні, попри схожу мету. Це видно тільки на реальних прогонах.</li>
 <li><strong>Сильний промпт регулює обсяг в обидва боки.</strong> <code>SE1</code>/<code>SE5</code>/<code>DS2</code> — коротше; <code>DS3</code>/<code>SE2</code>/<code>SE4</code> — довше. Мета не «менше токенів», а «правильний обсяг під задачу».</li>
@@ -855,6 +855,20 @@ pandas API.</code></pre>
 <p><strong>Застаріло після 2026-08-21 (5):</strong> вийшов Claude Fable 5.1, а Fable 5 став Legacy (Ч.8); OpenAI рекомендує GPT-6 Astra (Ч.4, 9); вийшла Gemma 4 (Ч.13); читання кешу на Fable 5.1 коштує 0.025× (Ч.12); Python SDK 1.0+ не приймає <code>temperature</code>. Через останнє виправлення туторіалу Anthropic тепер займає два рядки (Ч.4), а кроки відтворення нижче фіксують <code>anthropic&lt;1</code> (перевірено локально: SDK 1.7.0 дає <code>TypeError</code>, 0.125.0 працює).</p>
 <p><strong>Текст:</strong> 53 мовні порушення (транслітерації, ланцюги родового), неправильне слово в таблиці 12.3, граматика в 12.4, особисте звертання в 12.4. Джерела частин 9–13 стали посиланнями, у кожній частині зʼявився перелік перевірених джерел.</p>
 <p><strong>Перевірено й підтверджено без змін</strong> (вибірково): METR (16 розробників, 246 задач, −19%), DORA 2025, SpecBench, TDAD, SDD, NoLiMa, Chroma, EMNLP-2025, «selection bottleneck», Adversarial Review, Cognition 2025/2026, дослідницька система Anthropic (90.2%, 15×), 20 паралельних підагентів і 3 рівні вкладеності в Claude Code, Stop-hook із 8 блокуваннями, compaction (150K/50K), memory tool, кеш 0.1×/1.25×/2×, Qwen3.8-27B, DeepSeek V4, gpt-oss.</p>
+<h2 id="p03-повторна-перевірка-2026-09-24-що-виправлено">Повторна перевірка 2026-09-24: що виправлено</h2>
+<p>Мовний лінтер отримав нові правила 23.09, а 22.09 вийшли нові моделі. Тому курс перевірено ще раз.</p>
+<p><strong>Фактичні неточності (6):</strong></p>
+<ol type="1">
+<li>Ч.13: Willison цитувався неточно. Насправді він пише «wildly outperforming expectations» і наводить приклад із пеліканом. Порівняння з «моделями попереднього покоління» в нього немає.</li>
+<li>Ч.13: MLX-кванти Qwen3.8 викладає спільнота mlx-community, а не сам Qwen. Твердження «сотні квантів у день випуску» ми не підтвердили й прибрали дату.</li>
+<li>Ч.13: рядок «у локальних моделей немає structured outputs» суперечив виправленню від 19.09. Схемний режим в Ollama і llama.cpp є, але гарантує лише синтаксис.</li>
+<li>Ч.8: у Haiku 4.5 «сирий chain-of-thought видно» — ні. Жодна модель не повертає сирі міркування, Haiku типово повертає підсумок.</li>
+<li>Ч.8: <code>temperature</code> на Opus 4.8 і Fable дає 400 лише з нестандартним значенням, а не з будь-яким.</li>
+<li>Ч.4: «гайд Willison не оновлювався з квітня 2026» перевірити не вдалося. Формулювання пом'якшено до того, що видно на сторінці.</li>
+</ol>
+<p><strong>Застаріло після 19.09 (3):</strong> 22.09 вийшов Claude Opus 5.5 (<span class="math inline">4/</span>20, мислення завжди увімкнене, типовий effort <code>medium</code>), а Opus 5 став Legacy (Ч.4, 8, 9, 12, README). OpenAI додала GPT-6 Sol і Luna, які приймають <code>temperature</code> лише з <code>reasoning_effort: none</code> (Ч.9). DeepSeek 10.09 випустила V4.1-Flash (Ч.13).</p>
+<p><strong>Мова:</strong> 101 знахідка за новими правилами лінтера та 7 в архівному аудиті. Терміни тепер однакові в усьому курсі: bug → вада, review → рецензування, validation → перевірка, pipeline → конвеєр, default → типово. <code>AUDIT_REPORT.md</code> позначено як архівний знімок від 28.06.</p>
+<p><strong>Перевірено й підтверджено без змін:</strong> harness-пост Anthropic (<code>init.sh</code>, <code>claude-progress.txt</code>, аналогія зі змінами), пост про контекст-інжиніринг (визначення, Pokémon, 1–2 тис. токенів, JIT), цитата Karpathy у Willison, Managed Agents, gpt-oss, Gemma 3, Llama 4 як остання номерна Llama, ціна Sonnet 5, fallback і його платформи, вимога зберігати дані Fable 30 днів, дата, коли виведуть Haiku 4.5.</p>
 <h2 id="p03-як-відтворити">Як відтворити</h2>
 <p>Скрипт workflow збережено тут (можна редагувати й перезапускати):</p>
 <pre><code>/Users/bibo/.claude/projects/-Users-bibo-----------------/6085e5a9-e68d-4d94-b342-029a5542f2fa/workflows/scripts/haiku-prompt-eng-validation-wf_c3699d75-208.js</code></pre>
@@ -870,7 +884,7 @@ pandas API.</code></pre>
 <ol type="1">
 <li>Встанови ключ: <code>export ANTHROPIC_API_KEY=...</code> і <code>pip install "anthropic&lt;1"</code>. Версія важлива: Python SDK 1.0+ не приймає <code>temperature</code> (<code>TypeError</code>, перевірено 2026-09-19), а кроки 2–3 його використовують.</li>
 <li>Для кожної пари промптів виклич <code>messages.create(model="claude-haiku-4-5-...", max_tokens=1024, temperature=0)</code>.</li>
-<li>Для тестів стабільності (<code>DS2</code>, <code>SE3</code>) зроби <code>temperature=0.7</code> і N=5 семплів, порахуй частку унікальних/валідних форматів.</li>
+<li>Для тестів стабільності (<code>DS2</code>, <code>SE3</code>) зроби <code>temperature=0.7</code> і N=5 семплів, порахуй частку унікальних і коректних форматів.</li>
 <li>Для <code>DS4</code>/<code>SE5</code> додай <strong>prefill</strong> (<code>messages=[..., {"role":"assistant","content":"{"}]</code>) і переконайся, що преамбула зникає.</li>
 </ol>
 
@@ -885,13 +899,13 @@ pandas API.</code></pre>
 </blockquote>
 <h3 id="p04-1-anthropic--prompting-best-practices-офіційні-докси-claude--white_check_mark-актуальний">1. Anthropic — Prompting Best Practices (офіційні докси Claude) — ✅ актуальний</h3>
 <p>🔗 <a href="https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices" target="_blank" rel="noopener">https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices</a></p>
-<p>Офіційний, <strong>постійно оновлюваний</strong> довідник: чіткість, приклади, XML-структурування, tool use, extended/adaptive thinking, агентний промптинг — з нотатками під <strong>конкретні моделі</strong>. <strong>№1, бо це єдине джерело, яке не застаріває</strong>: воно оновлюється разом із моделями (перевірено — містить актуальні Opus 5 / Sonnet 5 / Fable 5). <em>Кому:</em> усім, хто пише промпти під Claude; обов'язково — розробникам на API.</p>
+<p>Офіційний, <strong>постійно оновлюваний</strong> довідник: чіткість, приклади, XML-структурування, tool use, extended/adaptive thinking, агентний промптинг — з нотатками під <strong>конкретні моделі</strong>. <strong>№1, бо це єдине джерело, яке не застаріває</strong>: воно оновлюється разом із моделями (перевірено 2026-09-24 — містить Opus 5.5, Sonnet 5 і Fable 5.1). <em>Кому:</em> усім, хто пише промпти під Claude; обов'язково — розробникам на API.</p>
 <h3 id="p04-2-prompt-engineering-guide--dairai--white_check_mark-актуальний">2. Prompt Engineering Guide — DAIR.AI — ✅ актуальний</h3>
 <p>🔗 <a href="https://www.promptingguide.ai/" target="_blank" rel="noopener">https://www.promptingguide.ai/</a></p>
 <p>Найбільш цитований відкритий гайд, що активно оновлюється. Дистилює дослідницькі техніки (chain-of-thought, few-shot, RAG, ReAct, агенти) з нотатками під конкретні моделі. Розділ <strong>Applications</strong> покриває і DS (генерація даних, синтетичні датасети, класифікація), і SWE (генерація коду, агенти). <strong>№2, бо це найкращий крос-доменний референс, не прив'язаний до вендора.</strong> <em>Кому:</em> усім, хто хоче зрозуміти техніки «з-під капота», що переносяться між моделями.</p>
 <h3 id="p04-3-anthropic-interactive-prompt-engineering-tutorial-github--warning-потребує-правки-перед-запуском">3. Anthropic Interactive Prompt Engineering Tutorial (GitHub) — ⚠️ потребує правки перед запуском</h3>
 <p>🔗 <a href="https://github.com/anthropics/prompt-eng-interactive-tutorial" target="_blank" rel="noopener">https://github.com/anthropics/prompt-eng-interactive-tutorial</a></p>
-<p>Єдиний ресурс топу, де ти <strong>сам проганяєш промпти</strong> в Jupyter і бачиш різницю на дотик. 9 розділів + додатки; концепції (чіткість, XML-теги, роль, few-shot, CoT, анти-галюцинації, chaining/tool-use/RAG) — <strong>досі валідні</strong> й майже дослівно збігаються з тим, що ми виміряли в цьому курсі.</p>
+<p>Єдиний ресурс топу, де ти <strong>сам проганяєш промпти</strong> в Jupyter і бачиш різницю на дотик. 9 розділів + додатки; концепції (чіткість, XML-теги, роль, few-shot, CoT, анти-галюцинації, chaining/tool-use/RAG) — <strong>досі чинні</strong> й майже дослівно збігаються з тим, що ми виміряли в цьому курсі.</p>
 <blockquote>
 <p>🔧 <strong>Але з коробки він НЕ запуститься.</strong> Ноутбуки жорстко зашиті на <code>claude-3-haiku-20240307</code>, яку Anthropic <strong>зняла з експлуатації 20 квітня 2026</strong> («Requests to retired models will fail»). Репозиторій не оновлювався з <strong>квітня 2024</strong>. <strong>Виправлення — два рядки.</strong> (1) Заміни у ноутбуці модель:</p>
 <pre class="python"><code>MODEL_NAME = &quot;claude-3-haiku-20240307&quot;   # ❌ retired
@@ -906,16 +920,16 @@ MODEL_NAME = &quot;claude-haiku-4-5-20251001&quot; # ✅ офіційна зам
 <h2 id="p04-додаткові-сайти-за-доменами-бонус">Додаткові сайти за доменами (бонус)</h2>
 <h3 id="p04-для-data-science">Для Data Science</h3>
 <ul>
-<li><strong>The Data Scientist's Prompt Playbook (Towards Data Science)</strong> — ⚠️ <em>стаття від 30.06.2025</em> — copy-paste промпти й pandas-снипети для planning / cleaning / EDA. Техніки валідні, але <strong>моделі, які вона називає (GPT-4, o3-pro), уже застаріли</strong> — не бери її як орієнтир щодо вибору моделі. 🔗 <a href="https://towardsdatascience.com/become-a-better-data-scientist-with-these-prompt-engineering-hacks/" target="_blank" rel="noopener">https://towardsdatascience.com/become-a-better-data-scientist-with-these-prompt-engineering-hacks/</a></li>
+<li><strong>The Data Scientist's Prompt Playbook (Towards Data Science)</strong> — ⚠️ <em>стаття від 30.06.2025</em> — copy-paste промпти й pandas-снипети для planning / cleaning / EDA. Техніки чинні, але <strong>моделі, які вона називає (GPT-4, o3-pro), уже застаріли</strong> — не бери її як орієнтир щодо вибору моделі. 🔗 <a href="https://towardsdatascience.com/become-a-better-data-scientist-with-these-prompt-engineering-hacks/" target="_blank" rel="noopener">https://towardsdatascience.com/become-a-better-data-scientist-with-these-prompt-engineering-hacks/</a></li>
 <li><strong>Advanced Prompt Engineering for DS (частина 2)</strong> — ⚠️ <em>стаття від 19.08.2025</em> — feature engineering, вибір моделі/AutoML, LLM-оцінка з JSON/CSV-схемами. <strong>Обережно з порадою «тримай <code>temperature</code> ≤ 0.3»</strong>: на сучасних Claude (Opus 4.7+, Fable 5) нестандартний <code>temperature</code> повертає <code>400</code> — там детермінізм задають промптом і <code>effort</code> (див. <a href="#part-08">Частину 8</a>). 🔗 <a href="https://towardsdatascience.com/advanced-prompt-engineering-for-data-science-projects/" target="_blank" rel="noopener">https://towardsdatascience.com/advanced-prompt-engineering-for-data-science-projects/</a></li>
 <li><strong>promptingguide.ai/applications</strong> — ✅ актуальний — data generation, синтетичні датасети, класифікація. 🔗 <a href="https://www.promptingguide.ai/applications" target="_blank" rel="noopener">https://www.promptingguide.ai/applications</a></li>
 </ul>
 <h3 id="p04-для-software-engineering">Для Software Engineering</h3>
 <ul>
-<li><strong>Best practices for Claude Code (Anthropic)</strong> — ✅ актуальний — офіційний плейбук агентного кодингу: explore-plan-code-commit, верифіковані перевірки, CLAUDE.md, subagents, рев'ю. 🔗 <a href="https://code.claude.com/docs/en/best-practices" target="_blank" rel="noopener">https://code.claude.com/docs/en/best-practices</a></li>
+<li><strong>Best practices for Claude Code (Anthropic)</strong> — ✅ актуальний — офіційний плейбук агентного кодингу: explore-plan-code-commit, верифіковані перевірки, CLAUDE.md, subagents, рецензування. 🔗 <a href="https://code.claude.com/docs/en/best-practices" target="_blank" rel="noopener">https://code.claude.com/docs/en/best-practices</a></li>
 <li><strong>Effective context engineering for AI agents (Anthropic Engineering)</strong> — ✅ актуальний — керування контекстним вікном (just-in-time loading, compaction, sub-agents). 🔗 <a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents" target="_blank" rel="noopener">https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents</a></li>
-<li><strong>Agentic Engineering Patterns (Simon Willison)</strong> — ⚠️ <em>не оновлювався з квітня 2026</em> — практичні патерни агентного кодингу, TDD для агентів. Методологія не застаріває, але приклади моделей — на покоління позаду. <strong>Читай живий покажчик, а не анонс:</strong> <a href="https://simonwillison.net/guides/agentic-engineering-patterns/" target="_blank" rel="noopener">https://simonwillison.net/guides/agentic-engineering-patterns/</a> 🔗 <a href="https://simonwillison.net/2026/Feb/23/agentic-engineering-patterns/" target="_blank" rel="noopener">https://simonwillison.net/2026/Feb/23/agentic-engineering-patterns/</a> <em>(анонс)</em></li>
-<li><strong>OpenAI Prompt Engineering Guide</strong> — ✅ актуальний (оновлений під GPT-6 Astra; перевірено 2026-09-19) — якщо працюєш і з OpenAI-моделями: кодинг, frontend, агентні робочі процеси. 🔗 <a href="https://developers.openai.com/api/docs/guides/prompt-engineering" target="_blank" rel="noopener">https://developers.openai.com/api/docs/guides/prompt-engineering</a></li>
+<li><strong>Agentic Engineering Patterns (Simon Willison)</strong> — ⚠️ <em>дат оновлення на сторінці немає; найсвіжіший приклад, який ми знайшли в розділах, датований квітнем 2026</em> — практичні патерни агентного кодингу, TDD для агентів. Методологія не застаріває, але приклади моделей — на покоління позаду. <strong>Читай живий покажчик, а не анонс:</strong> <a href="https://simonwillison.net/guides/agentic-engineering-patterns/" target="_blank" rel="noopener">https://simonwillison.net/guides/agentic-engineering-patterns/</a> 🔗 <a href="https://simonwillison.net/2026/Feb/23/agentic-engineering-patterns/" target="_blank" rel="noopener">https://simonwillison.net/2026/Feb/23/agentic-engineering-patterns/</a> <em>(анонс)</em></li>
+<li><strong>OpenAI Prompt Engineering Guide</strong> — ✅ актуальний (оновлений під GPT-6; перевірено 2026-09-24) — якщо працюєш і з OpenAI-моделями: кодинг, frontend, агентні робочі процеси. 🔗 <a href="https://developers.openai.com/api/docs/guides/prompt-engineering" target="_blank" rel="noopener">https://developers.openai.com/api/docs/guides/prompt-engineering</a></li>
 </ul>
 <h3 id="p04-ресурси-модуля-2026-частини-913-перевірені-при-дослідженні-2026-08">Ресурси Модуля 2026 (Частини 9–13, перевірені при дослідженні 2026-08)</h3>
 <ul>
@@ -938,7 +952,7 @@ MODEL_NAME = &quot;claude-haiku-4-5-20251001&quot; # ✅ офіційна зам
 <li>Обмежуй обсяг явно: «exactly 5 bullets», «output only the code». <em>(DS1, SE1, SE3)</em></li>
 </ol>
 <p><strong>Приклади (найнадійніший важіль формату)</strong> 4. Хочеш стабільний формат — дай 2–5 few-shot прикладів «вхід → вихід». <em>(DS2, SE3)</em> 5. Приклади &gt; опис. На малих моделях це усуває «балакучість». <em>(DS2)</em></p>
-<p><strong>Міркування</strong> 6. Для задач на судження — «think step by step, then give your final answer». <em>(DS3)</em> 7. Для дебагу — проси трасування виконання перед вердиктом. <em>(SE4)</em> 8. Задавай і <em>процес</em>, і <em>структуру фіналу</em> (баг → причина → виправлення). <em>(SE4)</em></p>
+<p><strong>Міркування</strong> 6. Для задач на судження — «think step by step, then give your final answer». <em>(DS3)</em> 7. Для дебагу — проси трасування виконання перед вердиктом. <em>(SE4)</em> 8. Задавай і <em>процес</em>, і <em>структуру фіналу</em> (вада → причина → виправлення). <em>(SE4)</em></p>
 <p><strong>Формат виводу</strong> 9. <strong>Якоруй перший символ</strong> («start with <code>{</code>») — надійніше за «no markdown». <em>(SE5 vs DS4)</em> 10. Гарантований формат дає лише <strong>structured outputs</strong> (<code>output_config.format</code>; на Claude працює і з Haiku 4.5). Prefill задає тільки перший токен, а на Claude 4.6+ повертає 400. <em>(DS4, Ч.9)</em> 11. Задавай JSON-схему: ключі, типи, поведінку для <code>null</code>. <em>(DS4)</em></p>
 <p><strong>Роль і чесність</strong> 12. Роль + контекст + обмеження разом (роль сама по собі слабка). <em>(DS5)</em> 13. Завжди давай «вихід»: «if X is not in the context / does not exist — say so, don't invent» — і перевіряй на <em>своїх</em> рідкісних випадках. <em>(SE6)</em></p>
 <blockquote>
@@ -964,13 +978,13 @@ check for missing index usage, full scans, and N+1 patterns.
 &lt;sql&gt;
 SELECT ...
 &lt;/sql&gt;</code></pre>
-Вісь фокусу (performance) скеровує рев'ю — інакше модель може зачепитись за стиль.</li>
+Вісь фокусу (performance) скеровує рецензію — інакше модель може зачепитись за стиль.</li>
 <li><strong>SE5.</strong> <code>Output ONLY the bash command, starting with the command name. No explanation, no markdown, no backticks.</code> Краще за «don't explain», бо задає <strong>позитивну дію</strong> (почни з імені команди), а не лише заборону — модель легше виконує конкретний старт виводу, ніж стримує звичку пояснювати.</li>
 <li><strong>SE6.</strong> <code>Answer ONLY using the provided documentation. If the function is not described in the documentation above, reply exactly: "Not found in the provided docs." Do not use outside knowledge or invent behavior.</code></li>
 </ol>
 <hr />
 <h2 id="p04-підсумок-одним-абзацом">Підсумок одним абзацом</h2>
-<p>Промт-інжиніринг — це не «магічні слова», а <strong>інженерна дисципліна з вимірюваним ефектом</strong>. У цьому курсі кожне правило підкріплене реальним прогоном на Claude Haiku 4.5: few-shot робить формат детермінованим (1 унікальна відповідь замість 3), якір першого символу б'є заборону обгортки, CoT перетворює вердикт на обґрунтування, а деякі «класичні» техніки на сучасній моделі дають менший ефект, ніж обіцяють старі гайди — і це теж треба перевіряти на власних задачах, а не приймати на віру.</p>
+<p>Промт-інжиніринг — не «магічні слова», а <strong>інженерна дисципліна з вимірюваним ефектом</strong>. Кожне правило курсу підкріплене реальним прогоном на Claude Haiku 4.5. Few-shot робить формат детермінованим (1 унікальна відповідь замість 3). Якір першого символу б'є заборону обгортки. CoT перетворює вердикт на обґрунтування. А деякі «класичні» техніки на сучасній моделі дають менший ефект, ніж обіцяють старі гайди. Тож перевіряй їх на власних задачах, а не приймай на віру.</p>
 
 </section>
 <section id="part-05" class="part" data-title="5 · Haiku vs Sonnet">
@@ -978,7 +992,7 @@ SELECT ...
 <p>Ця частина відповідає на три питання: (1) наскільки промпт-інжиніринг важливіший на малій моделі, ніж на великій; (2) чи працюють складніші техніки (RAG-grounding, prompt chaining, вкладений JSON); (3) чи можна писати промпти українською. Підкріплено <strong>25 прогонами</strong> (12 на Claude Sonnet 4.6 для порівняння + 13 на Haiku 4.5). Haiku-сторона порівняння взята з <a href="#part-01">Частини 1</a> (той самий промпт/модель) — заново ганявся лише Sonnet, щоб дані лишались узгодженими.</p>
 <hr />
 <h2 id="p05-a-haiku-vs-sonnet-46--де-промпт-інжиніринг-важливіший">A. Haiku vs Sonnet 4.6 — де промпт-інжиніринг важливіший</h2>
-<p><strong>Головна теза, яку треба було довести:</strong> на меншій моделі (Haiku) якість промпта впливає <strong>сильніше</strong>, бо у більшої моделі (Sonnet) кращі «дефолти» — вона частково рятує слабкий промпт сама.</p>
+<p><strong>Головна теза, яку треба було довести:</strong> на меншій моделі (Haiku) якість промпта впливає <strong>сильніше</strong>. Більша модель (Sonnet) має кращі типові припущення і частково рятує слабкий промпт сама.</p>
 <h3 id="p05-таблиця-порівняння-той-самий-промпт-на-обох-моделях">Таблиця порівняння (той самий промпт на обох моделях)</h3>
 <table>
 <thead>
@@ -1048,7 +1062,7 @@ SELECT ...
 ```</code></pre>
 <p><strong>Sonnet 4.6:</strong></p>
 <pre><code>{&quot;revenue_musd&quot;:4.2,&quot;revenue_growth_yoy_pct&quot;:12,&quot;churn_rate_pct&quot;:3.1,&quot;new_customers&quot;:540}</code></pre>
-<p>Sonnet <strong>виконав</strong> негативну заборону, Haiku — <strong>ні</strong>. Це і є емпіричне підтвердження правила <a href="#part-02">SE5</a>: на меншій моделі покладайся на <strong>позитивний якір</strong> («start with <code>{</code>») або <strong>prefill</strong>, а не на заборону — бо саме малій моделі бракує «дисципліни» дотриматись заборони.</p>
+<p>Sonnet <strong>виконав</strong> негативну заборону, Haiku — <strong>ні</strong>. Так емпірично підтверджується правило <a href="#part-02">SE5</a>: на меншій моделі покладайся на <strong>позитивний якір</strong> («start with <code>{</code>») або на <strong>structured outputs</strong> API, а не на заборону. Саме малій моделі бракує «дисципліни» дотриматись заборони.</p>
 <h3 id="p05-ds1--sonnet-прощає-haiku--ні">DS1 — Sonnet «прощає», Haiku — ні</h3>
 <p>На vague-промпті <code>«Analyze this dataset and tell me what to do. Columns: age, income, churned»</code>:</p>
 <ul>
@@ -1056,10 +1070,10 @@ SELECT ...
 <li><strong>Sonnet:</strong> одразу видав план (перевір пропуски → розподіли → churn rate → logistic/tree → AUC-ROC) і <em>лише потім</em> попросив деталі.</li>
 </ul>
 <blockquote>
-<p><strong>Висновок розділу A.</strong> Промпт-інжиніринг дає <strong>найбільший приріст саме на Haiku</strong>. На Sonnet добрі дефолти маскують слабкий промпт, тож виграш від техніки менш помітний — але не зникає. Практично: якщо економиш на моделі (Haiku — швидша й дешевша), <strong>компенсуй це якістю промпта</strong>. Few-shot і строгий формат потрібні обом, але Haiku «карає» за їх відсутність сильніше.</p>
+<p><strong>Висновок розділу A.</strong> Промпт-інжиніринг дає <strong>найбільший приріст саме на Haiku</strong>. На Sonnet добрі типові припущення маскують слабкий промпт, тож виграш від техніки менш помітний — але не зникає. Практично: якщо економиш на моделі (Haiku — швидша й дешевша), <strong>компенсуй це якістю промпта</strong>. Few-shot і строгий формат потрібні обом, але Haiku «карає» за їх відсутність сильніше.</p>
 </blockquote>
 <hr />
-<h2 id="p05-b-нові-техніки-валідовано-на-haiku-45">B. Нові техніки (валідовано на Haiku 4.5)</h2>
+<h2 id="p05-b-нові-техніки-перевірено-на-haiku-45">B. Нові техніки (перевірено на Haiku 4.5)</h2>
 <h3 id="p05-b1-rag-grounding--відповідай-лише-з-наданого-документа">B1. RAG-grounding — відповідай лише з наданого документа</h3>
 <p><strong>Документ</strong> (навмисно НЕ містить відповіді про free trial):</p>
 <blockquote>
@@ -1072,7 +1086,7 @@ SELECT ...
 </blockquote>
 <p>✅ <strong>З інструкцією</strong> «Answer ONLY using the document. If not stated, reply exactly: NOT IN DOCUMENT» — реальний Haiku:</p>
 <pre><code>NOT IN DOCUMENT</code></pre>
-<p><strong>Що ми бачимо:</strong> Haiku 4.5 і без інструкції не вигадав free trial (чесно сказав «немає інформації») — ще одне підтвердження стійкості сучасної моделі. Але строга версія дала <strong>машинно-читаний sentinel</strong> <code>NOT IN DOCUMENT</code>, який можна напряму ловити в коді RAG-пайплайна. Для продакшену це критично.</p>
+<p><strong>Що ми бачимо:</strong> Haiku 4.5 і без інструкції не вигадав free trial (чесно сказав «немає інформації») — ще одне підтвердження стійкості сучасної моделі. Але строга версія дала <strong>машинно-читаний sentinel</strong> <code>NOT IN DOCUMENT</code>, який можна напряму ловити в коді RAG-конвеєра. Для продакшену це критично.</p>
 <blockquote>
 <p><strong>Правило B1.</strong> У RAG завжди задавай sentinel для «немає відповіді» («reply exactly: NOT IN DOCUMENT») + «do not use outside knowledge». Це і знижує галюцинації, і дає програмно-детектований сигнал «нема відповіді».</p>
 </blockquote>
@@ -1082,12 +1096,12 @@ SELECT ...
 <li>Інструкція <strong>перед</strong> текстом → Haiku: <code>240 requests per minute</code> ✅</li>
 <li>Інструкція <strong>після</strong> тексту → Haiku: <code>240 requests per minute</code> ✅</li>
 </ul>
-<p><strong>Чесний висновок:</strong> на короткому контексті <strong>різниці немає</strong> — обидва варіанти знайшли факт. Ефект позиції інструкції проявляється на <strong>довгому</strong> контексті (десятки тисяч токенів), де рекомендація Anthropic — класти запит/інструкцію <strong>в кінець</strong>, після документів. Тут ми це не відтворили через брак довжини; правило лишається валідним для великих документів, але на малих — не морочся.</p>
+<p><strong>Чесний висновок:</strong> на короткому контексті <strong>різниці немає</strong> — обидва варіанти знайшли факт. Ефект позиції інструкції проявляється на <strong>довгому</strong> контексті (десятки тисяч токенів), де рекомендація Anthropic — класти запит/інструкцію <strong>в кінець</strong>, після документів. Тут ми це не відтворили через брак довжини; правило лишається чинним для великих документів, але на малих — не морочся.</p>
 <blockquote>
 <p><strong>Правило B2.</strong> Для довгих документів (10k+ токенів) клади інструкцію/питання <strong>після</strong> контенту. На коротких вхідних — позиція не має значення (виміряно).</p>
 </blockquote>
 <h3 id="p05-b3-prompt-chaining--декомпозиція-замість-зроби-все-одразу">B3. Prompt chaining — декомпозиція замість «зроби все одразу»</h3>
-<p>Завдання: брудний баг-репорт → план виправлення.</p>
+<p>Завдання: брудний звіт про ваду → план виправлення.</p>
 <p>❌ <strong>Монолітно</strong> («here's a bug report, fix it») — Haiku видав акуратний <em>переформатований репорт</em> + список напрямів для розслідування. Корисно, але це радше тріаж, ніж план.</p>
 <p>✅ <strong>Ланцюжок (2 кроки):</strong></p>
 <ul>
@@ -1108,7 +1122,7 @@ SELECT ...
   &quot;order&quot;: {&quot;id&quot;: &quot;A19&quot;, &quot;items&quot;: [&quot;widget&quot;,&quot;widget&quot;,&quot;gadget&quot;], &quot;total_usd&quot;: 57.50} }</code></pre>
 <p>Haiku коректно: побудував <strong>вкладену</strong> структуру, розгорнув «2 widgets and 1 gadget» у масив <code>["widget","widget","gadget"]</code>, дав правильні типи. Якір першого символу спрацював — без <code>```</code>.</p>
 <blockquote>
-<p><strong>Правило B4.</strong> Haiku справляється з вкладеним JSON, якщо дати <strong>явну форму схеми прямо в промпті</strong> + якір першого символу. Для критичних пайплайнів — додай валідацію схемою на виході.</p>
+<p><strong>Правило B4.</strong> Haiku справляється з вкладеним JSON, якщо дати <strong>явну форму схеми прямо в промпті</strong> + якір першого символу. Для критичних конвеєрів — додай перевірку за схемою на виході.</p>
 </blockquote>
 <hr />
 <h2 id="p05-c-українські-промпти-на-haiku-45">C. Українські промпти на Haiku 4.5</h2>
@@ -1127,7 +1141,7 @@ SELECT ...
 <li><strong>орфографія:</strong> «новий <strong>порожний</strong> список» (треба «порожній»),</li>
 <li>«з <strong>поважою</strong>» (треба «з повагою»).</li>
 </ul>
-<h3 id="p05-c3-пошук-бага-українською--бездоганна-логіка-дрібний-зрив">C3. Пошук бага українською — бездоганна логіка, дрібний зрив</h3>
+<h3 id="p05-c3-пошук-вади-українською--бездоганна-логіка-дрібний-зрив">C3. Пошук вади українською — бездоганна логіка, дрібний зрив</h3>
 <p>Україномовний CoT-промпт дав <strong>повністю коректний</strong> розбір mutable-default argument з трасуванням 3 викликів і однорядковим виправленням — нарівні з англійським SE4. Знову один зрив: «новий <strong>порожний</strong> список».</p>
 <h3 id="p05-висновок-розділу-c-практичний-для-дисертаціїукраїномовних-задач">Висновок розділу C (практичний для дисертації/україномовних задач)</h3>
 <table>
@@ -1213,15 +1227,15 @@ SELECT ...
 <ol type="1">
 <li><strong>B1-вправа (RAG).</strong> Ти будуєш бота підтримки на базі бази знань. Який рядок-sentinel ти задаси для «відповіді немає в документі» і чому машинний sentinel кращий за «вибач, я не знаю»?</li>
 <li><strong>B2-вправа (long-context).</strong> У тебе документ на 40k токенів і питання до нього. Куди покласти питання — на початок чи в кінець — і чому на короткому тексті це не має значення?</li>
-<li><strong>B3-вправа (chaining).</strong> Розбий задачу «перетвори брудний фідбек користувачів на JIRA-тікети» на ланцюжок із 2 кроків. Який проміжний артефакт повертає крок 1?</li>
+<li><strong>B3-вправа (chaining).</strong> Розбий задачу «перетвори сирі відгуки користувачів на JIRA-тікети» на ланцюжок із 2 кроків. Який проміжний артефакт повертає крок 1?</li>
 <li><strong>B4-вправа (nested JSON).</strong> У <code>NESTED</code>-тесті Haiku по-різному трактував «2 widgets» (2/5 розгорнув, 3/5 ні). Який один рядок ти додаси в промпт, щоб прибрати цю неоднозначність?</li>
 <li><strong>C-вправа (UK).</strong> Ти генеруєш україномовний розділ дисертації через Haiku. Які два кроки робочого процесу гарантують відсутність русизмів у фіналі?</li>
 </ol>
 <h3 id="p05-відповіді-частина-5">Відповіді (Частина 5)</h3>
 <ol type="1">
-<li>Sentinel на кшталт <code>NOT IN DOCUMENT</code> (точний фіксований рядок). Машинний sentinel кращий, бо його можна <strong>детектувати кодом</strong> (<code>if resp == "NOT IN DOCUMENT"</code>), тоді як вільне «вибач, я не знаю» щоразу формулюється інакше й не парситься — RAG-пайплайн не зрозуміє, що відповіді немає.</li>
+<li>Sentinel на кшталт <code>NOT IN DOCUMENT</code> (точний фіксований рядок). Машинний sentinel кращий, бо його можна <strong>детектувати кодом</strong> (<code>if resp == "NOT IN DOCUMENT"</code>). Вільне «вибач, я не знаю» щоразу формулюється інакше й не парситься, тож RAG-конвеєр не зрозуміє, що відповіді немає.</li>
 <li>Питання — <strong>в кінець</strong>, після документів (рекомендація для довгого контексту). На короткому тексті (як наш 7-рядковий) різниці немає, бо модель «бачить» увесь вхід цілком; ефект позиції зростає з довжиною, коли початок контексту «розмивається».</li>
-<li>Крок 1: екстракція в структуру — <code>{summary, severity, component, steps}</code> (JSON). Крок 2: на основі цього JSON згенерувати оформлений тікет. Проміжний артефакт — <strong>структурований JSON</strong>, який можна валідувати/роутити перед другим кроком.</li>
+<li>Крок 1: екстракція в структуру — <code>{summary, severity, component, steps}</code> (JSON). Крок 2: на основі цього JSON згенерувати оформлений тікет. Проміжний артефакт — <strong>структурований JSON</strong>, який можна перевірити й маршрутизувати перед другим кроком.</li>
 <li>Явна вказівка трактування кількості, напр.: <em>«expand quantities so each unit is a separate array element»</em> (або навпаки — «keep the quantity in the string»). Неоднозначна специфікація → різні прогони дають різне.</li>
 <li>(1) генеруй чернетку українською (логіка й формат не страждають); (2) окремим проходом перевір мову на русизми/орфографію — або інструкцією «пиши бездоганною академічною українською, уникай русизмів», або зовнішнім інструментом вичитки.</li>
 </ol>
@@ -1261,7 +1275,7 @@ SELECT ...
 <td><code>SE5</code> якір <code>{</code></td>
 <td>голий парсабельний JSON</td>
 <td style="text-align: center;"><strong>5/5 = 100%</strong></td>
-<td>2 косметичні варіанти відступів, обидва валідні</td>
+<td>2 косметичні варіанти відступів, обидва коректні</td>
 </tr>
 <tr>
 <td><code>SE3</code> few-shot commit</td>
@@ -1277,7 +1291,7 @@ SELECT ...
 </tr>
 <tr>
 <td><code>NESTED</code> JSON</td>
-<td>валідний вкладений JSON</td>
+<td>коректний вкладений JSON</td>
 <td style="text-align: center;"><strong>5/5 структура</strong></td>
 <td>але 4/5 без fences, і неоднозначність (нижче)</td>
 </tr>
@@ -1297,17 +1311,17 @@ SE5 strong → {&quot;host&quot;:&quot;localhost&quot;,&quot;port&quot;:5432,&qu
 <pre><code>feat(api): add retry logic to client
 
 fix(docs): fix typo in README</code></pre>
-<p>Тобто «output only the subject line» дотримано <strong>4/5</strong>. Урок: навіть few-shot не дає 100% на структурних обмеженнях — для гарантії додавай явне «exactly one line, no body».</p>
-<p><strong><code>NESTED</code> — структура ідеальна, а ось семантика «плаває».</strong> Усі 5 — валідний вкладений JSON. Але «2 widgets and 1 gadget» Haiku інтерпретував <strong>непослідовно</strong>:</p>
+<p>Інструкцію «output only the subject line» дотримано <strong>4/5</strong>. Урок: навіть few-shot не дає 100% на структурних обмеженнях — для гарантії додавай явне «exactly one line, no body».</p>
+<p><strong><code>NESTED</code> — структура ідеальна, а ось семантика «плаває».</strong> Усі 5 — коректний вкладений JSON. Але «2 widgets and 1 gadget» Haiku інтерпретував <strong>непослідовно</strong>:</p>
 <ul>
 <li>3/5: <code>"items": ["2 widgets", "1 gadget"]</code> (залишив кількість у рядку)</li>
 <li>2/5: <code>"items": ["widget", "widget", "gadget"]</code> (розгорнув у окремі елементи)</li>
 </ul>
-<p>Це <strong>не баг моделі, а неоднозначність промпта</strong> — ми не сказали, як трактувати кількість. Урок: якщо специфікація допускає два прочитання, модель <strong>обере по-різному на різних прогонах</strong>. Виправлення: «expand quantities so each unit is a separate array element» (або навпаки).</p>
+<p>Це <strong>не вада моделі, а неоднозначність промпта</strong> — ми не сказали, як трактувати кількість. Урок: якщо специфікація допускає два прочитання, модель <strong>обере по-різному на різних прогонах</strong>. Виправлення: «expand quantities so each unit is a separate array element» (або навпаки).</p>
 <h3 id="p06-контроль-слабкий-промпт--нестабільний-як-і-має-бути">Контроль: слабкий промпт — нестабільний (як і має бути)</h3>
 <p><code>DS2 weak</code> (zero-shot) — <strong>5/5 унікальних</strong> багатослівних відповідей, мітка плаває: <em>mixed → neutral-to-positive → cautiously positive</em>. Підтверджує, що нестабільність — властивість слабкого промпта, а не моделі.</p>
 <blockquote>
-<p>⚠️ <strong>Нюанс по <code>SE3 weak</code> (чесна звірка N=5).</strong> На відміну від <code>DS2 weak</code>, у <code>SE3 weak</code> всі 5 прогонів дали <strong>однаковий рядок-тему</strong> «Add retry logic to API client and fix README typo» — нестабільним був лише <strong>формат тіла</strong> (то bullet-и, то абзац). Тобто слабкий промпт тут нестабільний <em>за структурою</em>, але не <em>за змістом теми</em>. Це уточнює <a href="#part-02">приклад SE3 у Частині 2</a>: головна цінність few-shot — не «вгадати тему» (її модель і так тримає), а <strong>замкнути формат</strong> в один рядок <code>type(scope):</code>.</p>
+<p>⚠️ <strong>Нюанс по <code>SE3 weak</code> (чесна звірка N=5).</strong> На відміну від <code>DS2 weak</code>, у <code>SE3 weak</code> всі 5 прогонів дали <strong>однаковий рядок-тему</strong> «Add retry logic to API client and fix README typo» — нестабільним був лише <strong>формат тіла</strong> (то bullet-и, то абзац). Слабкий промпт тут нестабільний <em>за структурою</em>, але не <em>за змістом теми</em>. Це уточнює <a href="#part-02">приклад SE3 у Частині 2</a>: головна цінність few-shot — не «вгадати тему» (її модель і так тримає), а <strong>замкнути формат</strong> в один рядок <code>type(scope):</code>.</p>
 </blockquote>
 <h3 id="p06-підсумок-а-рейтинг-надійності-технік-формату-на-haiku">Підсумок А: рейтинг надійності технік формату на Haiku</h3>
 <table>
@@ -1353,7 +1367,7 @@ fix(docs): fix typo in README</code></pre>
 </tbody>
 </table>
 <blockquote>
-<p><strong>Головне правило надійності.</strong> Для критичного формату на малій моделі бери техніку рангу 1 (закритий набір / sentinel / якір). Якщо потрібні <strong>100.0%</strong> — у реальному API вмикай <strong>structured outputs</strong> (<code>output_config.format</code>, є і на Haiku 4.5). Без них — prefill (лише Haiku 4.5 і старші) + <strong>валідація виходу зі схемою</strong> і повторний прогін на провалі. На самих інструкціях стелі ~80–100% залежно від типу обмеження.</p>
+<p><strong>Головне правило надійності.</strong> Для критичного формату на малій моделі бери техніку рангу 1 (закритий набір / sentinel / якір). Якщо потрібні <strong>100.0%</strong> — у реальному API вмикай <strong>structured outputs</strong> (<code>output_config.format</code>, є і на Haiku 4.5). Без них — prefill (лише Haiku 4.5 і старші) + <strong>перевірка виходу за схемою</strong> і повторний прогін на провалі. На самих інструкціях стелі ~80–100% залежно від типу обмеження.</p>
 </blockquote>
 <hr />
 <h2 id="p06-b-антипатерни--як-не-треба-писати-промпти">B. Антипатерни — як НЕ треба писати промпти</h2>
@@ -1383,7 +1397,7 @@ fix(docs): fix typo in README</code></pre>
 <p><strong>Що сталося:</strong> 6 задач в одному промпті → увага «розмазана», глибина впала. На малій моделі це особливо помітно.</p>
 <p>✅ <strong>Виправлення:</strong> одна сфокусована задача — <em>«write a function fetch_html(url)... retries 3 times... raises on non-200. Output only the code.»</em> — <strong>повна, якісна, готова функція</strong> (на відміну від 6 поверхневих шматків). Решту — окремими промптами (див. <a href="#part-05">prompt chaining</a>).</p>
 <blockquote>
-<p>⚠️ <strong>Чесне застереження (підтверджено аудитом).</strong> Нова версія промпта прибирає <em>перевантаженість</em>: функція вийшла повна й якісна. Але вивід Haiku <strong>усе ж прийшов обгорнутим у <code>```python</code></strong> попри «Output only the code» — рівно та слабкість негативної заборони, яку ми виміряли вище у розділі A цієї частини (DS4 = 80% проти SE5 = 100%). Тобто промпт виправляє <em>одну</em> ваду, але демонструє <em>іншу</em>: щоб отримати голий код без fences, треба додати <strong>якір</strong> — <em>«start with <code>def fetch_html</code>»</em>. Урок: антипатерни можуть накладатися; виправляючи один, перевіряй, чи не лишився інший.</p>
+<p>⚠️ <strong>Чесне застереження (підтверджено аудитом).</strong> Нова версія промпта прибирає <em>перевантаженість</em>: функція вийшла повна й якісна. Але вивід Haiku <strong>усе ж прийшов обгорнутим у <code>```python</code></strong> попри «Output only the code» — рівно та слабкість негативної заборони, яку ми виміряли вище у розділі A цієї частини (DS4 = 80% проти SE5 = 100%). Промпт виправляє <em>одну</em> ваду, але демонструє <em>іншу</em>: щоб отримати голий код без fences, треба додати <strong>якір</strong> — <em>«start with <code>def fetch_html</code>»</em>. Урок: антипатерни можуть накладатися; виправляючи один, перевіряй, чи не лишився інший.</p>
 </blockquote>
 <blockquote>
 <p><strong>Правило:</strong> один промпт — одна задача. Багатокрокове — через ланцюжок, не через «зроби все». А для голого коду без обгортки — додай якір першого рядка.</p>
@@ -1497,14 +1511,14 @@ fix(docs): fix typo in README</code></pre>
 </table>
 <p><strong>Усі 10 унікальних зовнішніх посилань курсу — живі</strong> (перепровірено 2026-08-21). 6 технічних URL перевірені WebFetch тут; 3 доменно-специфічні (2× Towards Data Science, Simon Willison) — окремим проходом; 10-те (<code>promptingguide.ai/applications</code>) дозвірене у серпні. Жодне посилання не спирається лише на прапорець <code>verified_live</code> дослідницького агента.</p>
 <blockquote>
-<p>⚠️ <strong>Доступність ≠ актуальність (урок серпневої перевірки).</strong> Окремим проходом ми прочитали <strong>зміст</strong> усіх ресурсів, не лише перевірили код 200. Результат: 6 актуальні, 3 старіють, <strong>1 зламаний по суті</strong> — інтерактивний туторіал Anthropic віддає 200 OK, але його ноутбуки зашиті на <code>claude-3-haiku-20240307</code>, знятий з експлуатації <strong>20.04.2026</strong>, тож приклади падають з помилкою API. Деталі й виправлення — у <a href="#part-04">Частині 4</a>.</p>
+<p>⚠️ <strong>Доступність ≠ актуальність (урок серпневої перевірки).</strong> Окремим проходом ми прочитали <strong>зміст</strong> усіх ресурсів, не лише перевірили код 200. Результат: 6 актуальні, 3 старіють, <strong>1 без правки не працює</strong> — інтерактивний туторіал Anthropic віддає 200 OK, але його ноутбуки зашиті на <code>claude-3-haiku-20240307</code>, знятий з експлуатації <strong>20.04.2026</strong>, тож приклади падають з помилкою API. Деталі й виправлення — у <a href="#part-04">Частині 4</a>.</p>
 <p><strong>Метод-урок:</strong> перевірка посилань на код 200 — необхідна, але <strong>недостатня</strong>. Для навчальних матеріалів треба окремо перевіряти, чи не застарів <em>зміст</em>.</p>
 </blockquote>
 <hr />
 <h2 id="p06-підсумок-частини-6">Підсумок частини 6</h2>
 <ul>
-<li><strong>Надійність формату виміряна, а не припущена:</strong> закритий набір / sentinel / якір = ~100%; негативні заборони = ~80%. Для критичних пайплайнів — додавай prefill + валідацію схемою.</li>
-<li><strong>Антипатерни валідовані:</strong> найнебезпечніші на Haiku — суперечливі інструкції (тиха втрата контролю) і перевантаження (поверхневість). Заборони-обсягу протікають. Хибні засновки Haiku поки що спростовує сам.</li>
+<li><strong>Надійність формату виміряна, а не припущена:</strong> закритий набір / sentinel / якір = ~100%; негативні заборони = ~80%. Для критичних конвеєрів вмикай structured outputs, а без них — prefill (лише Haiku 4.5 і старші) + перевірку за схемою.</li>
+<li><strong>Антипатерни перевірені:</strong> найнебезпечніші на Haiku — суперечливі інструкції (тиха втрата контролю) і перевантаження (поверхневість). Заборони-обсягу протікають. Хибні засновки Haiku поки що спростовує сам.</li>
 <li><strong>Усі 10 посилань курсу перевірені</strong> реальним WebFetch (і перепровірені 2026-08-21).</li>
 </ul>
 <hr />
@@ -1518,7 +1532,7 @@ fix(docs): fix typo in README</code></pre>
 </ol>
 <h3 id="p06-відповіді-частина-6">Відповіді (Частина 6)</h3>
 <ol type="1">
-<li>Порядок: (0) <strong>structured outputs</strong> у реальному API (<code>output_config.format</code>) — схему гарантує сервер; (1) <strong>prefill</strong> (лише Haiku 4.5 і старші; підстав <code>{</code> — модель фізично не додасть преамбулу) → ~100%; (2) <strong>якір першого символу</strong> (<code>start with {</code>) → 100% у наших N=5; (3) <strong>валідація схемою + повторний прогін</strong> на провалі. «No markdown» недостатнє, бо це <strong>негативна заборона</strong>, що протікає ~20% (4/5 у DS4) — модель легше <em>виконує</em> дію, ніж <em>утримується</em> від звички.</li>
+<li>Порядок: (0) <strong>structured outputs</strong> у реальному API (<code>output_config.format</code>) — схему гарантує сервер; (1) <strong>prefill</strong> (лише Haiku 4.5 і старші; підстав <code>{</code> — модель фізично не додасть преамбулу) → ~100%; (2) <strong>якір першого символу</strong> (<code>start with {</code>) → 100% у наших N=5; (3) <strong>перевірка за схемою + повторний прогін</strong> на провалі. «No markdown» недостатнє, бо це <strong>негативна заборона</strong>, що протікає ~20% (4/5 у DS4) — модель легше <em>виконує</em> дію, ніж <em>утримується</em> від звички.</li>
 <li>Поганий промпт дає погану, але <strong>передбачувану</strong> відповідь. Суперечливий — модель <strong>мовчки обирає одне</strong> з вимог і викидає інше, не повідомляючи. Ти втрачаєш <strong>контроль</strong>: не знаєш, який бік переможе (в AP1 викинуло «comprehensive», лишило «one sentence»).</li>
 <li>Напр.: <em>«Explain Docker in 3 sentences for a developer who knows Git but not containers, using one analogy.»</em> — позитивна ціль (3 речення, аудиторія, аналогія) замість набору заборон.</li>
 <li>Рядок-якір: <em>«Output only the code, starting with <code>def fetch_html</code>»</em>. Техніка — <strong>примус формату через якір першого символу</strong> (SE5): позитивний якір надійніший за «output only the code».</li>
@@ -1586,14 +1600,14 @@ fix(docs): fix typo in README</code></pre>
 </tr>
 </tbody>
 </table>
-<p><strong>Правило:</strong> для критичних пайплайнів — техніка ~100% <strong>плюс</strong> валідація схемою й повторний прогін на провалі. Не покладайся на заборони.</p>
+<p><strong>Правило:</strong> для критичних конвеєрів — техніка ~100% <strong>плюс</strong> перевірка за схемою й повторний прогін на провалі. Не покладайся на заборони.</p>
 <hr />
 <h2 id="p07-73-haiku-специфіка-чому-це-курс-для-haiku-а-не-взагалі">7.3. Haiku-специфіка (чому це курс «для Haiku», а не взагалі)</h2>
 <p>Порівняння з Sonnet 4.6 (<a href="#part-05">Частина 5</a>) показало: <strong>промпт-інжиніринг важливіший саме на малій моделі.</strong></p>
 <ul>
 <li>Sonnet «прощає» слабкий промпт (дав план там, де Haiku відмовився) і дотримується заборон (голий JSON на «no markdown», де Haiku обгорнув).</li>
-<li>Тобто економія на моделі (Haiku — швидша й дешевша) <strong>компенсується якістю промпта</strong>. Те, що Sonnet робить «за замовчуванням», на Haiku треба <strong>прописати явно</strong>.</li>
-<li>Практично: прототипуй логіку на сильнішій моделі, а для прода на Haiku — додай явні приклади, якорі й валідацію.</li>
+<li>Економія на моделі (Haiku — швидша й дешевша) <strong>компенсується якістю промпта</strong>. Те, що Sonnet робить «за замовчуванням», на Haiku треба <strong>прописати явно</strong>.</li>
+<li>Практично: прототипуй логіку на сильнішій моделі, а для прода на Haiku — додай явні приклади, якорі й перевірку виходу.</li>
 </ul>
 <hr />
 <h2 id="p07-74-чотири-антипатерни-чого-не-робити">7.4. Чотири антипатерни (чого не робити)</h2>
@@ -1635,7 +1649,7 @@ fix(docs): fix typo in README</code></pre>
 <li><label><input type="checkbox" />Якщо вивід парситься кодом — чи є <strong>few-shot</strong> або <strong>схема</strong>?</label></li>
 <li><label><input type="checkbox" />Чи дав я моделі <strong>«вихід»</strong> на випадок «немає відповіді» (sentinel)?</label></li>
 <li><label><input type="checkbox" />Чи немає <strong>суперечливих</strong> вимог і <strong>перевантаження</strong> (&gt;1 задача)?</label></li>
-<li><label><input type="checkbox" />Чи <strong>прогнав я промпт N разів</strong> і порахував частку валідних відповідей? <em>(Одного прогону недостатньо — це головний урок <a href="#part-06">Частини 6</a>.)</em></label></li>
+<li><label><input type="checkbox" />Чи <strong>прогнав я промпт N разів</strong> і порахував частку коректних відповідей? <em>(Одного прогону недостатньо — це головний урок <a href="#part-06">Частини 6</a>.)</em></label></li>
 <li><label><input type="checkbox" />Якщо текст українською для дисертації — чи є <strong>прохід вичитки</strong> на русизми?</label></li>
 </ul>
 <hr />
@@ -1667,7 +1681,7 @@ fix(docs): fix typo in README</code></pre>
 <li><strong>Механіка API</strong> (розділ 8.2 нижче: що приймається / що → <code>400</code>) — з <strong>офіційного довідника Anthropic</strong> (<code>claude-api</code>, кеш станом на 2026-06-24) + migration-guide. Через гарнес агента <code>400</code>-и не відтворити, тож це залишається «з доксів».</li>
 <li><strong>Поведінкові твердження</strong> (розділи 8.3–8.5: прощення слабкого промпту, leak-rate заборон, стійкість до пасток) — <strong>виміряно на Haiku / Opus 4.8 / Fable 5</strong> (14 крос-модельних прогонів; див. <a href="#p08-88-емпірична-перевірка-на-трьох-моделях-виміряно">8.8</a>).</li>
 </ul>
-<p>✅ <strong>Перепровірено на живих доксах 2026-08-21:</strong> усі 11 тверджень механіки (розділ 8.2) — <strong>підтверджені</strong>; ціни й ліміти Haiku 4.5 / Opus 4.8 / Fable 5 — <strong>без змін</strong>. Повторна звірка 2026-09-19: вийшов Fable 5.1, Fable 5 став Legacy — див. «Свіжість лінійки».</p>
+<p>✅ <strong>Перепровірено на живих доксах 2026-08-21:</strong> усі 11 тверджень механіки (розділ 8.2) — <strong>підтверджені</strong>; ціни й ліміти Haiku 4.5 / Opus 4.8 / Fable 5 — <strong>без змін</strong>. Повторні звірки 2026-09-19 і 2026-09-24: вийшли Fable 5.1 та Opus 5.5, а Fable 5 та Opus 5 стали Legacy — див. «Свіжість лінійки».</p>
 <p>API змінюється — механіку звіряй з <a href="https://platform.claude.com/docs" target="_blank" rel="noopener">platform.claude.com/docs</a>.</p>
 </blockquote>
 <hr />
@@ -1704,8 +1718,8 @@ fix(docs): fix typo in README</code></pre>
 <tr>
 <td><strong>temperature / top_p / top_k</strong></td>
 <td>✅ дозволені</td>
-<td>❌ будь-який → <strong>400</strong></td>
-<td>❌ → <strong>400</strong></td>
+<td>❌ нестандартне значення → <strong>400</strong></td>
+<td>❌ нестандартне значення → <strong>400</strong></td>
 </tr>
 <tr>
 <td><strong>Prefill</strong> (підстава відповіді асистента)</td>
@@ -1715,7 +1729,7 @@ fix(docs): fix typo in README</code></pre>
 </tr>
 <tr>
 <td><strong>Сирий chain-of-thought</strong></td>
-<td>видно у відповіді</td>
+<td>не повертається; типово видно <strong>підсумок</strong> міркувань (<code>display:"summarized"</code>)</td>
 <td>не повертається; за замовч. поле <strong>порожнє</strong>, summary — через <code>display:"summarized"</code></td>
 <td><strong>сирий — ніколи</strong>; за замовч. поле <strong>порожнє</strong>, summary — лише з <code>display:"summarized"</code></td>
 </tr>
@@ -1742,12 +1756,13 @@ fix(docs): fix typo in README</code></pre>
 <blockquote>
 <p><strong>Наслідок для коду:</strong> що потужніша модель, то суворіший запит. Haiku приймає старий стиль (<code>budget_tokens</code>, <code>temperature</code>, prefill); Opus/Fable їх відкидають. Fable ще й думає завжди: <code>thinking</code> треба <strong>прибрати або лишити лише <code>{type:"adaptive"}</code></strong>.</p>
 </blockquote>
-<h3 id="p08-stopwatch-свіжість-лінійки-станом-на-2026-08-21">⏱️ Свіжість лінійки (станом на 2026-08-21)</h3>
+<h3 id="p08-stopwatch-свіжість-лінійки-станом-на-2026-09-24">⏱️ Свіжість лінійки (станом на 2026-09-24)</h3>
 <p>Курс писався в червні 2026 на трійці <strong>Haiku 4.5 / Opus 4.8 / Fable 5</strong>. За перевіркою живих доксів у серпні:</p>
 <ul>
 <li><strong>Усі цифри й механіка вище лишаються чинними</strong> — Haiku 4.5, Opus 4.8 і Fable 5 активні, ціни й ліміти не змінились.</li>
-<li><strong>Але зʼявилось нове покоління:</strong> <strong>Claude Opus 5</strong> (<code>claude-opus-5</code>) — тепер топова рекомендація Anthropic, а <strong>Opus 4.8 перейшов у Legacy</strong> (повністю підтримується). Також GA — <strong>Claude Sonnet 5</strong> (<code>claude-sonnet-5</code>, <span class="math inline">2/</span>10 за 1M; анонсоване підвищення до <span class="math inline">3/</span>15 з 1 вересня <strong>скасовано</strong>, <span class="math inline">2/</span>10 стала постійною ціною).</li>
-<li><strong>Практичний наслідок:</strong> усе, що ця частина каже про <strong>Opus 4.8</strong>, застосовне й до <strong>Opus 5</strong> (та сама сімʼя обмежень: adaptive-only thinking, <code>temperature</code>/prefill → 400). Одна відмінність Opus 5: <strong>adaptive-мислення увімкнене за замовчуванням</strong> (в Opus 4.8 — вимкнене), і <code>thinking:{type:"disabled"}</code> приймається лише при <code>effort</code> ≤ <code>high</code>.</li>
+<li><strong>Нове покоління:</strong> 22.09.2026 вийшов <strong>Claude Opus 5.5</strong> (<code>claude-opus-5-5</code>, <span class="math inline">4/</span>20 за 1M) — тепер топова рекомендація Anthropic. <strong>Opus 5</strong> (<code>claude-opus-5</code>) і <strong>Opus 4.8</strong> перейшли в Legacy й повністю підтримуються. <strong>Claude Sonnet 5</strong> (<code>claude-sonnet-5</code>) коштує <span class="math inline">2/</span>10 за 1M: анонсоване підвищення до <span class="math inline">3/</span>15 з 1 вересня <strong>скасовано</strong>.</li>
+<li><strong>Практичний наслідок:</strong> усе, що ця частина каже про <strong>Opus 4.8</strong>, застосовне й до <strong>Opus 5</strong> (та сама сімʼя обмежень: adaptive-only thinking, <code>temperature</code>/prefill → 400). Одна відмінність Opus 5: <strong>adaptive-мислення увімкнене типово</strong> (в Opus 4.8 — вимкнене), і <code>thinking:{type:"disabled"}</code> приймається лише при <code>effort</code> ≤ <code>high</code>.</li>
+<li><strong>Opus 5.5 за механікою ближчий до Fable, ніж до Opus 5.</strong> Мислення увімкнене завжди й не вимикається. Типовий effort — <code>medium</code>, а не <code>high</code>. Примусовий виклик інструмента (forced tool use) повертає помилку, як і на Fable 5.1. Читання кешу коштує 0.05× ціни входу.</li>
 <li><strong>Haiku 4.5</strong> лишається найдешевшою ланкою — головний висновок курсу («що менша модель, то важливіший промпт») не змінився.</li>
 </ul>
 <p><strong>Оновлення 2026-09-19</strong> (звірено з живими доксами):</p>
@@ -1770,13 +1785,13 @@ fix(docs): fix typo in README</code></pre>
 </blockquote>
 <hr />
 <h2 id="p08-84-стиль--opus-48-прощає-слабкий-промпт-але-має-свої-нахили">8.4. Стиль — Opus 4.8: «прощає» слабкий промпт, але має свої нахили</h2>
-<p>Добрі дефолти рятують vague-запит (це видно і в порівнянні Haiku-vs-Sonnet у <a href="#part-05">Частині 5</a>). Але за офіційним гайдом Opus 4.8:</p>
+<p>Добрі типові припущення рятують vague-запит (це видно і в порівнянні Haiku-vs-Sonnet у <a href="#part-05">Частині 5</a>). Але за офіційним гайдом Opus 4.8:</p>
 <ul>
 <li><strong>Недотягується сам</strong> до інструментів / підагентів / файл-пам'яті → давай <strong>явний тригеринг</strong> («шукай, коли…», «делегуй, коли фан-аут»). Це працює і на рівні <em>опису інструмента</em> («call this when…»).</li>
 <li><strong>Балакучіший</strong> за 4.7 — якщо агент занадто наративить, додай silence-default («default to silence between tool calls»).</li>
-<li><strong>Обережніший, частіше перепитує</strong> — додай «на дрібницях (назви, дефолти) обирай сам; питай лише про зміни обсягу чи незворотні дії».</li>
+<li><strong>Обережніший, частіше перепитує</strong> — додай «на дрібницях (назви, типові значення) обирай сам; питай лише про зміни обсягу чи незворотні дії».</li>
 <li><strong>Тепліший голос</strong> — старі інструкції «be concise/warmer», писані під 4.7, можуть перестати бути потрібними; перевір.</li>
-<li><strong>effort</strong>: дефолт <code>high</code>; для найважчого кодингу/агентики — <code>xhigh</code>. Роби sweep <code>medium/high/xhigh</code>, а не рефлекторно <code>xhigh</code>.</li>
+<li><strong>effort</strong>: типово <code>high</code>; для найважчого кодингу/агентики — <code>xhigh</code>. Роби sweep <code>medium/high/xhigh</code>, а не рефлекторно <code>xhigh</code>.</li>
 </ul>
 <blockquote>
 <p><strong>Правило 8.4.</strong> Opus 4.8 = «менше боротьби за формат, більше явного тригерингу інструментів і меж автономії».</p>
@@ -1786,7 +1801,7 @@ fix(docs): fix typo in README</code></pre>
 <p>Найпотужніша модель — і найконтр­інтуїтивніша в промптингу (за офіційним migration-guide):</p>
 <ul>
 <li><strong>Знімай покрокові риштування.</strong> Промпти під старі моделі <strong>часто занадто прескриптивні й знижують якість</strong>. Дай <strong>ціль + обмеження</strong>, і хай сама планує.</li>
-<li><strong>Ходи довгі</strong> — один запит на важкій задачі може йти <strong>хвилини</strong>. Плануй таймаути / стрімінг / асинхронні перевірки.</li>
+<li><strong>Ходи довгі</strong> — один запит на важкій задачі може йти <strong>хвилини</strong>. Плануй час очікування, стрімінг і асинхронні перевірки.</li>
 <li><strong>Дай файл-пам'ять</strong> і дозволь <strong>асинхронно делегувати</strong> підагентам — на цьому Fable виграє найбільше.</li>
 <li><strong>Став найважче.</strong> На рутині — знижуй <code>effort</code>: навіть <code>low</code> часто б'є <code>xhigh</code> старих моделей.</li>
 <li><strong>Обробляй <code>refusal</code></strong> (класифікатори безпеки). У продакшені став server-side fallback: актуальний спосіб (звірено 2026-08) — <code>fallbacks: "default"</code> з бета-хедером <code>server-side-fallback-2026-07-01</code>; він сам добирає модель за категорією відмови, без ручного списку. Недоступний на Batch API, Bedrock, Google Cloud і Foundry — там роби ретрай на клієнті.</li>
@@ -1813,8 +1828,12 @@ fix(docs): fix typo in README</code></pre>
 <td>Баланс ціна/якість (<span class="math inline">2/</span>10) для типового продакшену; у курсі порівнювався попередник Sonnet 4.6.</td>
 </tr>
 <tr>
-<td><strong>Opus 5</strong> <em>(новий флагман)</em></td>
-<td>Дефолт на більшість задач станом на серпень 2026; правила Opus 4.8 нижче застосовні.</td>
+<td><strong>Opus 5.5</strong> <em>(флагман з 22.09.2026)</em></td>
+<td>Типовий вибір для більшості задач; мислення завжди увімкнене, типовий effort — <code>medium</code>.</td>
+</tr>
+<tr>
+<td><strong>Opus 5</strong> <em>(Legacy з 22.09.2026)</em></td>
+<td>Повністю підтримується; правила Opus 4.8 нижче застосовні.</td>
 </tr>
 <tr>
 <td><strong>Opus 4.8</strong> <em>(Legacy)</em></td>
@@ -1837,7 +1856,7 @@ fix(docs): fix typo in README</code></pre>
 </ul>
 <hr />
 <h2 id="p08-88-емпірична-перевірка-на-трьох-моделях-виміряно">8.8. Емпірична перевірка на трьох моделях (виміряно)</h2>
-<p>Щоб ця частина не була «лише з доксів», поведінкові твердження <strong>реально прогнано</strong>: 7 промптів на <strong>Opus 4.8</strong> + 7 на <strong>Fable 5</strong> (Haiku-баейзлайни — з першої партії курсу). Валідація через гарнес агента (базові моделі справжні: <code>claude-opus-4-8</code>, <code>claude-fable-5</code>; raw-API немає).</p>
+<p>Щоб ця частина не була «лише з доксів», поведінкові твердження <strong>реально прогнано</strong>: 7 промптів на <strong>Opus 4.8</strong> + 7 на <strong>Fable 5</strong> (Haiku-баейзлайни — з першої партії курсу). Перевірка через гарнес агента (базові моделі справжні: <code>claude-opus-4-8</code>, <code>claude-fable-5</code>; raw-API немає).</p>
 <table>
 <thead>
 <tr>
@@ -1901,8 +1920,8 @@ fix(docs): fix typo in README</code></pre>
 <ol type="1">
 <li><strong>8-A.</strong> Зламаються: (1) <code>thinking:{type:"enabled", budget_tokens:N}</code> — прибрати <code>thinking</code> або лишити лише <code>{type:"adaptive"}</code> (Fable думає завжди); (2) <code>temperature</code>/<code>top_p</code>/<code>top_k</code> — прибрати, керувати стилем через промпт; (3) prefill (останній assistant-turn) — замінити на <code>output_config.format</code> або системну інструкцію. Плюс додати обробку <code>refusal</code> + server-side fallback (<code>fallbacks: "default"</code>, бета <code>server-side-fallback-2026-07-01</code>).</li>
 <li><strong>8-B.</strong> (1) Підняти <code>effort</code> до <code>high</code>/<code>xhigh</code> — на них Opus помітно активніше користується інструментами; (2) явний тригеринг: у <strong>системному промпті</strong> і в <strong>описі інструмента</strong> вказати <em>коли</em> його викликати («call this when the answer depends on current info»).</li>
-<li><strong>8-C.</strong> Fable 5 інтерпретує прескриптивні кроки буквально й може «переплановувати», що <strong>знижує</strong> якість. Переписати: дати <strong>ціль + обмеження + критерій готовності</strong>, прибрати покроковий алгоритм, дозволити планувати самій (за потреби — окремим кроком-верифікатором).</li>
-<li><strong>8-D.</strong> <strong>Haiku 4.5</strong> (найдешевша, <span class="math inline">1/</span>5, швидка). Компенсація: few-shot із закритим набором міток + якір/строгий формат («output only the label»), для критичного — валідація формату на виході. Плюс <strong>Batch API</strong> (−50% ціни) для масовості.</li>
+<li><strong>8-C.</strong> Fable 5 інтерпретує прескриптивні кроки дослівно й може «переплановувати», що <strong>знижує</strong> якість. Переписати: дати <strong>ціль + обмеження + критерій готовності</strong>, прибрати покроковий алгоритм, дозволити планувати самій (за потреби — окремим кроком-верифікатором).</li>
+<li><strong>8-D.</strong> <strong>Haiku 4.5</strong> (найдешевша, <span class="math inline">1/</span>5, швидка). Компенсація: few-shot із закритим набором міток + якір/строгий формат («output only the label»), для критичного — перевірка формату на виході. Плюс <strong>Batch API</strong> (−50% ціни) для масовості.</li>
 </ol>
 <hr />
 <h2 id="p08-підсумок-частини-8">Підсумок Частини 8</h2>
@@ -1911,7 +1930,7 @@ fix(docs): fix typo in README</code></pre>
 </section>
 <section id="part-09" class="part" data-title="9 · Промптинг 2026">
 <h1 id="p09-частина-9-промт-інжиніринг-2026-reasoning-моделі-та-зсув-до-контексту">Частина 9. Промт-інжиніринг 2026: reasoning-моделі та зсув до контексту</h1>
-<p>Частини 1–6 <strong>виміряли</strong> класичні техніки на Haiku 4.5 — малій моделі без примусового reasoning. Але фронтир 2026 — це <strong>reasoning-моделі</strong> (Claude Sonnet 5 / Opus 5 / Fable 5.1, OpenAI GPT-5 і GPT-6 Astra, DeepSeek R1/V4), які думають самі. Ця частина — про те, <strong>що з класики живе, що померло, і що прийшло на заміну</strong>, за офіційними доксами обох лабораторій та дослідженнями.</p>
+<p>Частини 1–6 <strong>виміряли</strong> класичні техніки на Haiku 4.5 — малій моделі без примусового reasoning. Але фронтир 2026 — це <strong>reasoning-моделі</strong> (Claude Sonnet 5 / Opus 5.5 / Fable 5.1, OpenAI GPT-6, DeepSeek R1/V4), які думають самі. Ця частина — про те, <strong>що з класики живе, що померло, і що прийшло на заміну</strong>, за офіційними доксами обох лабораторій та дослідженнями.</p>
 <blockquote>
 <p>📚 <strong>Джерела й маркування.</strong> Ця частина — дослідницька (офіційні докси Anthropic/OpenAI/DeepSeek, arXiv, Willison/Fowler), зібрана 2026-08-21 із правилом «кожне твердження реально прочитане за URL», а ключові — перевірені повторним фетчем незалежним критиком. Це <strong>не</strong> прогони моделей — на відміну від ядра курсу.</p>
 </blockquote>
@@ -1920,7 +1939,7 @@ fix(docs): fix typo in README</code></pre>
 <p>Обидві лабораторії <strong>незалежно</strong> зійшлися на одному:</p>
 <ul>
 <li><strong>OpenAI</strong> (офіційні reasoning best practices): <em>«Since these models perform reasoning internally, prompting them to "think step by step" or "explain your reasoning" is unnecessary»</em>. І далі: спершу пробуй <strong>zero-shot</strong>, few-shot — лише якщо треба. → <a href="https://developers.openai.com/api/docs/guides/reasoning-best-practices" target="_blank" rel="noopener">developers.openai.com/api/docs/guides/reasoning-best-practices</a></li>
-<li><strong>Anthropic</strong> (актуальний довідник під Sonnet 5/Opus 5/Fable 5): <em>«Prefer general instructions over prescriptive steps. A prompt like "think thoroughly" often produces better reasoning than a hand-written step-by-step plan»</em>. Ручний CoT з тегами <code>&lt;thinking&gt;/&lt;answer&gt;</code> — тепер лише <strong>fallback</strong>, коли adaptive thinking вимкнено. → <a href="https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices" target="_blank" rel="noopener">platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices</a></li>
+<li><strong>Anthropic</strong> (актуальний довідник під Sonnet 5, Opus 5.5 і Fable 5.1): <em>«Prefer general instructions over prescriptive steps. A prompt like "think thoroughly" often produces better reasoning than a hand-written step-by-step plan»</em>. Ручний CoT з тегами <code>&lt;thinking&gt;/&lt;answer&gt;</code> — тепер лише <strong>fallback</strong>, коли adaptive thinking вимкнено. → <a href="https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices" target="_blank" rel="noopener">platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices</a></li>
 </ul>
 <p><strong>Заміна:</strong> дай моделі <strong>задачу + обмеження + формат виводу</strong> — і хай планує сама. Глибину міркувань крутить не текст промпта, а <strong>явний перемикач</strong>: <code>effort</code> (Anthropic: low…max) / <code>reasoning_effort</code> (OpenAI).</p>
 <blockquote>
@@ -1955,13 +1974,13 @@ fix(docs): fix typo in README</code></pre>
 <p>Класичний хак «підстав <code>{</code> у відповідь асистента» (його радили правило DS4 і Частина 6) на нових моделях <strong>неможливий</strong> — prefill повертає 400 на Claude 4.6+/Fable. Офіційна заміна в обох лабораторій — <strong>нативні structured outputs</strong> (JSON-схема на рівні API: <code>output_config.format</code> в Anthropic, Structured Outputs в OpenAI). Докси Anthropic прямо описують міграцію з prefill.</p>
 <p><strong>Драбина надійності формату 2026</strong> (оновлення нашої з Частини 6):</p>
 <ol type="1">
-<li><strong>Нативна схема на рівні API</strong> (100% валідність гарантує сервер) — коли доступна. На Claude це <code>output_config.format</code>, і він працює навіть на Haiku 4.5.</li>
+<li><strong>Нативна схема на рівні API</strong> (100% коректність гарантує сервер) — коли доступна. На Claude це <code>output_config.format</code>, і він працює навіть на Haiku 4.5.</li>
 <li>Якір першого символу + закритий набір міток (наші виміряні ~100% на Haiku) — коли схемного режиму нема. Локальні стеки його мають: Ollama (<code>format</code>), llama.cpp (<code>json_schema</code>/<code>grammar</code>).</li>
 <li>Негативні заборони — досі протікають (наш вимір: 80%).</li>
 </ol>
 <h2 id="p09-94-семплінг-параметри-епоха-temperature-закінчується-але-не-скрізь">9.4. Семплінг-параметри: епоха temperature закінчується (але не скрізь)</h2>
 <ul>
-<li>Claude 4.7 і новіші (Sonnet 5, Opus 5, Fable 5/5.1): нестандартні <code>temperature</code>/<code>top_p</code>/<code>top_k</code> → <strong>400</strong>; OpenAI GPT-5 і GPT-6 Astra ці параметри не підтримують. Стиль і варіативність задаються промптом, глибина — effort.</li>
+<li>Claude 4.7 і новіші (Sonnet 5, Opus 5/5.5, Fable 5/5.1): нестандартні <code>temperature</code>/<code>top_p</code>/<code>top_k</code> → <strong>400</strong>. OpenAI: у GPT-5 і GPT-6 Astra цих параметрів немає, а GPT-6 Sol і Luna приймають їх лише з <code>reasoning_effort: none</code>. Стиль і варіативність задаються промптом, глибина — effort.</li>
 <li>Але <strong>DeepSeek R1</strong> офіційно радить temperature 0.5–0.7.</li>
 </ul>
 <p><strong>Правило 9.4.</strong> «Effort замість temperature» — правило <strong>конкретних фронтир-родин, не індустрії</strong>. Для кожної моделі — її картка. (Це підтвердив і наш адверсаріальний критик, спіймавши спробу узагальнення.)</p>
@@ -1972,7 +1991,7 @@ fix(docs): fix typo in README</code></pre>
 <ul>
 <li><strong>Роль/персона</strong>: consumer-блог Anthropic (11.2025) називає ролі «менш потрібними… надто специфічна роль може обмежити», а технічний довідник тієї ж Anthropic досі тримає «Give Claude a role» у ядрі технік. Наш вимір (DS5): роль <strong>у парі з контекстом+обмеженнями</strong> працювала на Haiku. Висновок: роль — не магія, а спосіб передати контекст; сама по собі слабшає зі зростанням моделей.</li>
 <li><strong>XML-теги</strong>: та сама пара джерел розходиться (маркетинг: «часто досить заголовків»; техдовідник: XML — основний спосіб розділяти складні промпти). Наш вимір (SE2) — теги давали реальний приріст на Haiku.</li>
-<li><strong>Чутливість reasoning-моделей до промпта</strong>: KAIST (<a href="https://arxiv.org/abs/2505.17225" target="_blank" rel="noopener">arXiv:2505.17225</a>) показує «reasoning rigidity» — моделі <strong>переїжджають явні умови</strong> звичними траєкторіями (три модуси: interpretation overload, input distrust, partial instruction attention). Тобто частина збоїв не лікується формулюванням. Єдиної картини «більш чи менш чутливі» в літературі поки немає — чесно кажемо: відкрите питання.</li>
+<li><strong>Чутливість reasoning-моделей до промпта</strong>: KAIST (<a href="https://arxiv.org/abs/2505.17225" target="_blank" rel="noopener">arXiv:2505.17225</a>) показує «reasoning rigidity» — моделі <strong>переїжджають явні умови</strong> звичними траєкторіями (три модуси: interpretation overload, input distrust, partial instruction attention). Частину збоїв формулювання не лікує. Єдиної картини «більш чи менш чутливі» в літературі поки немає — чесно кажемо: відкрите питання.</li>
 </ul>
 <h2 id="p09-97-оновлена-шпаргалка-2026-додаток-до-13-принципів-частини-4">9.7. Оновлена шпаргалка-2026 (додаток до 13 принципів Частини 4)</h2>
 <ol start="14" type="1">
@@ -1984,12 +2003,12 @@ fix(docs): fix typo in README</code></pre>
 <hr />
 <h2 id="p09-вправи-частина-9">Вправи (Частина 9)</h2>
 <ol type="1">
-<li><strong>9-A.</strong> Твій старий промпт для GPT-4-класу починався з «Let's think step by step» і мав 5 few-shot прикладів. Переносиш на Claude Opus 5. Що зміниш і чому?</li>
-<li><strong>9-B.</strong> Потрібен гарантовано валідний JSON на (а) Fable 5.1, (б) локальній Qwen через llama.cpp. Який механізм формату обереш для кожної і хто в кожному разі гарантує схему?</li>
+<li><strong>9-A.</strong> Твій старий промпт для GPT-4-класу починався з «Let's think step by step» і мав 5 few-shot прикладів. Переносиш на Claude Opus 5.5. Що зміниш і чому?</li>
+<li><strong>9-B.</strong> Потрібен гарантовано коректний JSON на (а) Fable 5.1, (б) локальній Qwen через llama.cpp. Який механізм формату обереш для кожної і хто в кожному разі гарантує схему?</li>
 </ol>
 <h3 id="p09-відповіді">Відповіді</h3>
 <ol type="1">
-<li><strong>9-A.</strong> Прибрати CoT-заклинання (Opus 5 думає сам; глибину задати <code>effort</code>), few-shot скоротити або лишити тільки якщо вони задають <strong>формат</strong> (не «навчають міркувати»); переписати як goal+constraints+формат виводу. І прибрати <code>temperature</code>, якщо був — на Opus 5 це 400.</li>
+<li><strong>9-A.</strong> Прибрати CoT-заклинання (Opus 5.5 думає завжди; глибину задає <code>effort</code>, типово <code>medium</code>), few-shot скоротити або лишити тільки якщо вони задають <strong>формат</strong> (не «навчають міркувати»); переписати як goal+constraints+формат виводу. І прибрати <code>temperature</code>, якщо був: на Opus 5.5 нестандартне значення дає 400.</li>
 <li><strong>9-B.</strong> (а) Fable 5.1 — нативні structured outputs (<code>output_config.format</code>): схему гарантує сервер Anthropic, prefill недоступний. (б) llama.cpp теж обмежує декодування: <code>json_schema</code> або GBNF-<code>grammar</code> у сервері. Тут схему гарантує граматика, яку ти сам налаштовуєш і тестуєш. В обох випадках якір першого символу й перевірка значень лишаються страховкою: схема гарантує синтаксис, а не зміст.</li>
 </ol>
 <hr />
@@ -2000,7 +2019,7 @@ fix(docs): fix typo in README</code></pre>
 <h3 id="p09-джерела-перевірено-2026-09-19">Джерела (перевірено 2026-09-19)</h3>
 <ul>
 <li><a href="https://developers.openai.com/api/docs/guides/reasoning-best-practices" target="_blank" rel="noopener">OpenAI — Reasoning best practices</a></li>
-<li><a href="https://developers.openai.com/api/docs/guides/latest-model" target="_blank" rel="noopener">OpenAI — Model guidance (GPT-6 Astra)</a></li>
+<li><a href="https://developers.openai.com/api/docs/guides/latest-model" target="_blank" rel="noopener">OpenAI — Model guidance (GPT-6 Astra, Sol, Luna)</a></li>
 <li><a href="https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices" target="_blank" rel="noopener">Anthropic — Prompting best practices</a></li>
 <li><a href="https://platform.claude.com/docs/en/build-with-claude/structured-outputs" target="_blank" rel="noopener">Anthropic — Structured outputs</a></li>
 <li><a href="https://platform.claude.com/docs/en/build-with-claude/effort" target="_blank" rel="noopener">Anthropic — Effort</a></li>
@@ -2019,7 +2038,7 @@ fix(docs): fix typo in README</code></pre>
 </section>
 <section id="part-10" class="part" data-title="10 · Розробка з ШІ">
 <h1 id="p10-частина-10-автоматизовані-системи-розробки-пз-з-ші">Частина 10. Автоматизовані системи розробки ПЗ з ШІ</h1>
-<p>Що кажуть <strong>дані і першоджерела</strong> (не маркетинг) станом на серпень 2026 про розробку софту агентами: де реальний виграш, де виміряні провали, і яка дисципліна відділяє одне від іншого.</p>
+<p>Що кажуть <strong>дані і першоджерела</strong> (не маркетинг) станом на серпень 2026 про розробку софту агентами. Де реальний виграш, де виміряні провали і яка дисципліна відділяє одне від іншого.</p>
 <blockquote>
 <p>📚 <strong>Джерела:</strong> офіційні докси Claude Code, Anthropic Engineering, METR (RCT), Google DORA 2025, arXiv (SpecBench, TDAD, SDD), Karpathy. Зібрано 2026-08-21; ключові твердження перевірені повторним фетчем (METR, DORA, best-practices — підтверджені дослівно).</p>
 </blockquote>
@@ -2031,7 +2050,7 @@ fix(docs): fix typo in README</code></pre>
 <p><strong>Правило 10.1.</strong> Самовідчуття продуктивності з ШІ — <strong>ненадійний прилад</strong> (METR: люди помилялись на ~40 п.п. навіть постфактум). Міряй результат (lead time, дефекти), а не відчуття. І спершу лагодь процес — ШІ його лише помножить.</p>
 </blockquote>
 <h2 id="p10-102-верифікаційна-петля--центральна-дисципліна">10.2. Верифікаційна петля — центральна дисципліна</h2>
-<p>Офіційні best practices Claude Code формулюють це як вододіл: дай агенту <strong>«a check it can run»</strong> (тести, exit-code збірки, лінтер, скріншот-диф) — інакше <em>«you become the verification loop»</em>. Це «різниця між сесією, яку ти дивишся, і сесією, від якої можна відійти».</p>
+<p>Офіційні best practices Claude Code формулюють це як вододіл: дай агенту <strong>«a check it can run»</strong> (тести, exit-code збірки, лінтер, порівняння знімків екрана) — інакше <em>«you become the verification loop»</em>. Це «різниця між сесією, яку ти дивишся, і сесією, від якої можна відійти».</p>
 <p>Три ескалаційні механізми контролю для автономної роботи (звідти ж, підтверджено дослівно):</p>
 <ol type="1">
 <li><strong>Check у промпті</strong> — «зроби і прожени тести».</li>
@@ -2055,12 +2074,12 @@ fix(docs): fix typo in README</code></pre>
 <p><strong>Правило 10.5.</strong> Строгість специфікації масштабуй під <strong>неоднозначність і багатофайловість</strong> задачі. Спека заради спеки — теж антипатерн.</p>
 </blockquote>
 <h2 id="p10-106-довгі-автономні-прогони-агенти-працюють-позмінно">10.6. Довгі автономні прогони: агенти «працюють позмінно»</h2>
-<p>Anthropic Engineering (2025-11-26, «Effective harnesses for long-running agents»): агент не має памʼяті між контекстними вікнами, тож харнес ділить роботу на <strong>Initializer-агента</strong> (пише <code>init.sh</code>, файл-трекер прогресу, перші git-коміти) і <strong>Coding-агента</strong>, який відновлюється зі <strong>структурованих handoff-артефактів</strong> — «як інженери, що передають зміну». Стан живе у файлах і git, а не в «памʼяті» моделі.</p>
+<p>Anthropic Engineering (2025-11-26, «Effective harnesses for long-running agents»): агент не має памʼяті між контекстними вікнами. Тому харнес ділить роботу на два агенти. <strong>Initializer-агент</strong> пише <code>init.sh</code>, файл прогресу <code>claude-progress.txt</code>, JSON-перелік функцій і перший git-коміт. <strong>Coding-агент</strong> щосесії відновлюється зі <strong>структурованих handoff-артефактів</strong>, наче інженери, що працюють позмінно. Стан живе у файлах і git, а не в «памʼяті» моделі.</p>
 <p>Крайній орієнтир можливого: експеримент <strong>Karpathy «autoresearch»</strong> (03.2026) — один агент безперервно працював <strong>дві доби</strong>, виконав ~700 експериментів з оптимізації навчання малої моделі й знайшов 20 покращень; на більшій моделі вони скоротили час навчання на 11%. Агент правив один файл <code>train.py</code> (модель і цикл навчання, ~630 рядків), а інструкції для нього вмістилися в легкий <code>program.md</code>. Його висновок: це шаблон, який масштабуватимуть лабораторії.</p>
 <h2 id="p10-107-ci-інтеграція-автономність-із-запобіжниками">10.7. CI-інтеграція: автономність із запобіжниками</h2>
-<p>Офіційні докси claude-code-action: два режими — інтерактивний (@claude у PR) і <strong>автоматичний</strong> (фіксований prompt на будь-яку GitHub-подію, включно з cron), з <strong>перевіркою прав запису і людини-актора</strong> на кожен тригер (проти бот-петель). Вбудовані обмежувачі вартості: <code>--max-turns</code>, таймаути workflow, GitHub concurrency — прямо «щоб обмежити runaway jobs».</p>
+<p>Офіційні докси claude-code-action: два режими — інтерактивний (@claude у PR) і <strong>автоматичний</strong> (фіксований prompt на будь-яку GitHub-подію, включно з cron), з <strong>перевіркою прав запису і людини-актора</strong> на кожен тригер (проти бот-петель). Вбудовані обмежувачі вартості: <code>--max-turns</code>, час очікування workflow, GitHub concurrency — прямо «щоб обмежити runaway jobs».</p>
 <blockquote>
-<p><strong>Правило 10.7.</strong> Автономний агент у CI = завжди <strong>бюджет + таймаут + гейт на людину-актора</strong>. Це не опції, а частина визначення системи.</p>
+<p><strong>Правило 10.7.</strong> Автономний агент у CI = завжди <strong>бюджет + час очікування + гейт на людину-актора</strong>. Це не опції, а частина визначення системи.</p>
 </blockquote>
 <hr />
 <h2 id="p10-вправи-частина-10">Вправи (Частина 10)</h2>
@@ -2072,12 +2091,12 @@ fix(docs): fix typo in README</code></pre>
 <h3 id="p10-відповіді">Відповіді</h3>
 <ol type="1">
 <li><strong>10-A.</strong> METR: досвідчені деви були на 19% повільніші, хоч вірили у +20% навіть постфактум; DORA: 80% «відчувають» приріст при 30% недовіри до ШІ-коду — відчуття ≠ вимір. Міряти: lead time на issue, частку ревертів/дефектів, час до зеленого CI — на рандомізованих або хоча б порівнянних вибірках задач.</li>
-<li><strong>10-B.</strong> (1) Прогнати <strong>приховані/композиційні тести</strong>, яких агент не бачив (SpecBench-логіка), або написати кілька нових інтеграційних постфактум; (2) адверсаріальний рев'ю у <strong>свіжому контексті</strong> (Writer/Reviewer з 10.2/Ч.11) із фокусом «шукай feature isolation і завчені входи», плюс диф-аудит підозріло великих/дивних файлів.</li>
+<li><strong>10-B.</strong> (1) Прогнати <strong>приховані/композиційні тести</strong>, яких агент не бачив (SpecBench-логіка), або написати кілька нових інтеграційних постфактум; (2) адверсаріальне рецензування у <strong>свіжому контексті</strong> (Writer/Reviewer з 10.2/Ч.11) із фокусом «шукай feature isolation і завчені входи», плюс диф-аудит підозріло великих/дивних файлів.</li>
 <li><strong>10-C.</strong> TDAD виміряв: наївний TDD-промпт підняв регресії з 6.08% до 9.94% — агент тестує «усе», не знаючи, що зачіпає зміна. Додати impact-аналіз залежностей (які тести стосуються зміни) як інструмент чи навичку — тоді 1.82% регресій і +8 п.п. розвʼязуваності.</li>
 </ol>
 <hr />
 <blockquote>
-<p><strong>Підсумок Частини 10.</strong> Автоматизована розробка з ШІ у 2026 — це не «агент пише код», а <strong>система</strong>: запускна перевірка + приховані тести проти reward hacking + свіжоконтекстне ревʼю + handoff-артефакти для довгих прогонів + бюджети в CI. Дані (METR, DORA) тверезять: без цієї дисципліни ШІ підсилює хаос — і навіть уповільнює.</p>
+<p><strong>Підсумок Частини 10.</strong> Автоматизована розробка з ШІ у 2026 — не «агент пише код», а <strong>система</strong>. Її складники: запускна перевірка, приховані тести проти reward hacking, рецензування у свіжому контексті, handoff-артефакти для довгих прогонів і бюджети в CI. Дані (METR, DORA) тверезять: без цієї дисципліни ШІ підсилює хаос — і навіть уповільнює.</p>
 </blockquote>
 <hr />
 <h3 id="p10-джерела-перевірено-2026-09-19">Джерела (перевірено 2026-09-19)</h3>
@@ -2108,7 +2127,7 @@ fix(docs): fix typo in README</code></pre>
 <p><strong>За (Anthropic Engineering, 06.2025, «How we built our multi-agent research system»):</strong> оркестратор-воркер (лідер Opus + паралельні Sonnet-підагенти, кожен зі своїм вікном) <strong>перевершив одиночного Opus на 90.2%</strong> на внутрішньому research-евалі. Ціна: <strong>~15× токенів</strong> проти чату; ~80% варіації якості пояснює сам обсяг споживаних токенів.</p>
 <p><strong>Конвергенція 2026 — обидві сторони посунулись назустріч:</strong></p>
 <ul>
-<li>Cognition (2026-04-22, «Multi-Agents: What's Actually Working»): мультиагент <strong>працює</strong>, «коли записи лишаються однопотоковими, а додаткові агенти дають <em>інтелект, а не дії</em>». Їхній продакшн-патерн: review-агент із <strong>навмисно чистим контекстом</strong> ловить у середньому <strong>2 баги на PR, 58% — серйозні</strong>.</li>
+<li>Cognition (2026-04-22, «Multi-Agents: What's Actually Working»): мультиагент <strong>працює</strong>, «коли записи лишаються однопотоковими, а додаткові агенти дають <em>інтелект, а не дії</em>». Їхній продакшн-патерн: review-агент із <strong>навмисно чистим контекстом</strong> ловить у середньому <strong>2 вади на PR, 58% — серйозні</strong>.</li>
 <li>Anthropic (офіційний гайд «when to use multi-agent», 23.01.2026): в експерименті з агентами, розділеними за ролями (planner, implementer, tester, reviewer), <strong>підагенти витрачали більше токенів на координацію, ніж на саму роботу</strong>. Причина — «зіпсований телефон» (<em>telephone game</em>): кожна передача між агентами губить точність. Загальний оверхед мультиагентності — <strong>3–10×</strong> токенів проти одиночного агента.</li>
 <li>OpenAI (Agents SDK docs, 2026), незалежно: <em>«Start with one agent whenever you can»</em> — спеціалістів додавай лише коли вони матеріально покращують ізоляцію можливостей/політик, чистоту промптів чи читабельність трейсів.</li>
 </ul>
@@ -2146,8 +2165,8 @@ fix(docs): fix typo in README</code></pre>
 <p><strong>Працюють:</strong></p>
 <ol type="1">
 <li><strong>Оркестратор-воркер</strong> — лідер декомпозує, воркери в чистих вікнах виконують, лідер синтезує (Anthropic Research).</li>
-<li><strong>Single-writer + read-only intelligence</strong> — код пише <strong>один</strong> агент; решта — ревʼюери/критики/верифікатори без права запису (точка згоди Cognition і Anthropic).</li>
-<li><strong>Review-loop у чистому контексті</strong> — ревʼюер бачить лише диф і критерії, <strong>не</strong> бачить міркувань автора, тому оцінює результат по суті (докси Claude Code: Writer/Reviewer; Cognition: 2 баги/PR). Контр-застереження звідти ж: ревʼюер, якому звеліли шукати проблеми, <strong>завжди щось знайде</strong> — гонитва за кожним зауваженням веде до overengineering.</li>
+<li><strong>Single-writer + read-only intelligence</strong> — код пише <strong>один</strong> агент; решта — рецензенти, критики й верифікатори без права запису (точка згоди Cognition і Anthropic).</li>
+<li><strong>Review-loop у чистому контексті</strong> — рецензент бачить лише диф і критерії, <strong>не</strong> бачить міркувань автора, тому оцінює сам результат (докси Claude Code: Writer/Reviewer; Cognition: 2 вади на PR). Контр-застереження звідти ж: рецензент, якому звеліли шукати проблеми, <strong>завжди щось знайде</strong> — гонитва за кожним зауваженням веде до overengineering.</li>
 <li><strong>Smart friend</strong> — слабший/дешевший агент ескалує складне сильнішому (Cognition).</li>
 <li><strong>Map-reduce</strong> — менеджер роздає незалежні шматки, збирає результати (Cognition; наші власні батчі прогонів — саме це).</li>
 </ol>
@@ -2157,14 +2176,14 @@ fix(docs): fix typo in README</code></pre>
 <li><strong>Наївний синтез-консенсус</strong> — див. 11.5.</li>
 </ul>
 <h2 id="p11-114-механіка-ізоляції-як-це-влаштовано-в-реальних-інструментах">11.4. Механіка ізоляції: як це влаштовано в реальних інструментах</h2>
-<p>Докси Claude Code sub-agents (2026): кожен (не-fork) підагент отримує <strong>справді свіже вікно</strong> — без історії головної розмови, без уже прочитаних файлів; лише системний промпт, текст завдання, CLAUDE.md, git-знімок і попередньо завантажені навички. Дефолти: до <strong>20 паралельних</strong> підагентів, вкладеність до <strong>3 рівнів</strong>; fork-режим — єдиний виняток, що успадковує історію. Managed Agents API: агенти = окремі персистентні треди зі спільною пісочницею/файлами, але <strong>ізольованою історією</strong> кожен.</p>
+<p>Докси Claude Code sub-agents (2026): кожен (не-fork) підагент отримує <strong>справді свіже вікно</strong> — без історії головної розмови, без уже прочитаних файлів; лише системний промпт, текст завдання, CLAUDE.md, git-знімок і попередньо завантажені навички. Типово: до <strong>20 паралельних</strong> підагентів, вкладеність до <strong>3 рівнів</strong>; fork-режим — єдиний виняток, що успадковує історію. Managed Agents API: агенти = окремі персистентні треди зі спільною пісочницею/файлами, але <strong>ізольованою історією</strong> кожен.</p>
 <blockquote>
-<p><strong>Правило 11.4.</strong> Ізоляція — не обмеження, а <strong>перевага</strong>: чистий контекст ревʼюера — це те, що робить ревʼю чесним, а паралельні воркери — дешевими для головного вікна. Але через неї підагентам треба передавати <strong>все потрібне явно</strong> (вони не «знають», що ти обговорював).</p>
+<p><strong>Правило 11.4.</strong> Ізоляція — не обмеження, а <strong>перевага</strong>: чистий контекст рецензента робить рецензування чесним, а паралельні воркери — дешевими для головного вікна. Але через неї підагентам треба передавати <strong>все потрібне явно</strong> (вони не «знають», що ти обговорював).</p>
 </blockquote>
 <h2 id="p11-115-найважливіше-відкриття-2026-вузьке-місце--відбір-не-генерація">11.5. Найважливіше відкриття 2026: вузьке місце — відбір, не генерація</h2>
 <ul>
 <li><strong>«When Agents Disagree» (<a href="https://arxiv.org/abs/2603.20324" target="_blank" rel="noopener">arXiv:2603.20324</a>):</strong> у конвеєрах generate-then-select якість <strong>судді-селектора</strong>, а не різноманіття генераторів, визначає результат: різнорідні команди з сильним суддею — <strong>81%</strong> win rate проти одиночної моделі; однорідні — <strong>51.2%</strong> (майже монетка). А <strong>наївне злиття</strong> відповідей кількох агентів в одну програло одиночній моделі <strong>0 з 42</strong> задач.</li>
-<li><strong>«Adversarial Review» (<a href="https://arxiv.org/abs/2608.18167" target="_blank" rel="noopener">arXiv:2608.18167</a>):</strong> 3-агентна схема зі <strong>структурованою незгодою</strong> (кодер + ревʼюер + критик-аудитор ревʼю) бʼє 5-агентний бейзлайн; названо failure mode «<strong>false consensus</strong>» — агенти сходяться без доказів, і більше агентів це не лікує.</li>
+<li><strong>«Adversarial Review» (<a href="https://arxiv.org/abs/2608.18167" target="_blank" rel="noopener">arXiv:2608.18167</a>):</strong> 3-агентна схема зі <strong>структурованою незгодою</strong> (кодер + рецензент + критик, що перевіряє рецензію) бʼє 5-агентний бейзлайн; названо failure mode «<strong>false consensus</strong>» — агенти сходяться без доказів, і більше агентів це не лікує.</li>
 <li><strong>Willison</strong> про систему Anthropic: людські оцінювачі спіймали те, що LLM-суддя пропустив — агенти «обирали SEO-ферми замість авторитетних джерел». Пряме застереження проти оцінки мультиагентного виходу лише LLM-суддею.</li>
 </ul>
 <blockquote>
@@ -2181,7 +2200,7 @@ fix(docs): fix typo in README</code></pre>
 <h2 id="p11-117-правила-частини-зведення">11.7. Правила частини (зведення)</h2>
 <ol type="1">
 <li>Починай з <strong>одного агента</strong>; діли лише за ізоляцію, паралелізм чи чистоту трейсів (Anthropic+OpenAI+Cognition — рідкісний потрійний консенсус).</li>
-<li><strong>Пише один; решта читають</strong> — ревʼю/критика/верифікація в чистих вікнах.</li>
+<li><strong>Пише один; решта читають</strong> — рецензування, критика й верифікація в чистих вікнах.</li>
 <li>Фазовий конвеєр для кодингу — антипатерн; паралель — для read-heavy.</li>
 <li>Суддя &gt; кількість агентів; <strong>відбір &gt; злиття</strong>; незгоду — структуруй.</li>
 <li>Плануй 3–15× токенів — і питай, чи задача цього варта.</li>
@@ -2189,14 +2208,14 @@ fix(docs): fix typo in README</code></pre>
 <hr />
 <h2 id="p11-вправи-частина-11">Вправи (Частина 11)</h2>
 <ol type="1">
-<li><strong>11-A.</strong> Тобі треба за годину аудитнути 40 мікросервісів на застарілі залежності. Один агент чи мультиагент? Який патерн і чому?</li>
-<li><strong>11-B.</strong> Команда зробила «планувальника → кодера → тестувальника → ревʼюера» і скаржиться на якість. Що з цим не так за даними 2026 і як перебудувати?</li>
+<li><strong>11-A.</strong> Тобі треба за годину перевірити 40 мікросервісів на застарілі залежності. Один агент чи мультиагент? Який патерн і чому?</li>
+<li><strong>11-B.</strong> Команда зробила «планувальника → кодера → тестувальника → рецензента» і скаржиться на якість. Що з цим не так за даними 2026 і як перебудувати?</li>
 <li><strong>11-C.</strong> Ти зібрав 5 відповідей від 5 агентів і хочеш «обʼєднати найкраще з усіх». Чому це погана ідея і що зробити натомість?</li>
 </ol>
 <h3 id="p11-відповіді">Відповіді</h3>
 <ol type="1">
 <li><strong>11-A.</strong> Мультиагент: класична read-heavy паралель без спільного змінного стану — map-reduce (оркестратор роздає по сервісах, воркери в чистих вікнах, зведення в кінці). Це наш власний робочий патерн батчів.</li>
-<li><strong>11-B.</strong> Фазовий конвеєр — задокументований антипатерн (Anthropic: у розбитті за ролями підагенти витрачали більше токенів на координацію, ніж на роботу, а кожна передача губить контекст; приклад Flappy Bird у Cognition). Перебудова: <strong>один</strong> агент веде задачу від плану до коду (single-writer), а тестування/ревʼю — окремі read-only агенти в чистих контекстах над його дифом.</li>
+<li><strong>11-B.</strong> Фазовий конвеєр — задокументований антипатерн (Anthropic: у розбитті за ролями підагенти витрачали більше токенів на координацію, ніж на роботу, а кожна передача губить контекст; приклад Flappy Bird у Cognition). Перебудова: <strong>один</strong> агент веде задачу від плану до коду (single-writer), а тестування й рецензування — окремі read-only агенти в чистих контекстах над його дифом.</li>
 <li><strong>11-C.</strong> Наївний синтез програв одиночній моделі 0/42 (<a href="https://arxiv.org/abs/2603.20324" target="_blank" rel="noopener">arXiv:2603.20324</a>) і живить false consensus. Натомість: сильний <strong>суддя обирає одну</strong> найкращу відповідь (81% win rate), за потреби — структурована незгода (критик атакує вибір) перед фіналом.</li>
 </ol>
 <hr />
@@ -2231,17 +2250,17 @@ fix(docs): fix typo in README</code></pre>
 <ul>
 <li><strong>Chroma «Context Rot» (2025-07):</strong> 18 фронтирних моделей (Claude Opus/Sonnet/Haiku, GPT-4.1/4o/o3, Gemini 2.5, Qwen3) на контрольованих NIAH-варіантах при <strong>фіксованій складності задачі</strong>: «performance grows increasingly unreliable as input length grows». Найдивніше: <strong>перемішаний/незв'язний</strong> «стіг» давав кращі результати, ніж логічно зв'язний — у всіх 18 моделей; автори чесно кажуть, що пояснення немає.</li>
 <li><strong>NoLiMa (<a href="https://arxiv.org/abs/2502.05167" target="_blank" rel="noopener">arXiv:2502.05167</a>, ICML 2025):</strong> якщо прибрати лексичний збіг між питанням і «голкою» (лишити тільки семантичний), <strong>11 із 13</strong> моделей із заявленими 128K+ падають нижче 50% свого short-context бейзлайну вже на <strong>32K</strong>; GPT-4o: 99.3% → 69.7%. Reasoning-моделі теж деградують — «більше міркувань» цього не лікує.</li>
-<li><strong>EMNLP 2025 Findings (<a href="https://arxiv.org/abs/2510.05381" target="_blank" rel="noopener">arXiv:2510.05381</a>):</strong> падіння 13.9–85% зі зростанням довжини <strong>навіть коли нерелевантні токени замінені пробілами/замасковані</strong> — тобто це не (лише) провал retrieval. Часткова милиця: «процитуй знайдені докази перед відповіддю» (+до 4% на RULER).</li>
+<li><strong>EMNLP 2025 Findings (<a href="https://arxiv.org/abs/2510.05381" target="_blank" rel="noopener">arXiv:2510.05381</a>):</strong> падіння 13.9–85% зі зростанням довжини <strong>навіть коли нерелевантні токени замінені пробілами/замасковані</strong> — отже, це не лише провал retrieval. Часткова милиця: «процитуй знайдені докази перед відповіддю» (+до 4% на RULER).</li>
 </ul>
 <blockquote>
-<p>⚠️ <strong>Чесна межа даних:</strong> ці студії — на моделях 2025 року; реплікації на Sonnet 5/Opus 5/Fable 5 ми не знайшли. Наскільки нове покоління помʼякшило context rot — відкрите питання (так і кажемо, а не вгадуємо).</p>
+<p>⚠️ <strong>Чесна межа даних:</strong> ці студії — на моделях 2025 року; реплікації на моделях 2026 року (Sonnet 5, Opus 5/5.5, Fable 5/5.1) ми не знайшли. Наскільки нове покоління помʼякшило context rot — відкрите питання (так і кажемо, а не вгадуємо).</p>
 </blockquote>
 <p><strong>Правило 12.1.</strong> Довге вікно ≠ дозвіл наливати все. Кожен токен у вікні має <strong>заробити своє місце</strong>.</p>
 <h2 id="p12-122-чотири-стратегії-канон-anthropic-engineering-2025-09-29">12.2. Чотири стратегії (канон Anthropic Engineering, 2025-09-29)</h2>
 <ol type="1">
 <li><strong>Just-in-time retrieval</strong> — тримай у контексті <strong>легкі посилання</strong> (шляхи файлів, ID, запити), а вміст підтягуй інструментами в момент потреби; не преднавантажуй усе. Так працює Claude Code.</li>
-<li><strong>Compaction</strong> — біля межі вікна: підсумувати й реініціалізуватись, зберігаючи <strong>архітектурні рішення і невирішені баги</strong>, а не сирі виводи інструментів.</li>
-<li><strong>Структуровані нотатки / памʼять</strong> — знання живуть <strong>поза вікном</strong> у файлах і повертаються на вимогу (Anthropic демонструвала Claude, що грає в Pokémon тисячі кроків, ведучи карти і стратегію в нотатках).</li>
+<li><strong>Compaction</strong> — біля межі вікна: підсумувати й реініціалізуватись, зберігаючи <strong>архітектурні рішення і невирішені вади</strong>, а не сирі виводи інструментів.</li>
+<li><strong>Структуровані нотатки / памʼять</strong> — знання живуть <strong>поза вікном</strong> у файлах і повертаються на вимогу. Приклад Anthropic: Claude грає в Pokémon тисячі кроків і сам веде нотатки — карти пройдених локацій і бойову стратегію.</li>
 <li><strong>Архітектури з підагентами</strong> — брудна підзадача йде в <strong>чисте вікно</strong> окремого агента, назад повертається дистилят на 1–2k токенів. (Контрапункт Cognition — див. <a href="#part-11">Частину 11</a>: для звʼязного кодингу ізоляція ріже спільні рішення.)</li>
 </ol>
 <h2 id="p12-123-2026-це-вже-примітиви-api-а-не-хаки-промпта">12.3. 2026: це вже примітиви API, а не хаки промпта</h2>
@@ -2256,7 +2275,7 @@ fix(docs): fix typo in README</code></pre>
 <tbody>
 <tr>
 <td><strong>Context editing</strong> (<code>clear_tool_uses_20250919</code>)</td>
-<td>Автоматично чистить найстаріші tool-результати (конфігуровані trigger / keep / clear_at_least / exclude_tools) — до того, як промпт дійде до моделі</td>
+<td>Автоматично чистить найстаріші tool-результати (налаштовувані trigger / keep / clear_at_least / exclude_tools) — до того, як промпт дійде до моделі</td>
 </tr>
 <tr>
 <td><code>clear_thinking_20251015</code></td>
@@ -2264,15 +2283,15 @@ fix(docs): fix typo in README</code></pre>
 </tr>
 <tr>
 <td><strong>Server-side compaction</strong> (<code>compact_20260112</code>, бета 01.2026)</td>
-<td>Сам підсумовує стару історію в compaction-блок після порога (дефолт 150K); клієнт зобовʼязаний передавати блок назад; сумаризація сама коштує токени і білиться поітераційно</td>
+<td>Сам підсумовує стару історію в compaction-блок після порога (типово 150K); клієнт зобовʼязаний передавати блок назад; сумаризація сама коштує токени і білиться поітераційно</td>
 </tr>
 <tr>
 <td><strong>Memory tool</strong> (<code>memory_20250818</code>)</td>
-<td>Персистентна директорія <code>/memories</code> (view/create/str_replace/…), що переживає вікна; офіційна рекомендація — <strong>у парі</strong> з compaction: компакція тримає вікно малим, памʼять зберігає те, що мусить пережити сумаризацію</td>
+<td>Персистентна тека <code>/memories</code> (view/create/str_replace/…), що переживає вікна; офіційна рекомендація — <strong>у парі</strong> з compaction: компакція тримає вікно малим, памʼять зберігає те, що мусить пережити сумаризацію</td>
 </tr>
 </tbody>
 </table>
-<p>Практичний патерн «multisession development» (докси + harness-пост 2025-11-26): initializer-сесія створює progress-лог + чекліст функцій + init-скрипт; кожна наступна сесія <strong>читає й оновлює лог</strong> перед завершенням; git — механізм відновлення. Це той самий патерн «зміни інженерів» із <a href="#part-10">Частини 10</a>.</p>
+<p>Практичний патерн «multisession development» (докси + harness-пост 2025-11-26): initializer-сесія створює журнал прогресу, перелік функцій та init-скрипт; кожна наступна сесія <strong>читає й оновлює журнал</strong> перед завершенням; git — механізм відновлення. Це той самий патерн «зміни інженерів» із <a href="#part-10">Частини 10</a>.</p>
 <h2 id="p12-124-структуровані-нотатки-в-реальному-інструменті">12.4. Структуровані нотатки в реальному інструменті</h2>
 <p>Докси Claude Code (v2.1.2xx) — жива реалізація «нотаток» двох сортів:</p>
 <ul>
@@ -2280,10 +2299,10 @@ fix(docs): fix typo in README</code></pre>
 <li><strong>Auto memory</strong> — пише сам Claude: <code>~/.claude/projects/&lt;project&gt;/memory/</code> з категоріями (user/feedback/project/reference) та індексом MEMORY.md (стеля 200 рядків / 25KB), який вантажиться щосесії; тіла тем — на вимогу (той самий just-in-time).</li>
 </ul>
 <blockquote>
-<p>Цей курс створено з тим самим механізмом: правило «валідувати, а не вигадувати» зберігалося в auto memory між сесіями.</p>
+<p>Цей курс створено з тим самим механізмом: правило «перевіряти, а не вигадувати» зберігалося в auto memory між сесіями.</p>
 </blockquote>
 <h2 id="p12-125-економіка-кешу-чому-порядок-у-промпті--гроші">12.5. Економіка кешу: чому порядок у промпті = гроші</h2>
-<p>Офіційні докси prompt caching: читання кешу — <strong>0.1×</strong> базової ціни входу (на Fable 5.1 і Mythos 5.1 — 0.025×); запис — 1.25× (5 хв TTL) або 2× (1 год). Але хіт вимагає <strong>байт-у-байт ідентичного префікса</strong> до breakpoint: один timestamp чи UUID на початку системного промпта = <strong>тихі 100% промахів</strong>. Змінені визначення інструментів інвалідовують весь ланцюг (tools → system → messages). Тому context-editing спроєктований обережно щодо кешу (<code>clear_at_least</code> існує саме щоб перезапис кешу окупався).</p>
+<p>Офіційні докси prompt caching: читання кешу — <strong>0.1×</strong> базової ціни входу (на Fable 5.1 і Mythos 5.1 — 0.025×, на Opus 5.5 — 0.05×); запис — 1.25× (5 хв TTL) або 2× (1 год). Але хіт вимагає <strong>байт-у-байт ідентичного префікса</strong> до breakpoint: один timestamp чи UUID на початку системного промпта = <strong>тихі 100% промахів</strong>. Змінені визначення інструментів інвалідовують весь ланцюг (tools → system → messages). Тому context-editing спроєктований обережно щодо кешу (<code>clear_at_least</code> існує саме щоб перезапис кешу окупався).</p>
 <p><strong>Правило 12.5.</strong> Стабільне — наперед (системний промпт, інструменти), змінне — в кінець. Це не стилістика, це <strong>10× різниці в ціні</strong> входу.</p>
 <h2 id="p12-126-правила-частини-зведення">12.6. Правила частини (зведення)</h2>
 <ol type="1">
@@ -2292,7 +2311,7 @@ fix(docs): fix typo in README</code></pre>
 <li>Компакція — для розміру вікна; <strong>файлова памʼять — для істини</strong>, що мусить пережити компакцію; використовуй разом.</li>
 <li>Брудні підзадачі — в чисті вікна підагентів, назад — дистилят (з поправкою Cognition для звʼязного кодингу).</li>
 <li>Стабільний префікс = 10× дешевший вхід; volatile-контент нижче breakpoint.</li>
-<li>Для довгих робіт: progress-лог + git як зовнішня памʼять «змін».</li>
+<li>Для довгих робіт: журнал прогресу + git як зовнішня памʼять «змін».</li>
 </ol>
 <hr />
 <h2 id="p12-вправи-частина-12">Вправи (Частина 12)</h2>
@@ -2303,9 +2322,9 @@ fix(docs): fix typo in README</code></pre>
 </ol>
 <h3 id="p12-відповіді">Відповіді</h3>
 <ol type="1">
-<li><strong>12-A.</strong> (1) Context editing / компакція, щоб старі tool-результати не витісняли важливе; (2) файловий progress-лог + нотатки рішень (переживають компакцію/ресети — патерн initializer→sessions); (3) підагенти для брудних підзадач, щоб сміття не потрапляло в головне вікно взагалі.</li>
+<li><strong>12-A.</strong> (1) Context editing / компакція, щоб старі tool-результати не витісняли важливе; (2) файловий журнал прогресу + нотатки рішень (переживають компакцію/ресети — патерн initializer→sessions); (3) підагенти для брудних підзадач, щоб сміття не потрапляло в головне вікно взагалі.</li>
 <li><strong>12-B.</strong> Динамічний перший рядок ламає байт-ідентичність префікса → 0% кеш-хітів → вхід коштує ~10× дорожче можливого. Виправлення: волатильне (дату, ID) — <strong>після</strong> cache-breakpoint (в кінець системного промпта або в перше повідомлення), стабільне ядро — наперед.</li>
-<li><strong>12-C.</strong> Compaction стискає <strong>вікно</strong> (сумаризує історію, щоб влізти далі), але сумарізація може загубити деталі; memory tool зберігає <strong>факти поза вікном</strong> назавжди і повертає на вимогу. Разом: компакція тримає розмір, памʼять — гарантує, що критичне (рішення, невирішені баги, стан функцій) переживе будь-яку сумаризацію чи ресет.</li>
+<li><strong>12-C.</strong> Compaction стискає <strong>вікно</strong> (сумаризує історію, щоб влізти далі), але сумарізація може загубити деталі; memory tool зберігає <strong>факти поза вікном</strong> назавжди і повертає на вимогу. Разом: компакція тримає розмір, памʼять — гарантує, що критичне (рішення, невирішені вади, стан функцій) переживе будь-яку сумаризацію чи ресет.</li>
 </ol>
 <hr />
 <blockquote>
@@ -2328,9 +2347,9 @@ fix(docs): fix typo in README</code></pre>
 </section>
 <section id="part-13" class="part" data-title="13 · Локальні LLM">
 <h1 id="p13-частина-13-локальні-llm-для-розробки">Частина 13. Локальні LLM для розробки</h1>
-<p>Останній напрям: що реально дають <strong>відкриті моделі на своєму залізі</strong> станом на серпень 2026, як їх запускати, і — головне для цього курсу — <strong>чи переноситься на них наш виміряний висновок</strong> «менша модель → важливіший промпт».</p>
+<p>Останній напрям: що реально дають <strong>відкриті моделі на своєму залізі</strong> станом на серпень 2026 і як їх запускати. Головне для цього курсу — <strong>чи переноситься на них наш виміряний висновок</strong> «менша модель → важливіший промпт».</p>
 <blockquote>
-<p>📚 <strong>Джерела:</strong> офіційні релізи/картки (OpenAI gpt-oss GitHub, Google ai.google.dev, Qwen HF, DeepSeek api-docs), докси llama.cpp і vLLM, hands-on Віллісона, arXiv про квантизацію. Зібрано 2026-08-21. <strong>Що ми свідомо викинули</strong> після адверсаріальної перевірки: заяву про нову відкриту модель Meta (непідтверджений домен джерела), конкретні Qwen-бенчмарки з офіційної картки (не відтворені незалежно) і рейтинги «best local model» з агрегаторів (SEO-сайти не пройшли фільтр джерел).</p>
+<p>📚 <strong>Джерела:</strong> офіційні випуски й картки (OpenAI gpt-oss GitHub, Google ai.google.dev, Qwen HF, DeepSeek api-docs), докси llama.cpp і vLLM, hands-on Віллісона, arXiv про квантизацію. Зібрано 2026-08-21. <strong>Що ми свідомо викинули</strong> після адверсаріальної перевірки: заяву про нову відкриту модель Meta (непідтверджений домен джерела) і конкретні Qwen-бенчмарки з офіційної картки (не відтворені незалежно). Викинули й рейтинги «best local model» з агрегаторів: SEO-сайти не пройшли фільтр джерел.</p>
 </blockquote>
 <hr />
 <h2 id="p13-131-ландшафт-відкритих-моделей-перевірене-ядро">13.1. Ландшафт відкритих моделей (перевірене ядро)</h2>
@@ -2360,12 +2379,12 @@ fix(docs): fix typo in README</code></pre>
 </tr>
 <tr>
 <td><strong>Qwen 3.x</strong> (Alibaba, Apache 2.0)</td>
-<td>Активна лінійка аж по серпень 2026 (остання — 27B dense з vision, 262K нативного контексту, три рівні reasoning-effort); сотні GGUF/MLX-квантів у день випуску</td>
+<td>Активна лінійка аж по серпень 2026 (остання — 27B dense з vision, 262K нативного контексту, три рівні reasoning-effort, типово <code>xhigh</code>); спільнота виклала сотні GGUF- і MLX-квантів</td>
 <td>27B у Q4 ≈ 17GB на диску</td>
 </tr>
 <tr>
-<td><strong>DeepSeek V4</strong> (прев'ю 04.2026, GA до 08.2026)</td>
-<td><strong>V4-Pro</strong> (1.6T/49B active) і <strong>V4-Flash</strong> (284B/13B active), відкриті ваги, MIT-стиль; 1M контексту через sparse attention (DSA)</td>
+<td><strong>DeepSeek V4</strong> (прев'ю 24.04.2026; V4-Pro GA 13.08.2026)</td>
+<td><strong>V4-Pro</strong> (1.6T/49B active) і <strong>V4-Flash</strong> (284B/13B active), відкриті ваги під MIT; 1M контексту через sparse attention (DSA). 10.09.2026 вийшов <strong>V4.1-Flash</strong> із нативним зором; старі імена Flash в API переспрямовано на нього</td>
 <td>Pro — серверний клас; Flash — досяжний ентузіастам</td>
 </tr>
 <tr>
@@ -2375,24 +2394,24 @@ fix(docs): fix typo in README</code></pre>
 </tr>
 </tbody>
 </table>
-<p><strong>Розрив із хостед-фронтиром</strong> (консенсус джерел): суттєво звузився у 2025–2026, <strong>але не закрився</strong> — особливо на складних довгогоризонтних багатофайлових задачах. Водночас Віллісон (05.2026) фіксує: ноутбукові моделі «substantially exceed performance expectations» — окремі задачі вже роблять на рівні хостед-моделей попереднього покоління.</p>
+<p><strong>Розрив із хостед-фронтиром</strong> (консенсус джерел): суттєво звузився у 2025–2026, <strong>але не закрився</strong> — особливо на складних довгогоризонтних багатофайлових задачах. Водночас Віллісон (05.2026) пише, що ноутбукові моделі «while a lot weaker than the frontier, have started wildly outperforming expectations». Його приклад: Qwen3.6-35B-A3B (20.9 ГБ) на ноутбуці намалював пелікана на велосипеді краще за Claude Opus 4.7. Сам автор застерігає, що цей тест уже вичерпав себе як бенчмарк.</p>
 <h2 id="p13-132-стек-запуску">13.2. Стек запуску</h2>
 <ul>
 <li><strong>Споживчий:</strong> <code>llama.cpp</code> (двигун + формат GGUF) → <strong>Ollama</strong> і <strong>LM Studio</strong> як обгортки над ним.</li>
 <li><strong>Серверний:</strong> <strong>vLLM</strong> — продакшн-throughput; квантизації AWQ/GPTQ/FP8/INT4/INT8/GGUF, але <strong>підтримка різко різниться за залізом</strong> (Marlin і bitsandbytes — лише NVIDIA; на AMD — лише GGUF і FP8; CPU-шлях мають AWQ і GPTQ на x86 та INT8 із llm-compressor, а <strong>GGUF у vLLM на CPU не працює</strong> — для CPU бери llama.cpp) — звіряй матрицю в доксах.</li>
-<li><strong>Apple Silicon — першокласна платформа</strong>, не ніша: unified memory + MLX; Ollama отримав MLX-рушій для Apple Silicon (спершу як прев'ю), а вендори (Qwen) публікують MLX-кванти в день випуску.</li>
+<li><strong>Apple Silicon — першокласна платформа</strong>, не ніша: unified memory + MLX; Ollama отримав MLX-рушій для Apple Silicon (спершу як прев'ю), а MLX-кванти викладає спільнота: для Qwen3.8-27B mlx-community опублікувала їх 14.08.2026.</li>
 </ul>
-<p><strong>Реальність швидкості</strong> (hands-on Віллісона, 08.2026, M-серія Mac + 27B Q4_K_M): <strong>15–30 tok/s</strong> базово (проти ~74 у порівнянної хостед-моделі); спекулятивне декодування додає ~72%. І показовий анекдот про дефолти: reasoning-режим <code>xhigh</code> на простий SVG-промпт витратив <strong>21 хвилину і 22 276 токенів на міркування</strong> проти 137 секунд без reasoning — <em>«This is a hilarious default»</em>. Мораль: <strong>на локальних reasoning-моделях effort-дефолти перевіряй перш за все.</strong></p>
+<p><strong>Реальність швидкості</strong> (hands-on Віллісона, 08.2026, M-серія Mac + 27B Q4_K_M): <strong>15–30 tok/s</strong> базово (проти ~74 у порівнянної хостед-моделі); спекулятивне декодування додає ~72%. І показовий випадок про типові налаштування: reasoning-режим <code>xhigh</code> на простий SVG-промпт витратив <strong>21 хвилину і 22 276 токенів на міркування</strong> проти 137 секунд без reasoning — <em>«This is a hilarious default»</em>. Мораль: <strong>на локальних reasoning-моделях типовий effort перевіряй насамперед.</strong></p>
 <h2 id="p13-133-квантизація-що-кажуть-інженерні-доки-і-дослідження">13.3. Квантизація: що кажуть інженерні доки і дослідження</h2>
 <ul>
 <li>Драбина GGUF (README llama.cpp): від IQ1 до Q8_0/F16; втрати точності «minimized by a suitable imatrix file»; для мультимодальних — <strong>vision/projector лишай у bf16/q8</strong> (там деградація помітніша). Канонічної «однієї правильної» кванти проєкт свідомо не призначає; Q4_K_M — робочий приклад.</li>
 <li><strong>Два якісно різні режими деградації</strong> (<a href="https://arxiv.org/abs/2604.19884" target="_blank" rel="noopener">arXiv:2604.19884</a>, 2026): <strong>4-bit</strong> — «signal degradation»: сигнал знань є, шум зростає — відновлюване; <strong>2-bit</strong> — «computation collapse»: ламається сам обчислювальний процес (увага в усіх шарах перестає концентруватися; понад 30% входів гейта SwiGLU у FFN змінюють знак — виміряно на щільних 7–9B моделях: Llama-3.1-8B, Qwen3-8B, Mistral-7B, Gemma-2-9B), і training-free ремонт не працює.</li>
 </ul>
-<p><strong>Правило 13.3.</strong> Q4_K_M-клас — обґрунтований дефолт; 8-bit — коли є памʼять і потрібна якість; <strong>2-bit — не «трохи гірше», а інший режим відмови</strong>.</p>
+<p><strong>Правило 13.3.</strong> Q4_K_M-клас — обґрунтований типовий вибір; 8-bit — коли є памʼять і потрібна якість; <strong>2-bit — не «трохи гірше», а інший режим відмови</strong>.</p>
 <h2 id="p13-134-навіщо-локальні-якщо-фронтир-сильніший">13.4. Навіщо локальні, якщо фронтир сильніший</h2>
 <p>Драйвери, незалежні від сирої якості (консенсус джерел):</p>
 <ol type="1">
-<li><strong>Суверенітет даних і комплаєнс</strong> — HIPAA, GDPR, і <strong>EU AI Act</strong>, що застосовується з 2 серпня 2026 року з винятками (правила для високоризикових систем пакет «AI Omnibus» переніс на 2.12.2027 і 2.08.2028): для регульованих індустрій «дані не покидають периметр» — вимога, а не смак.</li>
+<li><strong>Суверенітет даних і комплаєнс</strong> — HIPAA, GDPR і <strong>EU AI Act</strong>. Акт застосовується з 2 серпня 2026 року з винятками: правила для високоризикових систем пакет «AI Omnibus» переніс на 2.12.2027 і 2.08.2028. Для регульованих індустрій «дані не покидають периметр» — вимога, а не смак.</li>
 <li><strong>Вартість на масі</strong> — класифікація чи екстракція на мільйонах елементів без per-token білінгу.</li>
 <li><strong>Латентність/офлайн</strong> — edge, повітряні зазори, CI без зовнішніх викликів.</li>
 <li><strong>Дослідження</strong> — повний контроль ваг, файнтюни, відтворюваність.</li>
@@ -2400,15 +2419,15 @@ fix(docs): fix typo in README</code></pre>
 <h2 id="p13-135-чи-переноситься-наш-головний-висновок-чесна-відповідь-так-з-поправкою">13.5. Чи переноситься наш головний висновок? (чесна відповідь: так, з поправкою)</h2>
 <p>Наше виміряне (Частини 5–6): «що менша модель, то важливіший промпт» — Haiku карала за слабкі промпти там, де Sonnet прощав.</p>
 <ul>
-<li><strong>На локальні моделі це переноситься прямо</strong>: вони здебільшого менші й/або старших поколінь, без серверних structured-outputs — тож наша драбина (few-shot формат, якорі першого символу, закриті набори міток, валідація на виході) — <strong>саме їхній інструментарій</strong>. Докси Anthropic формулюють той самий принцип («clear, explicit instructions… brilliant but new employee»).</li>
+<li><strong>На локальні моделі це переноситься прямо</strong>: вони здебільшого менші або старших поколінь. Схемний режим у локальних стеках є (Ollama, llama.cpp), але він гарантує синтаксис, а не зміст. Тож наша драбина — few-shot формат, якорі першого символу, закриті набори міток, перевірка на виході — <strong>саме їхній інструментарій</strong>. Докси Anthropic формулюють той самий принцип («clear, explicit instructions… brilliant but new employee»).</li>
 <li><strong>Поправка, яку показало дослідження:</strong> усередині фронтир-родини тренд <strong>зворотний</strong> — що новіша/сильніша модель, то <em>менше</em> агресивної явності треба (старі «CRITICAL: YOU MUST» на нових моделях <strong>overtrigger'ять</strong>). І окремий випадок: <strong>DeepSeek R1 офіційно радить уникати few-shot</strong> (деградує reasoning) — model-conditional правило з <a href="#part-09">Частини 9</a>.</li>
 </ul>
-<p><strong>Синтез 13.5.</strong> Вісь «розмір → явність» працює <strong>в межах покоління</strong>; вісь «покоління → менше тиску» працює впоперек. Для конкретної локальної моделі: почни з нашого Haiku-плейбука, потім <strong>звір картку моделі</strong> (особливо щодо few-shot і reasoning-дефолтів) і зніми зайвий тиск, якщо модель сучасна.</p>
+<p><strong>Синтез 13.5.</strong> Вісь «розмір → явність» працює <strong>в межах покоління</strong>; вісь «покоління → менше тиску» працює впоперек. Для конкретної локальної моделі: почни з нашого Haiku-плейбука, потім <strong>звір картку моделі</strong> (особливо щодо few-shot і типових налаштувань reasoning) і зніми зайвий тиск, якщо модель сучасна.</p>
 <h2 id="p13-136-правила-частини-зведення">13.6. Правила частини (зведення)</h2>
 <ol type="1">
 <li>Локальний стек 2026: llama.cpp/GGUF (+Ollama/LM Studio) для десктопа, vLLM для сервера, Apple Silicon — повноправний громадянин.</li>
-<li>Q4 — дефолт, Q8 — якість, 2-bit — небезпечна зона (інший режим відмови).</li>
-<li>Перше, що перевіряєш на локальній reasoning-моделі — <strong>дефолт effort</strong> (випадок «21 хвилина на SVG»).</li>
+<li>Q4 — типовий вибір, Q8 — якість, 2-bit — небезпечна зона (інший режим відмови).</li>
+<li>Перше, що перевіряєш на локальній reasoning-моделі — <strong>типовий effort</strong> (випадок «21 хвилина на SVG»).</li>
 <li>Мотив локальності — суверенітет/маса/латентність, а не «наздогнали фронтир» (не наздогнали — на найважчому).</li>
 <li>Промптинг локальних = наш Haiku-плейбук + картка конкретної моделі.</li>
 </ol>
@@ -2423,11 +2442,11 @@ fix(docs): fix typo in README</code></pre>
 <ol type="1">
 <li><strong>13-A.</strong> Клас 20–31B (gpt-oss-20b / Gemma 4 26B-A4B чи 31B / Qwen-27B) у <strong>Q4_K_M</strong> через Ollama/llama.cpp (або vLLM, якщо потрібен throughput). Формат — <strong>вивід за JSON-схемою</strong> (Ollama: параметр <code>format</code>; llama.cpp: <code>json_schema</code> чи <code>grammar</code>). Поверх нього — few-shot із <strong>закритим набором міток</strong> + «output only the label» (наші 100%-надійні техніки) і перевірка значень: схема гарантує синтаксис, а не правильну мітку.</li>
 <li><strong>13-B.</strong> <a href="https://arxiv.org/abs/2604.19884" target="_blank" rel="noopener">arXiv:2604.19884</a>: 2-bit — це не плавне «трохи гірше», а <strong>computation collapse</strong> (увага перестає концентруватися, понад 30% входів гейта SwiGLU змінюють знак), який не ремонтується без тренування. Краще менша модель у Q4, ніж велика у Q2.</li>
-<li><strong>13-C.</strong> Дефолтний reasoning-effort виставлений у максимум (задокументований випадок: xhigh = 21 хв і 22k токенів на тривіальний SVG). Виправлення: знизити/вимкнути reasoning для простих задач у налаштуваннях запуску, лишити високий effort лише для складного.</li>
+<li><strong>13-C.</strong> Типовий reasoning-effort виставлений у максимум (задокументований випадок: xhigh = 21 хв і 22k токенів на тривіальний SVG). Виправлення: знизити/вимкнути reasoning для простих задач у налаштуваннях запуску, лишити високий effort лише для складного.</li>
 </ol>
 <hr />
 <blockquote>
-<p><strong>Підсумок Частини 13.</strong> Локальні LLM у 2026 — зрілий інструмент зі своєю нішею (суверенітет, маса, латентність), чесним відставанням на найважчому і <strong>нашим власним плейбуком у ролі інструкції з експлуатації</strong>: усе, що курс виміряв на Haiku, — це і є мистецтво отримувати максимум від малих моделей.</p>
+<p><strong>Підсумок Частини 13.</strong> Локальні LLM у 2026 — зрілий інструмент зі своєю нішею: суверенітет, маса, латентність. На найважчих задачах вони чесно відстають. А <strong>наш власний плейбук стає для них інструкцією з експлуатації</strong>: усе, що курс виміряв на Haiku, вчить отримувати максимум від малих моделей.</p>
 </blockquote>
 <hr />
 <h3 id="p13-джерела-перевірено-2026-09-19">Джерела (перевірено 2026-09-19)</h3>
@@ -2437,6 +2456,7 @@ fix(docs): fix typo in README</code></pre>
 <li><a href="https://ai.google.dev/gemma/docs/core/model_card_3" target="_blank" rel="noopener">Gemma 3 — картка моделі</a></li>
 <li><a href="https://huggingface.co/Qwen/Qwen3.8-27B" target="_blank" rel="noopener">Qwen3.8-27B</a></li>
 <li><a href="https://api-docs.deepseek.com/news/news260424/" target="_blank" rel="noopener">DeepSeek V4 — анонс</a></li>
+<li><a href="https://api-docs.deepseek.com/updates" target="_blank" rel="noopener">DeepSeek — журнал змін API</a></li>
 <li><a href="https://ai.meta.com/blog/llama-4-multimodal-intelligence/" target="_blank" rel="noopener">Meta — Llama 4</a></li>
 <li><a href="https://simonwillison.net/2026/Aug/16/qwen-38-27b/" target="_blank" rel="noopener">Simon Willison — Qwen 3.8 27B локально</a></li>
 <li><a href="https://simonwillison.net/2026/May/19/5-minute-llms/" target="_blank" rel="noopener">Simon Willison — огляд локальних моделей (05.2026)</a></li>
